@@ -6,5 +6,5 @@ package DAO;
 public class RawElement {
 
     private ObjectType objectType;
-    
+
 }

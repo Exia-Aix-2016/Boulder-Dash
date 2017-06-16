@@ -15,7 +15,13 @@ import java.sql.SQLException;
  * */
 public class DAOTest {
 
+    /**
+     * Instance of dao
+     * */
     private static Dao dao = null;
+    /**
+     * Instance of connection
+     * */
     private static Connection connection = null;
 
     /**
