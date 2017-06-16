@@ -1,6 +1,6 @@
 package model.element;
 
-class Mob extends Element{
+class Mob extends Movable{
 
     Mob(String sprite, Position position, Dimension dimension, int permeability) {
         super(sprite, position, dimension, permeability);
