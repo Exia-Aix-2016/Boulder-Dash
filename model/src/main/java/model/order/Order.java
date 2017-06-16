@@ -1,6 +1,8 @@
-package model;
+package model.order;
 
-public class Order {
+import model.element.Element;
+
+class Order {
 
     public enum action{}
     public Element element;
