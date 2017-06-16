@@ -5,7 +5,13 @@ package DAO;
  */
 public interface IMap {
 
+      /**
+       * Search in DataBase map by her id
+       * */
       RawMap getMap(final int idMap);
+      /**
+       * Allow to add in DataBase
+       * */
       void addMap(final RawMap rawMap);
 
 }
