@@ -8,11 +8,11 @@
 #------------------------------------------------------------
 
 CREATE TABLE Map(
-        Id     int (11) Auto_increment  NOT NULL ,
+        IdMap     int (11) Auto_increment  NOT NULL ,
         Nom    Varchar (25) NOT NULL ,
         Width  Int NOT NULL ,
         Heigth Int ,
-        PRIMARY KEY (Id )
+        PRIMARY KEY (IdMap)
 )ENGINE=InnoDB;
 
 
@@ -22,7 +22,7 @@ CREATE TABLE Map(
 
 CREATE TABLE ObjectType(
         Type Varchar (25) NOT NULL ,
-        PRIMARY KEY (Type )
+        PRIMARY KEY (Type)
 )ENGINE=InnoDB;
 
 
@@ -33,10 +33,10 @@ CREATE TABLE ObjectType(
 CREATE TABLE ObjectMap(
         CoordX Int NOT NULL ,
         CoordY Date NOT NULL ,
-        Id     Int NOT NULL ,
+        IdMap    Int NOT NULL ,
         Type   Varchar (25) NOT NULL ,
-        PRIMARY KEY (Id ,Type )
+        PRIMARY KEY (IdMap ,Type)
 )ENGINE=InnoDB;
 
-ALTER TABLE ObjectMap ADD CONSTRAINT FK_ObjectMap_Id FOREIGN KEY (Id) REFERENCES Map(Id);
+ALTER TABLE ObjectMap ADD CONSTRAINT FK_ObjectMap_Id FOREIGN KEY (IdMap) REFERENCES Map(IdMap);
 ALTER TABLE ObjectMap ADD CONSTRAINT FK_ObjectMap_Type FOREIGN KEY (Type) REFERENCES ObjectType(Type);
