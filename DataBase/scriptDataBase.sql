@@ -1,42 +1,41 @@
 #------------------------------------------------------------
 #        Script MySQL.
 #------------------------------------------------------------
-
+CREATE DATABASE boulderdash;
 
 #------------------------------------------------------------
 # Table: Map
 #------------------------------------------------------------
 
-CREATE TABLE Map(
-        IdMap     int (11) Auto_increment  NOT NULL ,
-        Nom    Varchar (25) NOT NULL ,
-        Width  Int NOT NULL ,
-        Heigth Int ,
-        PRIMARY KEY (IdMap)
-)ENGINE=InnoDB;
+CREATE TABLE boulderdash.Map(
+        MapName Varchar (255) NOT NULL ,
+        Width   Int NOT NULL ,
+        Heigth  Int ,
+        PRIMARY KEY (MapName )
+);
 
 
 #------------------------------------------------------------
 # Table: ObjectType
 #------------------------------------------------------------
 
-CREATE TABLE ObjectType(
-        Type Varchar (25) NOT NULL ,
-        PRIMARY KEY (Type)
-)ENGINE=InnoDB;
+CREATE TABLE boulderdash.ObjectType(
+        TypeObject Varchar (255) NOT NULL ,
+        PRIMARY KEY (TypeObject )
+);
 
 
 #------------------------------------------------------------
 # Table: ObjectMap
 #------------------------------------------------------------
 
-CREATE TABLE ObjectMap(
-        CoordX Int NOT NULL ,
-        CoordY Date NOT NULL ,
-        IdMap    Int NOT NULL ,
-        Type   Varchar (25) NOT NULL ,
-        PRIMARY KEY (IdMap ,Type)
-)ENGINE=InnoDB;
+CREATE TABLE boulderdash.ObjectMap(
+        MapName    Varchar (255) NOT NULL ,
+        TypeObject Varchar (255) NOT NULL ,
+        CoordX     Int NOT NULL ,
+        CoordY     Date NOT NULL ,
+        PRIMARY KEY (MapName ,TypeObject )
+);
 
-ALTER TABLE ObjectMap ADD CONSTRAINT FK_ObjectMap_Id FOREIGN KEY (IdMap) REFERENCES Map(IdMap);
-ALTER TABLE ObjectMap ADD CONSTRAINT FK_ObjectMap_Type FOREIGN KEY (Type) REFERENCES ObjectType(Type);
+ALTER TABLE boulderdash.ObjectMap ADD CONSTRAINT FK_ObjectMap_MapName FOREIGN KEY (MapName) REFERENCES boulderdash.Map(MapName);
+ALTER TABLE boulderdash.ObjectMap ADD CONSTRAINT FK_ObjectMap_TypeObject FOREIGN KEY (TypeObject) REFERENCES boulderdash.ObjectType(TypeObject);

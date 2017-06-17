@@ -9,10 +9,6 @@ import java.util.ArrayList;
  */
 public class RawMap {
     /**
-     * id of Map
-     * */
-    private int id;
-    /**
      * name of Map
      * */
     private String name;
@@ -27,8 +23,7 @@ public class RawMap {
      * */
     private ArrayList<RawElement> elements;
 
-    public RawMap(final int idMap, final String nameMap, final Dimension dimension){
-        this.id = idMap;
+    public RawMap(final String nameMap, final Dimension dimension){
         this.name = nameMap;
         this.dimension = dimension;
         elements = new ArrayList<>();
@@ -40,12 +35,6 @@ public class RawMap {
     }
 
     //Assesseur
-    /**
-     * @return id of this Map
-     * */
-    public int getId() {
-        return id;
-    }
     /**
      * @return name of this Map
      * */

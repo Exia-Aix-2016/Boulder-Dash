@@ -1,5 +1,7 @@
 import DAO.MapDAO;
 import DAO.ObjectType;
+import DAO.RawMap;
+import model.element.Dimension;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,18 +27,23 @@ public class MapDAOTest {
         }
     }
 
-
+    @Test
     public void InsertObjectTypeTest(){
 
         if(!mapDAO.addObjectType(ObjectType.DIRT)){
             fail("Fail : insert ObjectType");
         }
     }
-
+    @Test
     public void removeObjectTypeTest(){
         if(!mapDAO.removeObjectType(ObjectType.DIRT)){
             fail("Fail : insert ObjectType");
         }
+    }
+    @Test
+    public void createMapTest(){
+        RawMap map = new RawMap("test", new Dimension(10, 10));
+        mapDAO.addMap(map);
     }
 
     @AfterClass
