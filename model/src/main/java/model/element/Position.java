@@ -31,13 +31,13 @@ public class Position {
     //Assesseur
 
     /**
-     * add JavaDoc
+     * @return x position
      * */
     public int getX() {
         return x;
     }
     /**
-     * add JavaDoc
+     * @return y position
      * */
     public int getY() {
         return y;
