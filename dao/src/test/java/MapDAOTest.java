@@ -25,14 +25,14 @@ public class MapDAOTest {
         }
     }
 
-    @Test
+
     public void InsertObjectTypeTest(){
 
         if(!mapDAO.addObjectType(ObjectType.DIRT)){
             fail("Fail : insert ObjectType");
         }
     }
-    @Test
+
     public void removeObjectTypeTest(){
         if(!mapDAO.removeObjectType(ObjectType.DIRT)){
             fail("Fail : insert ObjectType");

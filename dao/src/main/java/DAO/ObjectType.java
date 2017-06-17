@@ -8,5 +8,6 @@ public enum ObjectType {
     ROCK,
     DIAMOND,
     MONSTER,
+    WALL,
     CHARACTER
 }
