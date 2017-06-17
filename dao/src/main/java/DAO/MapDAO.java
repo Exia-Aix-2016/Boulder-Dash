@@ -24,16 +24,34 @@ public class MapDAO implements IMap {
 
 
     //CRUD
+    /**
+     * @see IMap
+     * */
     @Override
     public RawMap getMap(int idMap) {
         return null;
     }
-
+    /**
+     * @see IMap
+     * */
     @Override
     public void addMap(RawMap rawMap) {
 
     }
+    /**
+     * @see IMap
+     * */
+    @Override
+    public void removeMap(String nameMap) {
 
+    }
+    /**
+     * @see IMap
+     * */
+    @Override
+    public void removeMap(int indexMap) {
+
+    }
 
     /**
      * Add Object type into dataBase.
