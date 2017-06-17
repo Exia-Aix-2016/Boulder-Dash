@@ -1,8 +1,6 @@
 package DAO;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * MapDAO
@@ -13,17 +11,15 @@ public class MapDAO implements IMap {
     /**
      * Connection dataBase
      * */
-    private Dao dao;
-    private PreparedStatement statement;
+    private Connection connection;
+    private CallableStatement CALLstatement;
 
     /**
      * Constructor
      * initialize dao
      * */
    public MapDAO(){
-
-       this.dao = Dao.getInstance();
-
+       this.connection = Dao.getInstance().getConnection();
     }
 
 
@@ -41,39 +37,72 @@ public class MapDAO implements IMap {
 
     /**
      * Add Object type into dataBase.
-     *
+     *call sql function boulderdash.addObjectType()
+     * @return true if success or false is if failure
      * */
-    public void addObjectType(final ObjectType objectType){
-        
+    public boolean addObjectType(final ObjectType objectType){
+        final String oTypeString = objectType.name();
+        try{
+            this.CALLstatement =  connection.prepareCall("{ call boulderdash.addObjectType(?)}");
+            this.CALLstatement.setString(1, oTypeString);
+            this.CALLstatement.execute();
+            this.closeStatement();
+            return true;
+
+        }catch (Exception e){
+
+            e.getStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Remove Object in ObjectType
+     * call sql function boulderdash.removeObjectType()
+     * @return true if success or false is if failure
+     * * */
+    public boolean removeObjectType(final ObjectType objectType){
+
+        final String oTypeString = objectType.name();
+        try{
+            this.CALLstatement =  connection.prepareCall("{ call boulderdash.removeObjectType(?)}");
+            this.CALLstatement.setString(1, oTypeString);
+            this.CALLstatement.execute();
+            this.closeStatement();
+            return true;
+
+        }catch (Exception e){
+
+            e.getStackTrace();
+            return false;
+        }
     }
 
 
     /**
      * Close Statement DAO
      * */
-    public boolean closeStatement(){
+    public void closeStatement(){
         try {
-            this.statement.close();
-            return true;
+            this.CALLstatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
     }
 
     //Assesseur
-
-    /**
-     * @return dao instance
-     * */
-    public Dao getDao() {
-        return dao;
-    }
-
     /**
      * @return statement instance
      * */
     public Statement getStatement() {
-        return statement;
+        return this.CALLstatement;
+    }
+
+    /**
+     * @return instance connection
+     * usage for Units Test
+     * */
+    public final Connection getConnection() {
+        return connection;
     }
 }
