@@ -17,3 +17,18 @@ BEGIN
 
 END |
 DELIMITER ;
+
+
+DELIMITER |
+CREATE PROCEDURE boulderdash.addMap(IN nameMap VARCHAR(255), IN width int, IN heigh int)
+BEGIN
+  INSERT INTO boulderdash.Map (Nom, Width, Heigth) VALUES (nameMap, width, heigh);
+END |
+DELIMITER ;
+
+DELIMITER |
+CREATE PROCEDURE boulderdash.removeMap(IN nameMap VARCHAR(255))
+BEGIN
+  DELETE FROM boulderdash.Map WHERE Nom = nameMap;
+END |
+DELIMITER ;
