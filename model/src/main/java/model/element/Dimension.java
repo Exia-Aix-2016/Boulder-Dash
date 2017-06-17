@@ -1,6 +1,6 @@
 package model.element;
 
-class Dimension {
+public class Dimension {
     private int wight;
     private int height;
 }

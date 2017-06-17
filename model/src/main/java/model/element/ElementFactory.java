@@ -1,6 +1,6 @@
 package model.element;
 
-public class ElementFactory {
+public abstract class ElementFactory {
 
     Element createCharacter(String sprite, Position position, Dimension dimension, int permeability){
         return new Character(sprite, position, dimension, permeability);
