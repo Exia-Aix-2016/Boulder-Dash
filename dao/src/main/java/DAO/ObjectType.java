@@ -1,12 +1,13 @@
 package DAO;
 
 /**
- * Created by Mandel on 16/06/2017.
+ * Enum which define all Elements which compose the map
  */
 public enum ObjectType {
     DIRT,
     ROCK,
     DIAMOND,
     MONSTER,
+    WALL,
     CHARACTER
 }
