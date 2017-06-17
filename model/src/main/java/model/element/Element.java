@@ -1,6 +1,6 @@
 package model.element;
 
-class Element {
+public abstract class Element {
     private Position position;
     private Dimension dimension;
 

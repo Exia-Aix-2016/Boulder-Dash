@@ -1,5 +1,5 @@
 package model.element;
 
-interface IMove {
+public interface IMove {
 
 }

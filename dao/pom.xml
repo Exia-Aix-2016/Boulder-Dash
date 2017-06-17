@@ -11,5 +11,24 @@
 
     <artifactId>dao</artifactId>
 
+<dependencies>
+    <dependency>
+        <groupId>com.github.Exia-Aix-A1</groupId>
+        <artifactId>model</artifactId>
+        <version>4.0.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>6.0.6</version>
+    </dependency>
+</dependencies>
+    <build>
+
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+    </build>
+
+
 
 </project>
