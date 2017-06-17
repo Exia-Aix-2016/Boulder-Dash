@@ -1,41 +1,144 @@
 #------------------------------------------------------------
-#        Script MySQL.
+#                     SCRIPT CREATE DATABASE
+#                              MYSQL
+#------------------------------------------------------------
+
+#------------------------------------------------------------
+#                         CREATE BOULDERDASH
+#                             DATABASE
 #------------------------------------------------------------
 CREATE DATABASE boulderdash;
 
-#------------------------------------------------------------
-# Table: Map
-#------------------------------------------------------------
-
-CREATE TABLE boulderdash.Map(
-        MapName Varchar (255) NOT NULL ,
-        Width   Int NOT NULL ,
-        Heigth  Int ,
-        PRIMARY KEY (MapName )
-);
-
 
 #------------------------------------------------------------
-# Table: ObjectType
+#                    CREATE boulderdash.Map
+#                             Table
+#------------------------------------------------------------
+create table boulderdash.Map
+(
+	MapName varchar(255) not null
+		primary key,
+	Width int null,
+	Heigth int null
+)
+;
+#------------------------------------------------------------
+#                  CREATE boulderdash.ObjectMap
+#                             Table
+#------------------------------------------------------------
+create table boulderdash.ObjectMap
+(
+	MapName varchar(255) not null,
+	TypeObject varchar(255) not null,
+	CoordX int not null,
+	CoordY int not null,
+	primary key (MapName, TypeObject, CoordY, CoordX),
+	constraint ObjectMap_Map_MapName_fk
+		foreign key (MapName) references boulderdash.Map (MapName)
+			on update cascade on delete cascade
+)
+;
+
+create index ObjectMap_ObjectType_TypeObject_fk
+	on boulderdash.ObjectMap (TypeObject)
+;
+#------------------------------------------------------------
+#                 CREATE boulderdash.ObjectType
+#                             Table
+#------------------------------------------------------------
+create table boulderdash.ObjectType
+(
+	TypeObject varchar(255) not null
+		primary key
+)
+;
+#------------------------------------------------------------
+#                         MIGRATION PRK
+#                 Map, ObjectType -> ObjectMap
+#------------------------------------------------------------
+alter table boulderdash.ObjectMap
+	add constraint ObjectMap_ObjectType_TypeObject_fk
+		foreign key (TypeObject) references boulderdash.ObjectType (TypeObject)
+			on update cascade
+;
+#------------------------------------------------------------
+#                             INSERT
+#                     DATA IN ObjectType Table
+#------------------------------------------------------------
+INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('CHARACTER');
+INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('DIAMOND');
+INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('DIRT');
+INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('MONSTER');
+INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('ROCK');
+INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('WALL');
+#------------------------------------------------------------
+#                          Stock routines
 #------------------------------------------------------------
 
-CREATE TABLE boulderdash.ObjectType(
-        TypeObject Varchar (255) NOT NULL ,
-        PRIMARY KEY (TypeObject )
-);
-
-
 #------------------------------------------------------------
-# Table: ObjectMap
+#addMap
 #------------------------------------------------------------
+DELIMITER |
+create procedure boulderdash.addMap (IN nameMap varchar(255), IN width int, IN heigh int)
+BEGIN
+	IF NOT EXISTS(SELECT * FROM boulderdash.Map WHERE MapName = nameMap) THEN
+  INSERT INTO boulderdash.Map (MapName, Width, Heigth) VALUES (nameMap, width, heigh);
+		END IF ;
+	END |
+DELIMITER ;
+#------------------------------------------------------------
+#addMapElement
+#------------------------------------------------------------
+DELIMITER |
+create procedure boulderdash.addMapElement (IN nameMAP varchar(255), IN nameElement varchar(255), IN X int, IN Y int)
+BEGIN
+		IF NOT EXISTS(SELECT * FROM boulderdash.ObjectMap WHERE MapName = nameMAP AND TypeObject = nameElement) THEN
+    INSERT INTO boulderdash.ObjectMap (CoordX, CoordY, MapName, TypeObject) VALUES (X, Y, nameMAP, nameElement);
+			END IF ;
+	END |
+DELIMITER ;
+#------------------------------------------------------------
+#addObjectType
+#------------------------------------------------------------
+DELIMITER |
+create procedure boulderdash.addObjectType (IN OType varchar(255))
+BEGIN
+	IF EXISTS(SELECT * FROM boulderdash.ObjectType WHERE TypeObject = OType) THEN
+  INSERT INTO boulderdash.ObjectType (TypeObject) VALUE (OType);
+		END IF ;
+	END |
+DELIMITER ;
+#------------------------------------------------------------
+#removeMap
+#------------------------------------------------------------
+DELIMITER |
+create procedure boulderdash.removeMap (IN nameMap varchar(255))
+	BEGIN
+			IF EXISTS(SELECT * FROM Map WHERE MapName = nameMap) THEN
+  	DELETE FROM boulderdash.Map WHERE MapName = nameMap;
+				END IF;
+	END |
 
-CREATE TABLE boulderdash.ObjectMap(
-        MapName    Varchar (255) NOT NULL ,
-        TypeObject Varchar (255) NOT NULL ,
-        CoordX     Int NOT NULL ,
-        CoordY     Date NOT NULL ,
-        PRIMARY KEY (MapName ,TypeObject )
-);
-
-ALTER TABLE boulderdash.ObjectMap ADD CONSTRAINT FK_ObjectMap_MapName FOREIGN KEY (MapName) REFERENCES boulderdash.Map(MapName);
-ALTER TABLE boulderdash.ObjectMap ADD CONSTRAINT FK_ObjectMap_TypeObject FOREIGN KEY (TypeObject) REFERENCES boulderdash.ObjectType(TypeObject);
+DELIMITER ;
+#------------------------------------------------------------
+#removeMapElement
+#------------------------------------------------------------
+DELIMITER |
+create procedure boulderdash.removeMapElement (IN nameMAP varchar(255), IN nameElement varchar(255))
+BEGIN
+		IF EXISTS(SELECT * FROM boulderdash.ObjectMap WHERE MapName = nameMAP AND TypeObject = nameElement) THEN
+    DELETE FROM boulderdash.ObjectMap WHERE MapName = nameMAP AND TypeObject = nameElement;
+			END IF;
+	END |
+DELIMITER ;
+#------------------------------------------------------------
+#removeObjectType
+#------------------------------------------------------------
+DELIMITER |
+create procedure boulderdash.removeObjectType (IN OType varchar(255))
+BEGIN
+	IF EXISTS(SELECT * FROM boulderdash.ObjectType WHERE TypeObject = OType) THEN
+  DELETE FROM boulderdash.ObjectType WHERE TypeObject = OType;
+		END IF ;
+	END |
+DELIMITER ;

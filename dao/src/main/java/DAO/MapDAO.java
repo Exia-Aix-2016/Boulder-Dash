@@ -36,6 +36,7 @@ public class MapDAO implements IMap {
     public RawMap getMap(int idMap) {
         return null;
     }
+
     /**
      * @see IMap
      * */
@@ -54,6 +55,14 @@ public class MapDAO implements IMap {
         //Clear parameter
         parameters.clear();
 
+        for(RawElement element : rawMap.getElements()){
+            parameters.add(rawMap.getName());
+            parameters.add(element.getObjectType().name());
+            parameters.add(element.getPosition().getX());
+            parameters.add(element.getPosition().getY());
+            this.createCallableStatement("boulderdash.addMapElement(?,?,?,?)", parameters).ifPresent(MapDAO::executeCallStatement);
+            parameters.clear();
+        }
     }
     /**
      * Allows to execute an CallableStatement

@@ -1,7 +1,9 @@
 import DAO.MapDAO;
 import DAO.ObjectType;
+import DAO.RawElement;
 import DAO.RawMap;
 import model.element.Dimension;
+import model.element.Position;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,12 +14,19 @@ import static org.junit.Assert.*;
 
 
 /**
- * Created by Mandel on 16/06/2017.
- */
+ * TESTS CLass
+ * TESTS FOR MapDAO Class
+ * */
 public class MapDAOTest {
 
+    /**
+     * Instance of object which will be test
+     * */
     private static MapDAO mapDAO;
 
+    /**
+     * Instanciate mapDAO
+     * */
     @BeforeClass
     public static void initMapDAOTest(){
 
@@ -25,27 +34,37 @@ public class MapDAOTest {
         if(mapDAO.getConnection() == null){
          fail("Fail : connection");
         }
-    }
+    }//FINISH
 
+    /**
+     * Test insert ObjectType
+     * */
     @Test
     public void InsertObjectTypeTest(){
+    }//TODO
 
-        if(!mapDAO.addObjectType(ObjectType.DIRT)){
-            fail("Fail : insert ObjectType");
-        }
-    }
+    /**
+     * Test remove ObjectType
+     * */
     @Test
     public void removeObjectTypeTest(){
-        if(!mapDAO.removeObjectType(ObjectType.DIRT)){
-            fail("Fail : insert ObjectType");
-        }
-    }
+    }//TODO
+
+    /**
+     * Test create MAp
+     * */
     @Test
     public void createMapTest(){
         RawMap map = new RawMap("test", new Dimension(10, 10));
-        mapDAO.addMap(map);
-    }
+        map.addElement(new RawElement(ObjectType.WALL, new Position(0, 0)));
+        map.addElement(new RawElement(ObjectType.WALL, new Position(1, 0)));
 
+        mapDAO.addMap(map);
+    }//FINISH
+
+    /**
+     * Close connection
+     * */
     @AfterClass
     public static void closeConnection(){
         try {
@@ -54,5 +73,5 @@ public class MapDAOTest {
             e.printStackTrace();
             fail("Erreur close connection");
         }
-    }
+    }//FINISH
 }
