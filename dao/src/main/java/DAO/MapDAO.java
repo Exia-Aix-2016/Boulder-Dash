@@ -10,6 +10,8 @@ import java.util.Optional;
 /**
  * MapDAO
  * CRUD with DataBase
+ * @see IMap
+ * @see Dao
  */
 public class MapDAO implements IMap {
 
@@ -17,13 +19,14 @@ public class MapDAO implements IMap {
      * Connection dataBase
      * */
     private Connection connection;
+
     /**
      * Constructor
      * initialize dao
      * */
    public MapDAO(){
        this.connection = Dao.getInstance().getConnection();
-    }
+    }//FINISH
 
 
     //CRUD
@@ -69,10 +72,10 @@ public class MapDAO implements IMap {
     public void removeMap(String nameMap) {
 
     }//TODO
+
     /**
      * @see IMap
      * */
-
     @Override
     public void removeMap(int indexMap) {
 
@@ -144,7 +147,7 @@ public class MapDAO implements IMap {
         ArrayList<Object> parameters = new ArrayList<>();
         parameters.add(objectType.name());
         this.createCallableStatement("boulderdash.addObjectType(?)", parameters).ifPresent(MapDAO::executeCallStatement);
-    }//TO TEST
+    }//FINISH TO TEST
 
     /**
      * Remove Object in ObjectType
@@ -157,7 +160,7 @@ public class MapDAO implements IMap {
         ArrayList<Object> parameters = new ArrayList<>();
         parameters.add(objectType.name());
         this.createCallableStatement("boulderdash.removeObjectType(?)", parameters).ifPresent(MapDAO::executeCallStatement);
-    }//TO TEST
+    }//FINISH TO TEST
 
     /**
      * @return instance connection
