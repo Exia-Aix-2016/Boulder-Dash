@@ -17,8 +17,6 @@ public class MapDAO implements IMap {
      * Connection dataBase
      * */
     private Connection connection;
-    private CallableStatement CALLstatement;
-
     /**
      * Constructor
      * initialize dao
@@ -35,7 +33,7 @@ public class MapDAO implements IMap {
     @Override
     public RawMap getMap(int idMap) {
         return null;
-    }
+    }//TODO
 
     /**
      * @see IMap
@@ -63,19 +61,22 @@ public class MapDAO implements IMap {
             this.createCallableStatement("boulderdash.addMapElement(?,?,?,?)", parameters).ifPresent(MapDAO::executeCallStatement);
             parameters.clear();
         }
-    }
+    }//FINISH
     /**
-     * Allows to execute an CallableStatement
-     * @param callableStatement CallableStatement
-     * @see CallableStatement
+     * @see IMap
      * */
-    public static void executeCallStatement(final CallableStatement callableStatement){
-        try {
-            callableStatement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    @Override
+    public void removeMap(String nameMap) {
+
+    }//TODO
+    /**
+     * @see IMap
+     * */
+
+    @Override
+    public void removeMap(int indexMap) {
+
+    }//TODO
 
     /**
      * Create a call routine with variable parameters
@@ -97,101 +98,66 @@ public class MapDAO implements IMap {
             CallableStatement callStatement = this.connection.prepareCall(call);
 
             for(Object obj : parameters){
-                if(obj instanceof Integer){
-
+                if(obj instanceof Integer){//Integer
                     callStatement.setInt(i, (Integer)obj);
-
-                }else if(obj instanceof String){
-
+                }else if(obj instanceof String){//String
                     callStatement.setString(i, (String)obj);
+                }else if(obj instanceof Double){//Double
+                    callStatement.setDouble(i, (Double)obj);
+                }else if(obj instanceof Boolean){//Boolean
+                    callStatement.setBoolean(i, (Boolean)obj);
+                }else if(obj instanceof Date){//Date
+                    callStatement.setDate(i, (Date)obj);
                 }
                 i++;
             }
-
             return Optional.of(callStatement);
         } catch (SQLException e) {
             e.printStackTrace();
             return Optional.empty();
-
         }
-    }
+    }//FINISH TO OPTIMIZE
+
     /**
-     * @see IMap
+     * Allows to execute an CallableStatement
+     * when execution is success the statement is closes
+     * @param callableStatement CallableStatement
+     * @see CallableStatement
+     * @throws SQLException
      * */
-    @Override
-    public void removeMap(String nameMap) {
-
-    }
-    /**
-     * @see IMap
-     * */
-    @Override
-    public void removeMap(int indexMap) {
-
-    }
-
+    public static void executeCallStatement(final CallableStatement callableStatement){
+        try {
+            callableStatement.execute();
+            callableStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }//FINISH
     /**
      * Add Object type into dataBase.
      *call sql function boulderdash.addObjectType()
      * @return true if success or false is if failure
+     * @throws SQLException
      * */
-    public boolean addObjectType(final ObjectType objectType){
-        final String oTypeString = objectType.name();
-        try{
-            this.CALLstatement =  connection.prepareCall("{ call boulderdash.addObjectType(?)}");
-            this.CALLstatement.setString(1, oTypeString);
-            this.CALLstatement.execute();
-            this.closeStatement();
-            return true;
-
-        }catch (Exception e){
-
-            e.getStackTrace();
-            return false;
-        }
-    }
+    public void addObjectType(final ObjectType objectType){
+        //Array of parameters
+        ArrayList<Object> parameters = new ArrayList<>();
+        parameters.add(objectType.name());
+        this.createCallableStatement("boulderdash.addObjectType(?)", parameters).ifPresent(MapDAO::executeCallStatement);
+    }//TO TEST
 
     /**
      * Remove Object in ObjectType
      * call sql function boulderdash.removeObjectType()
      * @return true if success or false if failure
+     * @throws SQLException
      * * */
-    public boolean removeObjectType(final ObjectType objectType){
-
-        final String oTypeString = objectType.name();
-        try{
-            this.CALLstatement =  connection.prepareCall("{ call boulderdash.removeObjectType(?)}");
-            this.CALLstatement.setString(1, oTypeString);
-            this.CALLstatement.execute();
-            this.closeStatement();
-            return true;
-
-        }catch (Exception e){
-
-            e.getStackTrace();
-            return false;
-        }
-    }
-
-
-    /**
-     * Close Statement DAO
-     * */
-    public void closeStatement(){
-        try {
-            this.CALLstatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //Assesseur
-    /**
-     * @return statement instance
-     * */
-    public Statement getStatement() {
-        return this.CALLstatement;
-    }
+    public void removeObjectType(final ObjectType objectType){
+        //Array of parameters
+        ArrayList<Object> parameters = new ArrayList<>();
+        parameters.add(objectType.name());
+        this.createCallableStatement("boulderdash.removeObjectType(?)", parameters).ifPresent(MapDAO::executeCallStatement);
+    }//TO TEST
 
     /**
      * @return instance connection
@@ -199,5 +165,5 @@ public class MapDAO implements IMap {
      * */
     public final Connection getConnection() {
         return connection;
-    }
+    }//FINISH
 }
