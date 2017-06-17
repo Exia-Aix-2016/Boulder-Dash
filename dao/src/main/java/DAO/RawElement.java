@@ -5,7 +5,7 @@ import model.element.Position;
 
 /**
  * RawElement its a representation of an Element is not real Element
- * He will be use by Map class so can create real map.
+ * He will be use by RawMap class so can create representation of Map.
  */
 public class RawElement {
 
