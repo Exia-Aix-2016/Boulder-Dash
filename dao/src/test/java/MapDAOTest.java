@@ -1,7 +1,9 @@
 import DAO.MapDAO;
 import DAO.ObjectType;
+import DAO.RawElement;
 import DAO.RawMap;
 import model.element.Dimension;
+import model.element.Position;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -43,6 +45,9 @@ public class MapDAOTest {
     @Test
     public void createMapTest(){
         RawMap map = new RawMap("test", new Dimension(10, 10));
+        map.addElement(new RawElement(ObjectType.WALL, new Position(0, 0)));
+        map.addElement(new RawElement(ObjectType.WALL, new Position(1, 0)));
+
         mapDAO.addMap(map);
     }
 
