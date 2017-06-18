@@ -16,5 +16,6 @@ public class BoulderDash {
         Controller controller = new Controller(model);
 
         View view = new View(model);
+        controller.start();
     }
 }

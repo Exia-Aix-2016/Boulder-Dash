@@ -5,7 +5,7 @@ import model.Model;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Controller {
+public class Controller extends Thread{
 
     private Collection<TickListener> tickListeners = new ArrayList<TickListener>();
     private int ticks = 0;
@@ -14,7 +14,6 @@ public class Controller {
     public Controller(Model model){
         this.model = model;
         this.addPlayer();
-        this.loop();
     }
 
     private void addPlayer(){
@@ -22,7 +21,8 @@ public class Controller {
         ElementControllerFactory::createPlayerController(player);*/
     }
 
-    private void loop(){
+    @Override
+    public void run(){
         while (true){
             fireTick();
             try {
@@ -34,6 +34,7 @@ public class Controller {
     }
 
     private void fireTick(){
+        System.out.println("tick");
         for (TickListener tickListener: tickListeners){
             ticks++;
             tickListener.tick(ticks);
