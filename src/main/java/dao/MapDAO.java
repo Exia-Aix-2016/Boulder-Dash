@@ -1,6 +1,7 @@
 package dao;
 
 import com.sun.deploy.security.ValidationState;
+import model.elements.Dimension;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -34,25 +35,71 @@ public class MapDAO implements IMap {
      * @see IMap
      * */
     @Override
-    public RawMap getMap(final String nameMap) {
+    public Optional<RawMap> getMap(final String nameMap) {
 
-        Integer width = 0;
-        Integer Height = 0;
+        //Init attributs
+        Integer width = 0, Height = 0, nbrObjectMap = 0;
+        Dimension size = null;
+        RawMap rawMap = null;
         ArrayList<Parameters> parameters = new ArrayList<>();
+
+        //============= Step 1 : Get Dimension of this map =============
+
         parameters.add(new Parameters(nameMap, TypeParameters.IN));
         parameters.add(new Parameters(width, TypeParameters.OUT));
         parameters.add(new Parameters(Height, TypeParameters.OUT));
         this.createCallableStatement("boulderdash.getSizeMap(?,?,?)", parameters).ifPresent(MapDAO::executeCallStatement);
 
+        //Create Dimension object
         try {
-            System.out.println("width : " + statement.getInt(2));
-            System.out.println("Height : " + statement.getInt(3));
+            size = new Dimension(statement.getInt(2), statement.getInt(3));
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+
+        //============= Step 2 : Create rawMap =============
+        if(size != null)
+        {
+            rawMap = new RawMap(nameMap, size);
+        }
+
+        //============= Step 3 : get Nbr ObjectMap =============
+        parameters.clear();
+        parameters.add(new Parameters(nameMap, TypeParameters.IN));
+        parameters.add(new Parameters(nbrObjectMap, TypeParameters.OUT));
+        this.createCallableStatement("boulderdash.countObjectMap(?,?)", parameters).ifPresent(MapDAO::executeCallStatement);
+        //get nbrElement for this map
+        try {
+            nbrObjectMap = statement.getInt(2);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        //============= Step 4 : add each Elements in rawMap =============
+
+        return Optional.empty();
     }//TODO
 
+
+    public void testListAll(){
+        ResultSet resultSet;
+        ResultSetMetaData resultMeta;
+
+        this.createCallableStatement("boulderdash.listall()", new ArrayList<Parameters>()).ifPresent(MapDAO::executeCallStatement);
+
+
+        try {
+            resultSet = statement.getResultSet();
+            while(resultSet.next()){
+                System.out.println(resultSet.getObject("TypeObject").toString());
+
+            }
+
+            System.out.println(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * @see IMap
      * */

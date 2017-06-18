@@ -62,7 +62,8 @@ public class MapDAOTest {
 
     @Test
     public void getMapTest(){
-        mapDAO.getMap("test");
+        //mapDAO.getMap("test");
+        mapDAO.testListAll();
     }
 
     @Test
