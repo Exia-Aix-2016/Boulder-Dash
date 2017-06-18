@@ -15,4 +15,8 @@ public abstract class Element {
         this.sprite = sprite;
         this.permeability = permeability;
     }
+
+    public Position getPosition() {
+        return position;
+    }
 }
