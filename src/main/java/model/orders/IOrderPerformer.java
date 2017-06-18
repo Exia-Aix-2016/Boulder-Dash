@@ -1,8 +1,6 @@
 package model.orders;
 
-public class IOrderPerformer {
+public interface IOrderPerformer {
 
-    public void emitOrder(Order order){
-
-    }
+    void emitOrder(Order order);
 }
