@@ -13,7 +13,7 @@ public class Dao {
     /**
      * connection url
      * */
-    private final static String url = "jdbc:mysql://localhost:32770/boulderdash?autoReconnect=true&useSSL=false";
+    private final static String url = "jdbc:mysql://localhost:32769/boulderdash?autoReconnect=true&useSSL=false";
     /**
      * username
      * */
