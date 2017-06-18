@@ -4,12 +4,12 @@ package dao;
  *Represente Parameters which used by CallStatement
  * the paramters with stocked routines can be IN OUT or INOUT
  */
-public class Parameters {
+public class Parameters<T> {
     /**
      * Represente Object Parameter
      * @see Object
      * */
-    private Object obj;
+    private T obj;
     /**
      * Type of this parameter (IN, OUT, INTOUT)
      * @see TypeParameters
@@ -23,7 +23,7 @@ public class Parameters {
      * @see TypeParameters
      * @see Object
      * */
-    public Parameters(final Object o, final TypeParameters typeParameters){
+    public Parameters(final T o, final TypeParameters typeParameters){
         this.obj = o;
         this.typeParameters = typeParameters;
     }
@@ -33,7 +33,7 @@ public class Parameters {
      * @param obj Take any type (Integer, String)
      * @see Object
      * */
-    public void setObj(Object obj) {
+    public void setObj(T obj) {
         this.obj = obj;
     }
 
@@ -50,7 +50,7 @@ public class Parameters {
      * @return Object of this parameter
      * @see Object
      * */
-    public Object getObj() {
+    public T getParameter() {
         return obj;
     }
 

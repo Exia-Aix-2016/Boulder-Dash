@@ -62,9 +62,11 @@ public class MapDAOTest {
 
     @Test
     public void getMapTest(){
-        //mapDAO.getMap("test");
-        mapDAO.testListAll();
-    }
+        mapDAO.getMap("test");
+
+
+
+    }//FINISH
 
     @Test
     public void removeMap(){
