@@ -11,7 +11,7 @@ public class Controller {
     private int ticks = 0;
     private Model model;
 
-    Controller(Model model){
+    public Controller(Model model){
         this.model = model;
         this.addPlayer();
         this.loop();
