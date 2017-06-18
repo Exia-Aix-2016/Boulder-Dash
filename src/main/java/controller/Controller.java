@@ -1,19 +1,28 @@
 package controller;
 
+import model.Model;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Controller {
+public class Controller extends Thread{
 
     private Collection<TickListener> tickListeners = new ArrayList<TickListener>();
     private int ticks = 0;
+    private Model model;
 
-    Controller(){
-
-        loop();
+    public Controller(Model model){
+        this.model = model;
+        this.addPlayer();
     }
 
-    public void loop(){
+    private void addPlayer(){
+        /*Element player;
+        ElementControllerFactory::createPlayerController(player);*/
+    }
+
+    @Override
+    public void run(){
         while (true){
             fireTick();
             try {
@@ -25,6 +34,7 @@ public class Controller {
     }
 
     private void fireTick(){
+        System.out.println("tick");
         for (TickListener tickListener: tickListeners){
             ticks++;
             tickListener.tick(ticks);

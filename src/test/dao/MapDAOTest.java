@@ -17,7 +17,7 @@ import static org.junit.Assert.fail;
  * */
 public class MapDAOTest {
     /**
-     * Instance of object which will be test
+     * Instance of element which will be test
      * */
     private static MapDAO mapDAO;
 
