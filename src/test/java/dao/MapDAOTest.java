@@ -1,7 +1,7 @@
 package dao;
 
-import com.github.ExiaAixA1.model.element.Dimension;
-import com.github.ExiaAixA1.model.element.Position;
+import model.elements.Dimension;
+import model.elements.Position;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
