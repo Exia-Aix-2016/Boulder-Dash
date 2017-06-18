@@ -26,7 +26,7 @@ public class View extends JFrame implements Observer{
         this.setContentPane(this.menu);
 
         this.setSize(800, 800);
-        this.setTitle("Coucou");
+        this.setTitle("Boulder Dash");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         System.out.println("Ouverture de la fenetre");

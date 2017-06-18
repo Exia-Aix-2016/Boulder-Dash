@@ -1,15 +1,18 @@
 package view;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 
 class Menu extends JPanel{
 
-    JPanel rootPanel;
-    JPanel worldsPanel;
+    private JPanel rootPanel;
+    private JPanel worldsPanel;
 
-    JButton playButton;
-    JButton quitButton;
-    JButton backButton;
+    private JButton playButton;
+    private JButton quitButton;
+    private JButton backButton;
 
     private enum Panel{
         ROOT, WORLDS
@@ -17,16 +20,19 @@ class Menu extends JPanel{
 
     private Panel currentPanel = Panel.ROOT;
 
+    Image backgroundImage;
+
     Menu(){
         this.configurerootPanel();
         this.configureWorldsPanel();
 
-        this.add(rootPanel);
+        this.add(rootPanel, BorderLayout.CENTER);
         this.add(worldsPanel);
     }
 
     private void configurerootPanel(){
         this.rootPanel = new JPanel();
+        this.rootPanel.setOpaque(false);
 
         this.playButton = new JButton("Play");
         this.quitButton = new JButton("Quit");
@@ -36,10 +42,18 @@ class Menu extends JPanel{
 
         this.playButton.addActionListener((e -> this.swithPanel()));
         this.quitButton.addActionListener((e) -> System.exit(0));
+
+        try {
+            this.backgroundImage = ImageIO.read(this.getClass().getResource("menuBackground.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void configureWorldsPanel(){
         this.worldsPanel = new JPanel();
+        this.worldsPanel.setOpaque(false);
         this.worldsPanel.setVisible(false);
 
         this.backButton = new JButton("Back");
@@ -65,5 +79,9 @@ class Menu extends JPanel{
                 this.currentPanel = Panel.ROOT;
                 break;
         }
+    }
+
+    public void paintComponent(Graphics g) {
+        g.drawImage(this.backgroundImage, 0, 0, this.getWidth(), this.getHeight(), null);
     }
 }
