@@ -3,9 +3,10 @@ package model.elements;
 public class Position {
     private int x;
     private int y;
-
     /**
-     * add JavaDoc
+     * Constructor Position
+     * @param y set y position
+     * @param x set x position
      * */
     public Position(final int x, final int y){
         this.setX(x);

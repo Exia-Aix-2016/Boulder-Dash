@@ -2,7 +2,7 @@ package model.elements;
 
 public class Movable extends Element implements IMove{
 
-    Movable(String sprite, Position position, Dimension dimension, int permeability){
+    Movable(final String sprite, Position position, final Dimension dimension, Permeability permeability){
         super(sprite, position, dimension, permeability);
     }
 }

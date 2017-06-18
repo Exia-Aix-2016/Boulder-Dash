@@ -2,7 +2,7 @@ package model.elements;
 
 public class Diamond extends Movable {
 
-    Diamond(String sprite,Position position, Dimension dimension, int permeability) {
+    Diamond(final String sprite, Position position, final Dimension dimension, Permeability permeability) {
         super(sprite, position, dimension,permeability);
 
     }

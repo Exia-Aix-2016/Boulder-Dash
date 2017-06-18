@@ -1,7 +1,7 @@
 package model.elements;
 
 public class Rock extends Movable {
-    Rock(String sprite, Position position, Dimension dimension, int permeability) {
+    Rock(final String sprite, Position position, final Dimension dimension, Permeability permeability) {
         super(sprite, position, dimension, permeability);
     }
 }

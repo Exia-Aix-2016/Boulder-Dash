@@ -2,7 +2,7 @@ package model.elements;
 
 public class Dirt extends Element{
 
-    Dirt(String sprite, Position position, Dimension dimension, int permeability) {
+    Dirt(final String sprite, Position position, final Dimension dimension, Permeability permeability) {
         super(sprite, position, dimension, permeability);
     }
 }

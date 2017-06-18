@@ -5,10 +5,10 @@ public abstract class Element {
     private Dimension dimension;
 
     private String sprite;
-    private int permeability;
+    private Permeability permeability;
 
 
-    Element (String sprite, Position position, Dimension dimension, int permeability){
+    Element (final String sprite, Position position, final Dimension dimension, Permeability permeability){
         this.position = position;
         this.dimension = dimension;
 

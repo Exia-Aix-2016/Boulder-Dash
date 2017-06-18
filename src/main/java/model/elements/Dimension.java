@@ -29,8 +29,8 @@ public class Dimension {
         this.height = height;
     }
     /**
-     * Define widht
-     * @param widht widht of com.github.ExiaAixA1.model
+     * Define width
+     * @param width widht of com.github.ExiaAixA1.model
      * */
     public void setWight(int width) {
         this.width = width;
