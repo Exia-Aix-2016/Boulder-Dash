@@ -1,4 +1,4 @@
-package com.github.ExiaAixA1.model.element;
+package model.elements;
 
 public class Rock extends Movable {
     Rock(String sprite, Position position, Dimension dimension, int permeability) {

@@ -1,4 +1,4 @@
-package com.github.ExiaAixA1.model.element;
+package model.elements;
 
 public class Position {
     private int x;

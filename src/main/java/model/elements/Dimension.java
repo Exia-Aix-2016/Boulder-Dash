@@ -1,4 +1,4 @@
-package com.github.ExiaAixA1.model.element;
+package model.elements;
 
 /**
  * Allow to set a height and width to a com.github.ExiaAixA1.model
