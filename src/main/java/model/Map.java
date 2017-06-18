@@ -93,22 +93,22 @@ public class Map {
         for(RawElement element : rwMap.getElements()) {
             switch (element.getObjectType()){
                 case ROCK:
-                    map.addElement(ElementFactory.createRock("", element.getPosition(), new Dimension(1,1), Permeability.MOVEABLE));
+                    map.addElement(ElementFactory.createRock("", element.getPosition(), new Dimension(1,1), Permeability.BLOCKING));
                     break;
                 case DIRT:
-                    map.addElement(ElementFactory.createDirt("", element.getPosition(), new Dimension(1,1), Permeability.REMOVABLE));
+                    map.addElement(ElementFactory.createDirt("", element.getPosition(), new Dimension(1,1), Permeability.BLOCKING));
                     break;
                 case WALL:
                     map.addElement(ElementFactory.createWall("", element.getPosition(), new Dimension(1,1), Permeability.BLOCKING));
                     break;
                 case DIAMOND:
-                    map.addElement(ElementFactory.createDiamond("", element.getPosition(), new Dimension(1,1), Permeability.MOVEABLE));
+                    map.addElement(ElementFactory.createDiamond("", element.getPosition(), new Dimension(1,1), Permeability.BLOCKING));
                     break;
                 case MONSTER:
-                    map.addElement(ElementFactory.createMob("", element.getPosition(), new Dimension(1,1), Permeability.MOVEABLE));
+                    map.addElement(ElementFactory.createMob("", element.getPosition(), new Dimension(1,1), Permeability.BLOCKING));
                     break;
                 case CHARACTER:
-                    map.addElement(ElementFactory.createCharacter("", element.getPosition(), new Dimension(1,1), Permeability.MOVEABLE));
+                    map.addElement(ElementFactory.createCharacter("", element.getPosition(), new Dimension(1,1), Permeability.BLOCKING));
                     break;
             }
         }
