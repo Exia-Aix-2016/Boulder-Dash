@@ -22,13 +22,6 @@
             </plugin>
         </plugins>
     </build>
-    <modules>
-        <module>controller</module>
-        <module>view</module>
-        <module>dao</module>
-        <module>model</module>
-        <module>main</module>
-    </modules>
     <reporting>
         <plugins>
             <plugin>
