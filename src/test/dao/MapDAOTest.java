@@ -35,35 +35,35 @@ public class MapDAOTest {
     /**
      * Test remove ObjectType
      * */
-    @Test
-    public void removeObjectTypeTest(){
-        mapDAO.removeObjectType(ObjectType.DIRT);
+    public void removeObjectTypeTest(ObjectType objectType){
+        System.out.println("MapDAOTest : removeObjectTypeTest");
+        mapDAO.removeObjectType(objectType);
     }//FINISH
 
     /**
      * Test insert ObjectType
      * */
-    @Test
-    public void InsertObjectTypeTest(){
-        mapDAO.addObjectType(ObjectType.DIRT);
+    public void insertObjectTypeTest(ObjectType objectType){
+        System.out.println("MapDAOTest : InsertObjectTypeTest");
+        mapDAO.addObjectType(objectType);
     }//FINISH
-
     /**
      * Test create MAp
      * */
-    @Test
     public void createMapTest(){
+        System.out.println("MapDAOTest : Create Map");
         RawMap map = new RawMap("test", new Dimension(10, 10));
         map.addElement(new RawElement(ObjectType.WALL, new Position(0, 0)));
         map.addElement(new RawElement(ObjectType.WALL, new Position(1, 0)));
+        map.addElement(new RawElement(ObjectType.DIRT, new Position(5, 0)));
         mapDAO.addMap(map);
     }//FINISH
 
     /**
      * Test GetMap
      * */
-    @Test
     public void getMapTest(){
+        System.out.println("MapDAOTest : get Map");
         if(!mapDAO.getMap("test").isPresent()){
             fail("Fail : getMap()");
         }
@@ -72,15 +72,32 @@ public class MapDAOTest {
     /**
      * Test Remove Map
      * */
-    @Test
-    public void removeMap(){
+    public void removeMapTest(){
+        System.out.println("MapDAOTest : remove Map");
         mapDAO.removeMap("test");
     }//FINISH
+    /**
+     * Order the test map
+     * */
+    @Test
+    public void testInteracMap(){
+        this.createMapTest();
+        this.getMapTest();
+        this.removeMapTest();
+    }
+    @Test
+    public void testInteractObjectType(){
+        this.insertObjectTypeTest(ObjectType.TEST);
+        this.removeObjectTypeTest(ObjectType.TEST);
+    }
+
+
     /**
      * Close connection
      * */
     @AfterClass
     public static void closeConnection(){
+        System.out.println("MapDAOTest : Close connection");
         try {
             mapDAO.getConnection().close();
         } catch (SQLException e) {

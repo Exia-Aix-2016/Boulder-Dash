@@ -44,24 +44,11 @@ public class DAOTest {
      * */
     @Test
     public void TestGetConnection(){
+        System.out.println("DAOTest : test connection");
         connection = dao.getConnection();
         if(connection == null){
             fail("Fail : getConnection");
         }
     }//FINISH
-    /**
-     * Test Close Connection
-     * */
-    @AfterClass
-    public static void CloseConnection(){
-        if(connection != null){
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                fail("Fail : Close DataBase Connection !");
-            }
-        }
 
-    }//FINISH
 }

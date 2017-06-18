@@ -67,6 +67,8 @@ public class MapDAO implements IMap {
         //get ResultSet
         try {
             resultSet = statement.getResultSet();
+            if(resultSet == null)
+                return Optional.empty();
         } catch (SQLException e) {
             e.printStackTrace();
             return Optional.empty();
