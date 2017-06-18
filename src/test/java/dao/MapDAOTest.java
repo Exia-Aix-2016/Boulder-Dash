@@ -59,6 +59,12 @@ public class MapDAOTest {
 
         mapDAO.addMap(map);
     }//FINISH
+
+    @Test
+    public void getMapTest(){
+        mapDAO.getMap("test");
+    }
+
     @Test
     public void removeMap(){
         mapDAO.removeMap("test");

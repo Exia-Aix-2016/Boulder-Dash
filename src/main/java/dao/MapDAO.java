@@ -35,6 +35,21 @@ public class MapDAO implements IMap {
      * */
     @Override
     public RawMap getMap(final String nameMap) {
+
+        Integer width = 0;
+        Integer Height = 0;
+        ArrayList<Parameters> parameters = new ArrayList<>();
+        parameters.add(new Parameters(nameMap, TypeParameters.IN));
+        parameters.add(new Parameters(width, TypeParameters.OUT));
+        parameters.add(new Parameters(Height, TypeParameters.OUT));
+        this.createCallableStatement("boulderdash.getSizeMap(?,?,?)", parameters).ifPresent(MapDAO::executeCallStatement);
+
+        try {
+            System.out.println("width : " + statement.getInt(2));
+            System.out.println("Height : " + statement.getInt(3));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }//TODO
 
@@ -83,10 +98,10 @@ public class MapDAO implements IMap {
     /**
      * Create a call routine with variable parameters
      * @param sql name of routine which will be call
-     * @param parameters Array(Object) for each parameter which compose the routine
+     * @param parameters Array(Parameters) for each parameter which compose the routine
      * @return Optional(CallableStatement) can return optional.empty() if create routine failed else return Optional(CallableStatement)
      * @see CallableStatement
-     * @see Object
+     * @see Parameters
      * @see Optional
      * */
     public final Optional<CallableStatement> createCallableStatement(String sql, final ArrayList<Parameters> parameters){
