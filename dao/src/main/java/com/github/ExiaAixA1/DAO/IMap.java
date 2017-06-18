@@ -9,7 +9,7 @@ public interface IMap {
        * Search in DataBase map by her id
        * @see RawMap
        * */
-      RawMap getMap(final int idMap);
+      RawMap getMap(final String nameMap);
       /**
        * Allow to add in DataBase
        * @see RawMap

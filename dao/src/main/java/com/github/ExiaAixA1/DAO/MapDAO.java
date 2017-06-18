@@ -35,7 +35,7 @@ public class MapDAO implements IMap {
      * @see IMap
      * */
     @Override
-    public RawMap getMap(int idMap) {
+    public RawMap getMap(final String nameMap) {
         return null;
     }//TODO
 
@@ -68,12 +68,14 @@ public class MapDAO implements IMap {
     }//FINISH
     /**
      * @see IMap
-     * 
+     *
      * */
     @Override
     public void removeMap(String nameMap) {
-
-    }//TODO
+        ArrayList<Object> parameters = new ArrayList<>();
+        parameters.add(nameMap);
+        this.createCallableStatement("boulderdash.removeMap(?)",parameters).ifPresent(MapDAO::executeCallStatement);
+    }//FINISH
 
 
     /**

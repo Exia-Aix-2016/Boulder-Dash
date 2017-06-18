@@ -27,7 +27,6 @@ public class MapDAOTest {
      * */
     @BeforeClass
     public static void initMapDAOTest(){
-
         mapDAO = new MapDAO();
         if(mapDAO.getConnection() == null){
          fail("Fail : connection");
@@ -35,19 +34,19 @@ public class MapDAOTest {
     }//FINISH
 
     /**
-     * Test insert ObjectType
-     * */
-   // @Test
-   // public void InsertObjectTypeTest(){
-   // }//TODO
-
-    /**
      * Test remove ObjectType
      * */
-   // @Test
-   // public void removeObjectTypeTest(){
-   // }//TODO
-
+    @Test
+    public void removeObjectTypeTest(){
+        mapDAO.removeObjectType(ObjectType.DIRT);
+    }//FINISH
+    /**
+     * Test insert ObjectType
+     * */
+    @Test
+    public void InsertObjectTypeTest(){
+        mapDAO.addObjectType(ObjectType.DIRT);
+    }//FINISH
 
     /**
      * Test create MAp
@@ -60,7 +59,10 @@ public class MapDAOTest {
 
         mapDAO.addMap(map);
     }//FINISH
-
+    @Test
+    public void removeMap(){
+        mapDAO.removeMap("test");
+    }//FINISH
     /**
      * Close connection
      * */
