@@ -1,10 +1,7 @@
 package dao;
 
-import com.sun.deploy.security.ValidationState;
 import model.elements.Dimension;
 import model.elements.Position;
-import org.omg.CORBA.MARSHAL;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
