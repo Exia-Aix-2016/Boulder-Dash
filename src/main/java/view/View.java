@@ -1,6 +1,7 @@
 package view;
 
 import model.Model;
+import view.menu.Menu;
 
 import javax.swing.*;
 import java.util.Observable;
@@ -10,7 +11,7 @@ public class View extends JFrame implements Observer{
 
     private Model model;
 
-    private Menu menu;
+    private view.menu.Menu menu;
 
     public View(Model model){
         this.model = model;
@@ -23,13 +24,13 @@ public class View extends JFrame implements Observer{
     }
 
     private void configureFrame(){
-        this.setContentPane(this.menu);
 
         this.setSize(800, 800);
-        this.setTitle("Coucou");
+        this.setTitle("Boulder Dash");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        System.out.println("Ouverture de la fenetre");
+        this.setContentPane(this.menu);
+
         this.setVisible(true);
     }
 
