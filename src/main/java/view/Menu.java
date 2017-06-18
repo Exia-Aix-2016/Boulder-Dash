@@ -13,6 +13,8 @@ class Menu extends JPanel{
     private Image backgroundImage;
 
     Menu(){
+        this.setLayout(new GridBagLayout());
+
         this.configurerootPanel();
         this.configureWorldsPanel();
 
@@ -60,9 +62,7 @@ class Menu extends JPanel{
 
     private void setPanel(JPanel panel){
         this.removeAll();
-        System.out.println(this.getSize());
-        System.out.println(panel.getSize());
-        this.add(panel, BorderLayout.CENTER);
+        this.add(panel);
         this.revalidate();
         this.repaint();
     }
