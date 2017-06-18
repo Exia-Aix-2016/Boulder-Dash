@@ -1,9 +1,8 @@
 package dao;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.SQLException;
+import com.sun.deploy.security.ValidationState;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -19,6 +18,7 @@ public class MapDAO implements IMap {
      * Connection dataBase
      * */
     private Connection connection;
+    private static CallableStatement statement;
 
     /**
      * Constructor
@@ -45,25 +45,26 @@ public class MapDAO implements IMap {
     public void addMap(RawMap rawMap) {
 
         //Array of parameters
-        ArrayList<Object> parameters = new ArrayList<>();
+        ArrayList<Parameters> parameters = new ArrayList<>();
 
         //Create Map
-        parameters.add(rawMap.getName());
-        parameters.add(rawMap.getDimension().getWight());
-        parameters.add(rawMap.getDimension().getHeight());
+        parameters.add(new Parameters(rawMap.getName(), TypeParameters.IN));
+        parameters.add(new Parameters(rawMap.getDimension().getWight(), TypeParameters.IN));
+        parameters.add(new Parameters(rawMap.getDimension().getHeight(), TypeParameters.IN));
         //Execute Statement
         this.createCallableStatement("boulderdash.addMap(?,?,?)", parameters).ifPresent(MapDAO::executeCallStatement);
         //Clear parameter
         parameters.clear();
 
         for(RawElement element : rawMap.getElements()){
-            parameters.add(rawMap.getName());
-            parameters.add(element.getObjectType().name());
-            parameters.add(element.getPosition().getX());
-            parameters.add(element.getPosition().getY());
+            parameters.add(new Parameters(rawMap.getName(), TypeParameters.IN));
+            parameters.add(new Parameters(element.getObjectType().name(), TypeParameters.IN));
+            parameters.add(new Parameters(element.getPosition().getX(), TypeParameters.IN));
+            parameters.add(new Parameters(element.getPosition().getY(), TypeParameters.IN));
             this.createCallableStatement("boulderdash.addMapElement(?,?,?,?)", parameters).ifPresent(MapDAO::executeCallStatement);
             parameters.clear();
         }
+        closeStatement();
     }//FINISH
     /**
      * @see IMap
@@ -71,9 +72,11 @@ public class MapDAO implements IMap {
      * */
     @Override
     public void removeMap(String nameMap) {
-        ArrayList<Object> parameters = new ArrayList<>();
-        parameters.add(nameMap);
+        ArrayList<Parameters> parameters = new ArrayList<>();
+        parameters.add(new Parameters(nameMap, TypeParameters.IN));
         this.createCallableStatement("boulderdash.removeMap(?)",parameters).ifPresent(MapDAO::executeCallStatement);
+
+        closeStatement();
     }//FINISH
 
 
@@ -86,7 +89,7 @@ public class MapDAO implements IMap {
      * @see Object
      * @see Optional
      * */
-    public final Optional<CallableStatement> createCallableStatement(String sql, final ArrayList<Object> parameters){
+    public final Optional<CallableStatement> createCallableStatement(String sql, final ArrayList<Parameters> parameters){
 
         //create call routine
         final String call = "{ call " + sql + " }";
@@ -96,17 +99,36 @@ public class MapDAO implements IMap {
         try {
             CallableStatement callStatement = this.connection.prepareCall(call);
 
-            for(Object obj : parameters){
-                if(obj instanceof Integer){//Integer
-                    callStatement.setInt(i, (Integer)obj);
-                }else if(obj instanceof String){//String
-                    callStatement.setString(i, (String)obj);
-                }else if(obj instanceof Double){//Double
-                    callStatement.setDouble(i, (Double)obj);
-                }else if(obj instanceof Boolean){//Boolean
-                    callStatement.setBoolean(i, (Boolean)obj);
-                }else if(obj instanceof Date){//Date
-                    callStatement.setDate(i, (Date)obj);
+            for(Parameters parameter : parameters){
+                switch (parameter.getTypeParameters()){
+                    case IN:
+                        if(parameter.getObj() instanceof Integer){//Integer
+                            callStatement.setInt(i, (Integer)parameter.getObj());
+                        }else if(parameter.getObj() instanceof String){//String
+                            callStatement.setString(i, (String)parameter.getObj());
+                        }else if(parameter.getObj() instanceof Double){//Double
+                            callStatement.setDouble(i, (Double)parameter.getObj());
+                        }else if(parameter.getObj() instanceof Boolean){//Boolean
+                            callStatement.setBoolean(i, (Boolean)parameter.getObj());
+                        }else if(parameter.getObj() instanceof Date){//Date
+                            callStatement.setDate(i, (Date)parameter.getObj());
+                        }
+                        break;
+                    case OUT:
+                        if(parameter.getObj() instanceof Integer){//Integer
+                            callStatement.registerOutParameter(i, Types.INTEGER);
+                        }else if(parameter.getObj() instanceof String){//String
+                            callStatement.registerOutParameter(i, Types.VARCHAR);
+                        }else if(parameter.getObj() instanceof Double){//Double
+                            callStatement.registerOutParameter(i, Types.DOUBLE);
+                        }else if(parameter.getObj() instanceof Boolean){//Boolean
+                            callStatement.registerOutParameter(i, Types.BOOLEAN);
+                        }else if(parameter.getObj() instanceof Date){//Date
+                            callStatement.registerOutParameter(i, Types.DATE);
+                        }
+                        break;
+                    case INOUT:
+                        break;
                 }
                 i++;
             }
@@ -127,11 +149,22 @@ public class MapDAO implements IMap {
     public static void executeCallStatement(final CallableStatement callableStatement){
         try {
             callableStatement.execute();
-            callableStatement.close();
+            statement = callableStatement;
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }//FINISH
+
+    /**
+     * Allow to close statement
+     * */
+    private static void closeStatement(){
+        try {
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Add Object type into dataBase.
      *call sql function boulderdash.addObjectType()
@@ -140,8 +173,8 @@ public class MapDAO implements IMap {
      * */
     public void addObjectType(final ObjectType objectType){
         //Array of parameters
-        ArrayList<Object> parameters = new ArrayList<>();
-        parameters.add(objectType.name());
+        ArrayList<Parameters> parameters = new ArrayList<>();
+        parameters.add(new Parameters(objectType.name(), TypeParameters.IN));
         this.createCallableStatement("boulderdash.addObjectType(?)", parameters).ifPresent(MapDAO::executeCallStatement);
     }//FINISH TO TEST
 
@@ -153,8 +186,8 @@ public class MapDAO implements IMap {
      * * */
     public void removeObjectType(final ObjectType objectType){
         //Array of parameters
-        ArrayList<Object> parameters = new ArrayList<>();
-        parameters.add(objectType.name());
+        ArrayList<Parameters> parameters = new ArrayList<>();
+        parameters.add(new Parameters(objectType.name(), TypeParameters.IN));
         this.createCallableStatement("boulderdash.removeObjectType(?)", parameters).ifPresent(MapDAO::executeCallStatement);
     }//FINISH TO TEST
 
