@@ -38,11 +38,10 @@ public class MapDAO implements IMap {
     public Optional<RawMap> getMap(final String nameMap) {
 
         //Init attributs
-        Integer width = 0, Height = 0, nbrObjectMap = 0;
-        Dimension size = null;
-        RawMap rawMap = null;
-        RawElement rawElement = null;
-        ResultSet resultSet = null;
+        Integer width = 0, Height = 0;
+        Dimension size;
+        RawMap rawMap;
+        ResultSet resultSet;
         ArrayList<Parameters> parameters = new ArrayList<>();
 
 
