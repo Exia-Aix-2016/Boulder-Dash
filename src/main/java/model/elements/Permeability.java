@@ -6,5 +6,6 @@ package model.elements;
 public enum  Permeability {
     BLOCKING,
     MOVEABLE,
-    RECOVERED
+    RECOVERED,
+    REMOVABLE
 }
