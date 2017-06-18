@@ -34,7 +34,7 @@ public class Controller extends Thread{
     }
 
     private void fireTick(){
-        System.out.println("tick");
+        //System.out.println("tick");
         for (TickListener tickListener: tickListeners){
             ticks++;
             tickListener.tick(ticks);

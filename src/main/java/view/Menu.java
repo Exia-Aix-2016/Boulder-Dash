@@ -10,38 +10,11 @@ class Menu extends JPanel{
     private JPanel rootPanel;
     private JPanel worldsPanel;
 
-    private JButton playButton;
-    private JButton quitButton;
-    private JButton backButton;
-
-    private enum Panel{
-        ROOT, WORLDS
-    }
-
-    private Panel currentPanel = Panel.ROOT;
-
-    Image backgroundImage;
+    private Image backgroundImage;
 
     Menu(){
         this.configurerootPanel();
         this.configureWorldsPanel();
-
-        this.add(rootPanel, BorderLayout.CENTER);
-        this.add(worldsPanel);
-    }
-
-    private void configurerootPanel(){
-        this.rootPanel = new JPanel();
-        this.rootPanel.setOpaque(false);
-
-        this.playButton = new JButton("Play");
-        this.quitButton = new JButton("Quit");
-
-        this.rootPanel.add(playButton);
-        this.rootPanel.add(quitButton);
-
-        this.playButton.addActionListener((e -> this.swithPanel()));
-        this.quitButton.addActionListener((e) -> System.exit(0));
 
         try {
             this.backgroundImage = ImageIO.read(this.getClass().getResource("menuBackground.png"));
@@ -49,36 +22,49 @@ class Menu extends JPanel{
             e.printStackTrace();
         }
 
+        this.setPanel(this.rootPanel);
+    }
+
+    private void configurerootPanel(){
+        this.rootPanel = new JPanel();
+        this.rootPanel.setOpaque(false);
+
+        JButton playButton = new JButton("Play");
+        JButton quitButton = new JButton("Quit");
+
+        this.rootPanel.setSize(new Dimension(400,400));
+
+        this.rootPanel.setLayout(new GridLayout(2, 1, 20, 20));
+
+        this.rootPanel.add(playButton);
+        this.rootPanel.add(quitButton);
+
+        playButton.addActionListener((e -> this.setPanel(this.worldsPanel)));
+        quitButton.addActionListener((e) -> System.exit(0));
     }
 
     private void configureWorldsPanel(){
         this.worldsPanel = new JPanel();
         this.worldsPanel.setOpaque(false);
-        this.worldsPanel.setVisible(false);
 
-        this.backButton = new JButton("Back");
+        JButton backButton = new JButton("Back");
+
+        this.worldsPanel.setLayout(new GridLayout(3, 1, 20, 20));
 
         this.worldsPanel.add(new JButton("World1"));
         this.worldsPanel.add(new JButton("World2"));
-        this.worldsPanel.add(this.backButton);
+        this.worldsPanel.add(backButton);
 
-        this.backButton.addActionListener((e -> this.swithPanel()));
-
+        backButton.addActionListener((e -> this.setPanel(this.rootPanel)));
     }
 
-    public void swithPanel(){
-        switch (this.currentPanel){
-            case ROOT:
-                this.rootPanel.setVisible(false);
-                this.worldsPanel.setVisible(true);
-                this.currentPanel = Panel.WORLDS;
-                break;
-            case WORLDS:
-                this.rootPanel.setVisible(true);
-                this.worldsPanel.setVisible(false);
-                this.currentPanel = Panel.ROOT;
-                break;
-        }
+    private void setPanel(JPanel panel){
+        this.removeAll();
+        System.out.println(this.getSize());
+        System.out.println(panel.getSize());
+        this.add(panel, BorderLayout.CENTER);
+        this.revalidate();
+        this.repaint();
     }
 
     public void paintComponent(Graphics g) {
