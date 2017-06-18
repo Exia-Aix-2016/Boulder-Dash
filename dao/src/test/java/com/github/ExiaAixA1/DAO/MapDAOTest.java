@@ -37,16 +37,17 @@ public class MapDAOTest {
     /**
      * Test insert ObjectType
      * */
-    @Test
-    public void InsertObjectTypeTest(){
-    }//TODO
+   // @Test
+   // public void InsertObjectTypeTest(){
+   // }//TODO
 
     /**
      * Test remove ObjectType
      * */
-    @Test
-    public void removeObjectTypeTest(){
-    }//TODO
+   // @Test
+   // public void removeObjectTypeTest(){
+   // }//TODO
+
 
     /**
      * Test create MAp
