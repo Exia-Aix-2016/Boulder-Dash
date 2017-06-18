@@ -1,9 +1,9 @@
 package view;
 
 import model.Model;
+import view.menu.Menu;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -11,7 +11,7 @@ public class View extends JFrame implements Observer{
 
     private Model model;
 
-    private Menu menu;
+    private view.menu.Menu menu;
 
     public View(Model model){
         this.model = model;
