@@ -9,11 +9,14 @@ public interface IMap {
 
       /**
        * Search in DataBase map by her id
+       * @return Optional encapsulate RawMap if method is success return Optional(RawMap) else Optional.empty()
        * @see RawMap
+       * @see Optional
        * */
       Optional<RawMap> getMap(final String nameMap);
       /**
        * Allow to add in DataBase
+       * @param rawMap representation of Map
        * @see RawMap
        * */
       void addMap(final RawMap rawMap);

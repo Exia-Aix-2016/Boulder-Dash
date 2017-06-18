@@ -30,8 +30,6 @@ public class MapDAO implements IMap {
    public MapDAO(){
        this.connection = Dao.getInstance().getConnection();
     }//FINISH
-
-
     //CRUD
     /**
      * @see IMap
@@ -90,6 +88,7 @@ public class MapDAO implements IMap {
             e.printStackTrace();
             return Optional.empty();
         }
+        closeStatement();
         return Optional.of(rawMap);
     }//FINISH
     /**

@@ -16,7 +16,6 @@ import static org.junit.Assert.fail;
  * TESTS FOR MapDAO Class
  * */
 public class MapDAOTest {
-
     /**
      * Instance of object which will be test
      * */
@@ -40,6 +39,7 @@ public class MapDAOTest {
     public void removeObjectTypeTest(){
         mapDAO.removeObjectType(ObjectType.DIRT);
     }//FINISH
+
     /**
      * Test insert ObjectType
      * */
@@ -56,18 +56,22 @@ public class MapDAOTest {
         RawMap map = new RawMap("test", new Dimension(10, 10));
         map.addElement(new RawElement(ObjectType.WALL, new Position(0, 0)));
         map.addElement(new RawElement(ObjectType.WALL, new Position(1, 0)));
-
         mapDAO.addMap(map);
     }//FINISH
 
+    /**
+     * Test GetMap
+     * */
     @Test
     public void getMapTest(){
-        mapDAO.getMap("test");
-
-
-
+        if(!mapDAO.getMap("test").isPresent()){
+            fail("Fail : getMap()");
+        }
     }//FINISH
 
+    /**
+     * Test Remove Map
+     * */
     @Test
     public void removeMap(){
         mapDAO.removeMap("test");

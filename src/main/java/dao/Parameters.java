@@ -3,6 +3,7 @@ package dao;
 /**
  *Represente Parameters which used by CallStatement
  * the paramters with stocked routines can be IN OUT or INOUT
+ * it is a generic Class
  */
 public class Parameters<T> {
     /**
@@ -23,10 +24,10 @@ public class Parameters<T> {
      * @see TypeParameters
      * @see Object
      * */
-    public Parameters(final T o, final TypeParameters typeParameters){
-        this.obj = o;
+    public Parameters(final T obj, final TypeParameters typeParameters){
+        this.obj = obj;
         this.typeParameters = typeParameters;
-    }
+    }//FINISH
 
     /**
      * Set parameter object
@@ -35,7 +36,7 @@ public class Parameters<T> {
      * */
     public void setObj(T obj) {
         this.obj = obj;
-    }
+    }//FINISH
 
     /**
      * Set Type of this Parameter
@@ -44,7 +45,7 @@ public class Parameters<T> {
      * */
     public void setTypeParameters(TypeParameters typeParameters) {
         this.typeParameters = typeParameters;
-    }
+    }//FINISH
 
     /**
      * @return Object of this parameter
@@ -52,7 +53,7 @@ public class Parameters<T> {
      * */
     public T getParameter() {
         return obj;
-    }
+    }//FINISH
 
     /**
      * @return Type of this Parameter
@@ -60,5 +61,5 @@ public class Parameters<T> {
      * */
     public TypeParameters getTypeParameters() {
         return typeParameters;
-    }
+    }//FINISH
 }

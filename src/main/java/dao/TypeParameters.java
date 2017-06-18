@@ -1,7 +1,7 @@
 package dao;
 
 /**
- * Created by Mandel on 18/06/2017.
+ * Represents the different types of parameters a stored procedure can take
  */
 public enum TypeParameters {
     IN,

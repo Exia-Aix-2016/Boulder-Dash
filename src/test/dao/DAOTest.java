@@ -1,6 +1,5 @@
 package dao;
 
-import dao.Dao;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -38,7 +37,7 @@ public class DAOTest {
         if(dao == null){
             fail("Fail : instanciate dao");
         }
-    }
+    }//FINISH
 
     /**
      * Test Connection
@@ -49,7 +48,7 @@ public class DAOTest {
         if(connection == null){
             fail("Fail : getConnection");
         }
-    }
+    }//FINISH
     /**
      * Test Close Connection
      * */
@@ -64,5 +63,5 @@ public class DAOTest {
             }
         }
 
-    }
+    }//FINISH
 }
