@@ -1,4 +1,4 @@
-package view.menu;
+package menu;
 
 interface IMenuAction {
     void exit();
