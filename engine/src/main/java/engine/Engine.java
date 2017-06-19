@@ -1,39 +1,17 @@
 package engine;
 
-import engine.fx.FxEngine;
-import engine.rendering.RenderingEngine;
-import engine.sound.SoundEngine;
+import world.IWorld;
 
-public class Engine {
+import javax.swing.*;
+import java.util.Collection;
 
-    private static Engine engine = null;
+public class Engine extends JPanel{
 
-    private FxEngine fxEngine;
-    private SoundEngine soundEngine;
-    private RenderingEngine renderingEngine;
+    public void loadWorld(IWorld world){
+        Collection<JComponent> components = world.getComponents();
 
-    private Engine(){
-        fxEngine = new FxEngine();
-        soundEngine = new SoundEngine();
-        renderingEngine = new RenderingEngine(this);
-    }
-
-    public static Engine getInstance(){
-        if (engine == null){
-            engine = new Engine();
+        for (JComponent component: components){
+            this.add(component);
         }
-        return engine;
-    }
-
-    public FxEngine getFxEngine() {
-        return fxEngine;
-    }
-
-    public SoundEngine getSoundEngine() {
-        return soundEngine;
-    }
-
-    public RenderingEngine getRenderingEngine() {
-        return renderingEngine;
     }
 }
