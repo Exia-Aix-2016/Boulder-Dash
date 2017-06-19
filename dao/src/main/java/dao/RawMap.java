@@ -1,6 +1,6 @@
 package dao;
 
-import model.elements.Dimension;
+
 import java.util.ArrayList;
 
 /**
@@ -13,10 +13,21 @@ public class RawMap {
      * */
     private String name;
     /**
-     *Dimension of Map
-     * @see Dimension
+     * width
      * */
-    private Dimension dimension;
+    private int width;
+    /**
+     * height
+     * */
+    private int height;
+    /**
+     * number of diamond
+     * */
+    private int nbrDiamond;
+    /**
+     * time remaining
+     * */
+    private int timeRemaining;
     /**
      * Element which compose the Map
      * @see RawElement
@@ -26,11 +37,17 @@ public class RawMap {
     /**
      * RawMap constructor
      * @param nameMap Name of this Map
-     * @param dimension Dimension of this RawMap
+     * @param height height
+     * @param width width
+     * @param nbrDiamond number of diamond in the map
+     * @param timeRemaining time remaining
      * */
-    public RawMap(final String nameMap, final Dimension dimension){
+    public RawMap(final String nameMap, final int width, final int height, final int nbrDiamond, final int timeRemaining){
         this.name = nameMap;
-        this.dimension = dimension;
+        this.width = width;
+        this.height = height;
+        this.nbrDiamond = nbrDiamond;
+        this.timeRemaining = timeRemaining;
         elements = new ArrayList<>();
     }//FINISH
 
@@ -45,19 +62,39 @@ public class RawMap {
     }//FINISH
 
     //Assesseur
+
+    /**
+     * @return width
+     * */
+    public int getWidth() {
+        return width;
+    }
+    /**
+     * @return Height
+     * */
+    public int getHeight() {
+        return height;
+    }
+    /**
+     * @return number of diamonds
+     * */
+    public int getNbrDiamond() {
+        return nbrDiamond;
+    }
+    /**
+     * @return time remaining
+     * */
+    public int getTimeRemaining() {
+        return timeRemaining;
+    }
+
     /**
      * @return name of this Map
      * */
     public String getName() {
         return name;
     }//FINISH
-    /**
-     * @return Dimension of this Map
-     * @see Dimension
-     * */
-    public Dimension getDimension() {
-        return dimension;
-    }//FINISH
+
     /**
      * @return RawElement Array of this Map
      * @see RawElement

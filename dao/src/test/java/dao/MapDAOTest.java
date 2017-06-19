@@ -1,7 +1,5 @@
 package dao;
 
-import model.elements.Dimension;
-import model.elements.Position;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -52,10 +50,10 @@ public class MapDAOTest {
      * */
     public void createMapTest(){
         System.out.println("MapDAOTest : Create Map");
-        RawMap map = new RawMap("test", new Dimension(10, 10));
-        map.addElement(new RawElement(ObjectType.WALL, new Position(0, 0)));
-        map.addElement(new RawElement(ObjectType.WALL, new Position(1, 0)));
-        map.addElement(new RawElement(ObjectType.DIRT, new Position(5, 0)));
+        RawMap map = new RawMap("test", 10, 10, 150, 1500);
+        map.addElement(new RawElement(ObjectType.WALL, 10, 10));
+        map.addElement(new RawElement(ObjectType.WALL, 5, 5));
+        map.addElement(new RawElement(ObjectType.DIRT, 1, 1));
         mapDAO.addMap(map);
     }//FINISH
 
