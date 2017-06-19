@@ -1,4 +1,4 @@
-package view.menu;
+package menu;
 
 class RootPanel extends SubMenu{
 
