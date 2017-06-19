@@ -1,4 +1,4 @@
-package model.elements;
+package world.elements;
 
 public interface IMove {
 

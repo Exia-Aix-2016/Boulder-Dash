@@ -1,4 +1,4 @@
-package model.elements;
+package world.elements;
 
 /**
  * Created by Mandel on 18/06/2017.
