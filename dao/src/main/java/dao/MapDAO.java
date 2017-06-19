@@ -1,6 +1,6 @@
 package dao;
 
-import com.sun.org.apache.regexp.internal.RE;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -79,6 +79,9 @@ public class MapDAO implements IMap {
                     height = (Integer)oResult.get().getObject("Heigth");
                     nbrDiamond = (Integer)oResult.get().getObject("Diamond");
                     timeRemaining = (Integer)oResult.get().getObject("RemainingTime");
+                    if(width == null || height == null || nbrDiamond == null || timeRemaining == null){
+                        return Optional.empty();
+                    }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -127,8 +130,10 @@ public class MapDAO implements IMap {
         parameters.add(new Parameters<>(rawMap.getName(), TypeParameters.IN));
         parameters.add(new Parameters<>(rawMap.getWidth(), TypeParameters.IN));
         parameters.add(new Parameters<>(rawMap.getHeight(), TypeParameters.IN));
+        parameters.add(new Parameters<>(rawMap.getNbrDiamond(), TypeParameters.IN));
+        parameters.add(new Parameters<>(rawMap.getTimeRemaining(), TypeParameters.IN));
         //Execute Statement
-        this.createCallableStatement("boulderdash.addMap(?,?,?)", parameters).ifPresent(MapDAO::executeCallStatement);
+        this.createCallableStatement("boulderdash.addMap(?,?,?,?,?)", parameters).ifPresent(MapDAO::executeCallStatement);
         //Clear parameter
         parameters.clear();
 
