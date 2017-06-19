@@ -15,7 +15,7 @@ public class Engine {
     private Engine(){
         fxEngine = new FxEngine();
         soundEngine = new SoundEngine();
-        renderingEngine = new RenderingEngine();
+        renderingEngine = new RenderingEngine(this);
     }
 
     public static Engine getInstance(){
