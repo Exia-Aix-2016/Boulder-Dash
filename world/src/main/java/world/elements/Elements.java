@@ -4,7 +4,9 @@ import world.Dimension;
 import world.Position;
 import world.Permeability;
 
-public abstract class Elements {
+import javax.swing.*;
+
+public abstract class Elements extends JComponent {
     private Position position;
     private Dimension dimension;
     private String sprite;

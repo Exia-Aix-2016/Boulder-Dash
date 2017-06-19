@@ -1,6 +1,5 @@
 package game;
 
-import dao.Dao;
 import menu.Menu;
 
 import javax.swing.*;
