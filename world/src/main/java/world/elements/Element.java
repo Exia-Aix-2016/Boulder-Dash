@@ -1,4 +1,7 @@
-package model.elements;
+package world.elements;
+
+import world.Dimension;
+import world.Position;
 
 public abstract class Element {
     private Position position;

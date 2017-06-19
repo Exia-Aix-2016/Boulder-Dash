@@ -1,4 +1,7 @@
-package model.elements;
+package world.elements;
+
+import world.Dimension;
+import world.Position;
 
 public class Rock extends Movable {
     Rock(final String sprite, Position position, final Dimension dimension, Permeability permeability) {
