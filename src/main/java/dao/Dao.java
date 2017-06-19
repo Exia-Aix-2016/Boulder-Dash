@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -13,7 +14,7 @@ public class Dao {
     /**
      * connection url
      * */
-    private final static String url = "jdbc:mysql://localhost:32769/boulderdash?autoReconnect=true&useSSL=false&autoReconnect=true";
+    private final static String url = "jdbc:mysql://localhost:32769/boulderdash?autoReconnect=true&useSSL=false";
     /**
      * username
      * */

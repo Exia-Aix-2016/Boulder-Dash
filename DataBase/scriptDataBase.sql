@@ -153,10 +153,22 @@ CREATE PROCEDURE boulderdash.getSizeMap(IN nameMap VARCHAR(255), OUT outWidth IN
 	END |
 DELIMITER ;
 #------------------------------------------------------------
+#getMap
+#------------------------------------------------------------
+DELIMITER |
+
+CREATE PROCEDURE boulderdash.getMap(IN NameMap VARCHAR(255))
+  BEGIN
+    DECLARE rowcount int;
+		IF EXISTS(SELECT * FROM Map WHERE MapName = NameMap) THEN
+    	SELECT * FROM Map WHERE MapName = NameMap;
+			END IF ;
+  END;
+DELIMITER ;
+#------------------------------------------------------------
 #getMapObjects
 #------------------------------------------------------------
 DELIMITER |
-DROP PROCEDURE listall;
 CREATE PROCEDURE boulderdash.getMapObjects(IN NameMap VARCHAR(255))
   BEGIN
     DECLARE rowcount int;
@@ -166,4 +178,7 @@ CREATE PROCEDURE boulderdash.getMapObjects(IN NameMap VARCHAR(255))
   END;
 DELIMITER ;
 
+
+
+call boulderdash.getMapObjects("test");
 
