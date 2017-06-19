@@ -79,10 +79,10 @@ INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('WALL');
 #addMap
 #------------------------------------------------------------
 DELIMITER |
-create procedure boulderdash.addMap (IN nameMap varchar(255), IN width int, IN heigh int)
+create procedure boulderdash.addMap (IN nameMap varchar(255), IN width int, IN heigh int, IN nbrDiamond INT, IN timeremaining INT)
 BEGIN
 	IF NOT EXISTS(SELECT * FROM boulderdash.Map WHERE MapName = nameMap) THEN
-  INSERT INTO boulderdash.Map (MapName, Width, Heigth) VALUES (nameMap, width, heigh);
+  INSERT INTO boulderdash.Map (MapName, Width, Heigth, Diamond, RemainingTime) VALUES (nameMap, width, heigh, nbrDiamond, timeremaining);
 		END IF ;
 	END |
 DELIMITER ;
@@ -179,6 +179,6 @@ CREATE PROCEDURE boulderdash.getMapObjects(IN NameMap VARCHAR(255))
 DELIMITER ;
 
 
-
+call boulderdash.getMap("test");
 call boulderdash.getMapObjects("test");
 
