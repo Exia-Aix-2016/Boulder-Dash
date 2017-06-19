@@ -7,6 +7,6 @@ import world.elements.Elements;
 
 public abstract class Block extends Elements {
     public Block(Position position, Dimension dimension, String sprite, Permeability permeability) {
-        super(position, dimension, sprite, permeability);
+        super(position, permeability);
     }
 }

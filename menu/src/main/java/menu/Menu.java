@@ -16,7 +16,7 @@ public class Menu extends JPanel implements IMenuAction{
         this.setLayout(new GridBagLayout());
 
         try {
-            this.backgroundImage = ImageIO.read(this.getClass().getResource("background.png"));
+            this.backgroundImage = ImageIO.read(this.getClass().getResource("background.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }

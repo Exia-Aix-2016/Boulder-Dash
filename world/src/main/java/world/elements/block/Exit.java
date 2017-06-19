@@ -2,7 +2,7 @@ package world.elements.block;
 
 import world.Dimension;
 import world.Position;
-import world.element.Permeability;
+import world.Permeability;
 
 public class Exit extends Block{
 
