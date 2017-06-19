@@ -1,4 +1,4 @@
-package model.elements;
+package world;
 
 public class Position {
     private int x;
