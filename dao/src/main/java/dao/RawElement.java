@@ -1,7 +1,6 @@
 package dao;
 
 
-import model.elements.Position;
 
 /**
  * RawElement its a representation of an Element is not real Element
@@ -16,29 +15,38 @@ public class RawElement {
     private ObjectType objectType;
 
     /**
-     * Position of this Element.
-     * @see Position
+     * x position
      * */
-    private Position position;
+    private int x;
+    /**
+     * y position
+     * */
+    private int y;
 
     /**
      * Constructor of RawElement
      * @param objectType Type of this Element (DIRT, ROCK, MONSTER, etc...).
-     * @param position Position of this Element.
-     * @see Position
+     * @param x x position
+     * @param y y position
      * */
-    public RawElement(final ObjectType objectType, final Position position){
+    public RawElement(final ObjectType objectType, final int x, final int y){
         this.objectType = objectType;
-        this.position = position;
+        this.x = x;
+        this.y = y;
     }//FINISH
 
     /**
-     * @return Position.
-     * @see Position
+     * @return y position
      * */
-    public Position getPosition() {
-        return position;
-    }//FINISH
+    public int getY() {
+        return y;
+    }
+    /**
+     * @return x position
+     * */
+    public int getX() {
+        return x;
+    }
 
     /**
      * @return Type of this Element.
