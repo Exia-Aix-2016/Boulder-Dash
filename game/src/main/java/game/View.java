@@ -1,6 +1,5 @@
 package view;
 
-import model.Model;
 import view.menu.Menu;
 
 import javax.swing.*;

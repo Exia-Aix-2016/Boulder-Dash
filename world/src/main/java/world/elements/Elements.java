@@ -1,0 +1,35 @@
+package world.elements;
+
+import world.Dimension;
+import world.Position;
+import world.Permeability;
+
+public abstract class Elements {
+    Position position;
+    Dimension dimension;
+    String sprite;
+    Permeability permeability;
+
+    public Elements(Position position, Dimension dimension, String sprite, Permeability permeability){
+        this.position = position;
+        this.dimension = dimension;
+        this.sprite = sprite;
+        this.permeability = permeability;
+    }
+
+    public Dimension getDimension() {
+        return dimension;
+    }
+
+    public Permeability getPermeability() {
+        return permeability;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+}
