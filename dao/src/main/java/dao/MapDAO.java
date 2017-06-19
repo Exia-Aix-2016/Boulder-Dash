@@ -27,13 +27,7 @@ public class MapDAO implements IMap {
        this.connection = Dao.getInstance().getConnection();
     }//FINISH
     //CRUD
-
-    /**
-     * Add Object type into dataBase.
-     *call sql function boulderdash.addObjectType()
-     * @return true if success or false is if failure
-     * @throws SQLException
-     * */
+    @Override
     public void addObjectType(final ObjectType objectType){
         //Array of parameters
         ArrayList<Parameters> parameters = new ArrayList<>();
@@ -41,12 +35,7 @@ public class MapDAO implements IMap {
         this.createCallableStatement("boulderdash.addObjectType(?)", parameters).ifPresent(MapDAO::executeCallStatement);
     }//FINISH
 
-    /**
-     * Remove Object in ObjectType
-     * call sql function boulderdash.removeObjectType()
-     * @return true if success or false if failure
-     * @throws SQLException
-     * * */
+    @Override
     public void removeObjectType(final ObjectType objectType){
         //Array of parameters
         ArrayList<Parameters> parameters = new ArrayList<>();
@@ -54,9 +43,6 @@ public class MapDAO implements IMap {
         this.createCallableStatement("boulderdash.removeObjectType(?)", parameters).ifPresent(MapDAO::executeCallStatement);
     }//FINISH
 
-    /**
-     * @see IMap
-     * */
     @Override
     public Optional<RawMap> getMap(final String nameMap) {
 
@@ -117,9 +103,7 @@ public class MapDAO implements IMap {
         MapDAO.closeStatement();
         return Optional.of(rawMap);
     }//FINISH
-    /**
-     * @see IMap
-     * */
+
     @Override
     public void addMap(RawMap rawMap) {
 
@@ -147,10 +131,7 @@ public class MapDAO implements IMap {
         }
         closeStatement();
     }//FINISH
-    /**
-     * @see IMap
-     *
-     * */
+
     @Override
     public void removeMap(String nameMap) {
         ArrayList<Parameters> parameters = new ArrayList<>();
@@ -160,9 +141,6 @@ public class MapDAO implements IMap {
         closeStatement();
     }//FINISH
 
-    /***
-     * @see IMap
-     * */
     @Override
     public ArrayList<String> getMapListNames() {
 
@@ -182,21 +160,9 @@ public class MapDAO implements IMap {
         return mapnames;
     }
 
-    /**
-     *get ResultSet
-     * */
-    public static Optional<ResultSet> getResultSet(){
-        try {
-            ResultSet resultSet = statement.getResultSet();
-            if(resultSet != null){
-                return Optional.of(resultSet);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return Optional.empty();
-    }
 
+
+    //STEP 1 : Create statement
     /**
      * Create a call routine with variable parameters
      * @param sql name of routine which will be call
@@ -266,6 +232,7 @@ public class MapDAO implements IMap {
         }
     }//FINISH
 
+    //STEP 3 : Execute statement
     /**
      * Allows to execute an CallableStatement
      * when execution is success the statement is closes
@@ -282,6 +249,25 @@ public class MapDAO implements IMap {
         }
     }//FINISH
 
+    //STEP 3 : get if possible ResultSet
+    /**
+     *@return Optional(ResultSet) with private static resultSet on this class
+     * @see Optional
+     * @see ResultSet
+     * */
+    public static Optional<ResultSet> getResultSet(){
+        try {
+            ResultSet resultSet = statement.getResultSet();
+            if(resultSet != null){
+                return Optional.of(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    //STEP 4 : close the statement
     /**
      * Allow to close statement
      * */
@@ -292,7 +278,6 @@ public class MapDAO implements IMap {
             e.printStackTrace();
         }
     }
-
 
     /**
      * @return instance connection
