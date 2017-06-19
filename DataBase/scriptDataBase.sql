@@ -19,9 +19,13 @@ create table boulderdash.Map
 	MapName varchar(255) not null
 		primary key,
 	Width int null,
-	Heigth int null
+	Heigth int null,
+	Diamond int null,
+	RemainingTime int null
 )
 ;
+
+
 #------------------------------------------------------------
 #                  CREATE boulderdash.ObjectMap
 #                             Table
