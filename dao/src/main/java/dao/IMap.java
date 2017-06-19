@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ public interface IMap {
        * @see Optional
        * */
       Optional<RawMap> getMap(final String nameMap);
+
       /**
        * Allow to add in DataBase
        * @param rawMap representation of Map
@@ -26,9 +28,26 @@ public interface IMap {
        * @return List of map (with there name)
        * */
       ArrayList<String> getMapListNames();
+
       /**
        * remove map with her name
        * @param nameMap name of the map
        * */
       void removeMap(final String nameMap);
+
+      /**
+     * Add Object type into dataBase.
+     *call sql function boulderdash.addObjectType()
+     * @return true if success or false is if failure
+     * @throws SQLException
+     **/
+      void addObjectType(final ObjectType objectType);
+
+    /**
+     * Remove Object in ObjectType
+     * call sql function boulderdash.removeObjectType()
+     * @return true if success or false if failure
+     * @throws SQLException
+     * * */
+     void removeObjectType(final ObjectType objectType);
 }
