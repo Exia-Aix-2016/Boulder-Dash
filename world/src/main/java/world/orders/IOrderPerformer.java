@@ -1,4 +1,4 @@
-package model.orders;
+package world.orders;
 
 public interface IOrderPerformer {
 
