@@ -182,7 +182,15 @@ CREATE PROCEDURE boulderdash.getMapObjects(IN NameMap VARCHAR(255))
   END;
 DELIMITER ;
 
+#------------------------------------------------------------
+#getMapObjects
+#------------------------------------------------------------
+DELIMITER |
+CREATE PROCEDURE boulderdash.getMapNames()
+  BEGIN
+    DECLARE rowcount int;
 
-call boulderdash.getMap("test");
-call boulderdash.getMapObjects("test");
+    SELECT MapName FROM boulderdash.Map;
+  END;
+DELIMITER ;
 

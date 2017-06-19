@@ -89,6 +89,14 @@ public class MapDAOTest {
         this.removeObjectTypeTest(ObjectType.TEST);
     }
 
+    @Test
+    public void testGetMapNames(){
+
+        for(String name : mapDAO.getMapListNames()){
+            System.out.println(name);
+        }
+    }
+
 
     /**
      * Close connection

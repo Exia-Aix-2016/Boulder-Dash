@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -21,6 +22,10 @@ public interface IMap {
        * */
       void addMap(final RawMap rawMap);
 
+      /**
+       * @return List of map (with there name)
+       * */
+      ArrayList<String> getMapListNames();
       /**
        * remove map with her name
        * @param nameMap name of the map

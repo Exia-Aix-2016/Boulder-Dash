@@ -160,6 +160,28 @@ public class MapDAO implements IMap {
         closeStatement();
     }//FINISH
 
+    /***
+     * @see IMap
+     * */
+    @Override
+    public ArrayList<String> getMapListNames() {
+
+        Optional<ResultSet> oResult;
+        ArrayList<String> mapnames = new ArrayList<>();
+        createCallableStatement("boulderdash.getMapNames()", new ArrayList<>()).ifPresent(MapDAO::executeCallStatement);
+        oResult = getResultSet();
+        if(oResult.isPresent()){
+            try {
+                while (oResult.get().next()){
+                    mapnames.add((String)oResult.get().getObject("MapName"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return mapnames;
+    }
+
     /**
      *get ResultSet
      * */
