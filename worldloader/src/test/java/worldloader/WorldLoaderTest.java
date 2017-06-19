@@ -5,19 +5,25 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.fail;
 
+
 /**
- * Created by Mandel on 20/06/2017.
+ * TestClass WorldLoarder
  */
 public class WorldLoaderTest {
 
     private static IMap mapDao;
 
-
+    /**
+     * Instanciate mapDao
+     * */
     @BeforeClass
     public static void initWorldLoader(){
          mapDao = new MapDAO();
     }
 
+    /**
+     * Test getMap() method.
+     * */
     @Test
     public void getMapTest(){
         System.out.println("WorldLoader Test : getMap()");
