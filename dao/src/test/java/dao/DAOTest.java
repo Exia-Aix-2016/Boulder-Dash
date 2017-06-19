@@ -1,19 +1,14 @@
 package dao;
 
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import java.sql.Connection;
-import java.sql.SQLException;
-
 import static org.junit.Assert.fail;
 
 /**
  * Class Test DaoClass
  * Test instanciate
  * Test Connection
- * Test Close Connection
  * */
 public class DAOTest {
 

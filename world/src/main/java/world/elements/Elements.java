@@ -12,7 +12,7 @@ public abstract class Elements extends JComponent {
     private String sprite;
     private Permeability permeability;
 
-    public Elements(Position position, Permeability permeability){
+    public Elements(Position position, final Dimension dimension, final String sprite,  Permeability permeability){
         this.position = position;
         this.dimension = dimension;
         this.sprite = sprite;

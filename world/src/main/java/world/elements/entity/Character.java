@@ -8,9 +8,10 @@ import java.awt.*;
 
 public class Character extends Entity {
 
-
-    public Character(Position position, Dimension dimension, String waiting_sprite, Permeability permeability) {
-        super(position, dimension, waiting_sprite, permeability);
+    private static String SPRITE = "";
+    private static Permeability PERMEABILITY = Permeability.PERMEABLE;
+    public Character(Position position, Dimension dimension) {
+        super(position, dimension, SPRITE, PERMEABILITY);
         this.setBackground(Color.RED);
     }
 }

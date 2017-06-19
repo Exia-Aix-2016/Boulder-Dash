@@ -8,8 +8,10 @@ import java.awt.*;
 
 public class Exit extends Block{
 
-    public Exit(Position position, Dimension dimension, String sprite, Permeability permeability){
-        super(position, dimension, sprite, permeability);
+    private static String SPRITE = "";
+    private static Permeability PERMEABILITY = Permeability.PERMEABLE;
+    public Exit(Position position, Dimension dimension){
+        super(position, dimension, SPRITE, PERMEABILITY);
         this.setBackground(Color.CYAN);
     }
 }

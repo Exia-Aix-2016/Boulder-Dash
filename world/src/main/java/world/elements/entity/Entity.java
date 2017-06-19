@@ -7,7 +7,7 @@ import world.elements.Elements;
 
 public abstract class Entity extends Elements{
        Entity(Position position, Dimension dimension, String sprite, Permeability permeability){
-        super(position, permeability);
+        super(position, dimension, sprite, permeability);
     }
 
 }

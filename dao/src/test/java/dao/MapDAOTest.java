@@ -3,15 +3,12 @@ package dao;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import java.sql.SQLException;
-
 import static org.junit.Assert.fail;
 
-
 /**
- * TESTS CLass
- * TESTS FOR MapDAO Class
+ * Test Create map Method
+ * TEST Close connection
  * */
 public class MapDAOTest {
     /**
