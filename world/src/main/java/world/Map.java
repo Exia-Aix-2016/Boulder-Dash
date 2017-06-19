@@ -5,6 +5,7 @@ import dao.ObjectType;
 import dao.RawElement;
 import dao.RawMap;
 import model.elements.*;
+import world.Dimension;
 
 import java.util.ArrayList;
 /**
@@ -62,7 +63,7 @@ public class Map {
         return name;
     }
     /**
-     * @return the elements which compose this map
+     * @return the element which compose this map
      * @see Element
      * */
     public ArrayList<Element> getElements() {

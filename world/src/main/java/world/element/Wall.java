@@ -1,4 +1,4 @@
-package world.elements;
+package world.element;
 
 import world.Dimension;
 import world.Position;
