@@ -1,5 +1,8 @@
 package menu;
 
+import dao.IMap;
+import game.ILaunch;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +15,12 @@ public class Menu extends JPanel implements IMenuAction{
 
     private Image backgroundImage;
 
-    public Menu(){
+    private ILaunch worldLaucher;
+
+    public Menu(IMap mapDao, ILaunch worldLauncher){
+
+        this.worldLaucher = worldLauncher;
+
         this.setLayout(new GridBagLayout());
 
         try {
@@ -22,7 +30,7 @@ public class Menu extends JPanel implements IMenuAction{
         }
 
         this.rootPanel = new RootPanel(this);
-        this.worldsPanel = new WorldsPanel(this);
+        this.worldsPanel = new WorldsPanel(this, mapDao);
 
         this.setPanel(this.rootPanel);
     }
@@ -51,5 +59,10 @@ public class Menu extends JPanel implements IMenuAction{
     @Override
     public void enterPlay() {
         this.setPanel(worldsPanel);
+    }
+
+    @Override
+    public void playWorld(String worldName) {
+        this.worldLaucher.launch(worldName);
     }
 }
