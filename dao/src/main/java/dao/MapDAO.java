@@ -1,7 +1,6 @@
 package dao;
 
-import model.elements.Dimension;
-import model.elements.Position;
+import com.sun.org.apache.regexp.internal.RE;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -28,6 +27,33 @@ public class MapDAO implements IMap {
        this.connection = Dao.getInstance().getConnection();
     }//FINISH
     //CRUD
+
+    /**
+     * Add Object type into dataBase.
+     *call sql function boulderdash.addObjectType()
+     * @return true if success or false is if failure
+     * @throws SQLException
+     * */
+    public void addObjectType(final ObjectType objectType){
+        //Array of parameters
+        ArrayList<Parameters> parameters = new ArrayList<>();
+        parameters.add(new Parameters<>(objectType.name(), TypeParameters.IN));
+        this.createCallableStatement("boulderdash.addObjectType(?)", parameters).ifPresent(MapDAO::executeCallStatement);
+    }//FINISH
+
+    /**
+     * Remove Object in ObjectType
+     * call sql function boulderdash.removeObjectType()
+     * @return true if success or false if failure
+     * @throws SQLException
+     * * */
+    public void removeObjectType(final ObjectType objectType){
+        //Array of parameters
+        ArrayList<Parameters> parameters = new ArrayList<>();
+        parameters.add(new Parameters<>(objectType.name(), TypeParameters.IN));
+        this.createCallableStatement("boulderdash.removeObjectType(?)", parameters).ifPresent(MapDAO::executeCallStatement);
+    }//FINISH
+
     /**
      * @see IMap
      * */
@@ -35,58 +61,57 @@ public class MapDAO implements IMap {
     public Optional<RawMap> getMap(final String nameMap) {
 
         //Init attributs
-        Integer width = 0, Height = 0;
-        Dimension size;
+        Integer width = 0, height = 0, nbrDiamond = 0, timeRemaining = 0, x = 0, y = 0;
         RawMap rawMap;
-        ResultSet resultSet;
+        Optional<ResultSet> oResult;
         ArrayList<Parameters> parameters = new ArrayList<>();
 
-
-        //============= Step 1 : Get Dimension of this map =============
-
+        //============= Step 1 : Get Dimension / number of diamond / time remaining of this map =============
         parameters.add(new Parameters<>(nameMap, TypeParameters.IN));
-        parameters.add(new Parameters<>(width, TypeParameters.OUT));
-        parameters.add(new Parameters<>(Height, TypeParameters.OUT));
-        this.createCallableStatement("boulderdash.getSizeMap(?,?,?)", parameters).ifPresent(MapDAO::executeCallStatement);
-
-        //Create Dimension object
-        try {
-            size = new Dimension(statement.getInt(2), statement.getInt(3));
-        } catch (SQLException e) {
-            e.printStackTrace();
+        this.createCallableStatement("boulderdash.getMap(?)", parameters).ifPresent(MapDAO::executeCallStatement);
+        //get ResultSet
+        oResult = MapDAO.getResultSet();
+        if(oResult.isPresent()){
+            try {
+                while (oResult.get().next()){
+                    //get specs
+                    width = (Integer)oResult.get().getObject("Width");
+                    height = (Integer)oResult.get().getObject("Heigth");
+                    nbrDiamond = (Integer)oResult.get().getObject("Diamond");
+                    timeRemaining = (Integer)oResult.get().getObject("RemainingTime");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return Optional.empty();
+            }
+        }else {
             return Optional.empty();
         }
 
         //============= Step 2 : Create rawMap =============
-            rawMap = new RawMap(nameMap, size);
+        rawMap = new RawMap(nameMap, width, height, nbrDiamond, timeRemaining);
 
         //============= Step 3 : get MapObject =============
         parameters.clear();
         parameters.add(new Parameters<>(nameMap, TypeParameters.IN));
         this.createCallableStatement("boulderdash.getMapObjects(?)", parameters).ifPresent(MapDAO::executeCallStatement);
-        //get ResultSet
-        try {
-            resultSet = statement.getResultSet();
-            if(resultSet == null)
+        oResult = MapDAO.getResultSet();
+        if(oResult.isPresent()){
+            try {
+                while (oResult.get().next()){
+                    ObjectType type = ObjectType.valueOf(oResult.get().getObject("TypeObject").toString());
+                     x = (Integer)oResult.get().getObject("CoordX");
+                     y = (Integer)oResult.get().getObject("CoordY");
+                    rawMap.addElement(new RawElement(type, x, y));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
                 return Optional.empty();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return Optional.empty();
-        }
-        //============= Step 4 : add element =============
-        try {
-            while (resultSet.next()){
-                ObjectType type = ObjectType.valueOf(resultSet.getObject("TypeObject").toString());
-                Integer x = (Integer)resultSet.getObject("CoordX");
-                Integer y = (Integer)resultSet.getObject("CoordY");
-                rawMap.addElement(new RawElement(type, new Position(x, y)));
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        }else {
             return Optional.empty();
         }
-        closeStatement();
+        MapDAO.closeStatement();
         return Optional.of(rawMap);
     }//FINISH
     /**
@@ -100,8 +125,8 @@ public class MapDAO implements IMap {
 
         //Create Map
         parameters.add(new Parameters<>(rawMap.getName(), TypeParameters.IN));
-        parameters.add(new Parameters<>(rawMap.getDimension().getWight(), TypeParameters.IN));
-        parameters.add(new Parameters<>(rawMap.getDimension().getHeight(), TypeParameters.IN));
+        parameters.add(new Parameters<>(rawMap.getWidth(), TypeParameters.IN));
+        parameters.add(new Parameters<>(rawMap.getHeight(), TypeParameters.IN));
         //Execute Statement
         this.createCallableStatement("boulderdash.addMap(?,?,?)", parameters).ifPresent(MapDAO::executeCallStatement);
         //Clear parameter
@@ -110,8 +135,8 @@ public class MapDAO implements IMap {
         for(RawElement element : rawMap.getElements()){
             parameters.add(new Parameters<>(rawMap.getName(), TypeParameters.IN));
             parameters.add(new Parameters<>(element.getObjectType().name(), TypeParameters.IN));
-            parameters.add(new Parameters<>(element.getPosition().getX(), TypeParameters.IN));
-            parameters.add(new Parameters<>(element.getPosition().getY(), TypeParameters.IN));
+            parameters.add(new Parameters<>(element.getX(), TypeParameters.IN));
+            parameters.add(new Parameters<>(element.getY(), TypeParameters.IN));
             this.createCallableStatement("boulderdash.addMapElement(?,?,?,?)", parameters).ifPresent(MapDAO::executeCallStatement);
             parameters.clear();
         }
@@ -130,6 +155,20 @@ public class MapDAO implements IMap {
         closeStatement();
     }//FINISH
 
+    /**
+     *get ResultSet
+     * */
+    public static Optional<ResultSet> getResultSet(){
+        try {
+            ResultSet resultSet = statement.getResultSet();
+            if(resultSet != null){
+                return Optional.of(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
 
     /**
      * Create a call routine with variable parameters
@@ -226,31 +265,7 @@ public class MapDAO implements IMap {
             e.printStackTrace();
         }
     }
-    /**
-     * Add Object type into dataBase.
-     *call sql function boulderdash.addObjectType()
-     * @return true if success or false is if failure
-     * @throws SQLException
-     * */
-    public void addObjectType(final ObjectType objectType){
-        //Array of parameters
-        ArrayList<Parameters> parameters = new ArrayList<>();
-        parameters.add(new Parameters<>(objectType.name(), TypeParameters.IN));
-        this.createCallableStatement("boulderdash.addObjectType(?)", parameters).ifPresent(MapDAO::executeCallStatement);
-    }//FINISH
 
-    /**
-     * Remove Object in ObjectType
-     * call sql function boulderdash.removeObjectType()
-     * @return true if success or false if failure
-     * @throws SQLException
-     * * */
-    public void removeObjectType(final ObjectType objectType){
-        //Array of parameters
-        ArrayList<Parameters> parameters = new ArrayList<>();
-        parameters.add(new Parameters<>(objectType.name(), TypeParameters.IN));
-        this.createCallableStatement("boulderdash.removeObjectType(?)", parameters).ifPresent(MapDAO::executeCallStatement);
-    }//FINISH
 
     /**
      * @return instance connection
