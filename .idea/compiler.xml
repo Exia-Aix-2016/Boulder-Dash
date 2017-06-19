@@ -14,15 +14,14 @@
         <module name="worlloader" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Boulder-Dash" target="1.5" />
-      <module name="BoulderDash" target="1.5" />
-      <module name="dao" target="1.5" />
-      <module name="engine" target="1.5" />
-      <module name="game" target="1.5" />
-      <module name="menu" target="1.5" />
-      <module name="world" target="1.5" />
-      <module name="worlloader" target="1.5" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="BoulderDash" target="1.8" />
+      <module name="dao" target="1.8" />
+      <module name="engine" target="1.8" />
+      <module name="game" target="1.8" />
+      <module name="menu" target="1.8" />
+      <module name="world" target="1.8" />
+      <module name="worlloader" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
