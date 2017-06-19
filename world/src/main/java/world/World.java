@@ -1,7 +1,8 @@
 package world;
 
+import java.util.ArrayList;
+
 public class World {
-    public void hello(){
-        System.out.println("hello");
-    }
+    private String name;
+    private Dimension dimension;
 }
