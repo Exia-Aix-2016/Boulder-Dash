@@ -1,4 +1,4 @@
-package view.menu;
+package menu;
 
 class WorldsPanel extends SubMenu {
 
