@@ -5,12 +5,12 @@ import world.Position;
 import world.Permeability;
 
 public abstract class Elements {
-    Position position;
-    Dimension dimension;
-    String sprite;
-    Permeability permeability;
+    private Position position;
+    private Dimension dimension;
+    private String sprite;
+    private Permeability permeability;
 
-    public Elements(Position position, Dimension dimension, String sprite, Permeability permeability){
+    public Elements(Position position, Permeability permeability){
         this.position = position;
         this.dimension = dimension;
         this.sprite = sprite;

@@ -1,7 +1,7 @@
 package world;
 
-import world.block.Block;
-import world.entity.Entity;
+import world.elements.block.Block;
+import world.elements.entity.Entity;
 
 /**
  *
