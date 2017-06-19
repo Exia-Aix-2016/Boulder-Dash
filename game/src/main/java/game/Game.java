@@ -11,7 +11,8 @@ public class Game {
         JFrame frame = new JFrame();
 
         frame.setTitle("BoulderDash");
-        frame.setPreferredSize(new Dimension(800, 800));
+        frame.setSize(new Dimension(800, 800));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Menu menu = new Menu();
 
