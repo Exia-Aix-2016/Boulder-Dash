@@ -50,5 +50,4 @@ public class DAOTest {
             fail("Fail : getConnection");
         }
     }//FINISH
-
 }

@@ -33,7 +33,7 @@ public class MapDAOTest {
     /**
      * Test remove ObjectType
      * */
-    public void removeObjectTypeTest(ObjectType objectType){
+    private void removeObjectTypeTest(ObjectType objectType){
         System.out.println("MapDAOTest : removeObjectTypeTest");
         mapDAO.removeObjectType(objectType);
     }//FINISH
@@ -41,14 +41,14 @@ public class MapDAOTest {
     /**
      * Test insert ObjectType
      * */
-    public void insertObjectTypeTest(ObjectType objectType){
+    private void insertObjectTypeTest(ObjectType objectType){
         System.out.println("MapDAOTest : InsertObjectTypeTest");
         mapDAO.addObjectType(objectType);
     }//FINISH
     /**
      * Test create MAp
      * */
-    public void createMapTest(){
+    private void createMapTest(){
         System.out.println("MapDAOTest : Create Map");
         RawMap map = new RawMap("test", 10, 10, 150, 1500);
         map.addElement(new RawElement(ObjectType.WALL, 10, 10));
@@ -60,7 +60,7 @@ public class MapDAOTest {
     /**
      * Test GetMap
      * */
-    public void getMapTest(){
+    private void getMapTest(){
         System.out.println("MapDAOTest : get Map");
         if(!mapDAO.getMap("test").isPresent()){
             fail("Fail : getMap()");
@@ -70,10 +70,21 @@ public class MapDAOTest {
     /**
      * Test Remove Map
      * */
-    public void removeMapTest(){
+    private void removeMapTest(){
         System.out.println("MapDAOTest : remove Map");
         mapDAO.removeMap("test");
     }//FINISH
+
+    /**
+     * Test get listMap
+     * */
+    private void testGetMapNames(){
+
+        for(String name : mapDAO.getMapListNames()){
+            System.out.println(name);
+        }
+    }//FINISH
+
     /**
      * Order the test map
      * */
@@ -81,21 +92,19 @@ public class MapDAOTest {
     public void testInteracMap(){
         this.createMapTest();
         this.getMapTest();
+        this.testGetMapNames();
         this.removeMapTest();
+
     }
+
+    /**
+     * Order the test ObjectType
+     * */
     @Test
     public void testInteractObjectType(){
         this.insertObjectTypeTest(ObjectType.TEST);
         this.removeObjectTypeTest(ObjectType.TEST);
-    }
-
-    @Test
-    public void testGetMapNames(){
-
-        for(String name : mapDAO.getMapListNames()){
-            System.out.println(name);
-        }
-    }
+    }//FINISH
 
 
     /**
