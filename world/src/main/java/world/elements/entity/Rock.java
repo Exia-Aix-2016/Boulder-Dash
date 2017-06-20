@@ -13,4 +13,9 @@ public class Rock extends Entity {
         super(position, dimension, SPRITE, PERMEABILITY);
         this.setBackground(Color.GRAY);
     }
+
+    @Override
+    public void tick() {
+
+    }
 }

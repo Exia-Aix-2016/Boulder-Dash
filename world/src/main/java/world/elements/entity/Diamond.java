@@ -13,4 +13,9 @@ public class Diamond extends Entity {
         super(position, dimension, SPRITE, PERMEABILITY);
         this.setBackground(Color.BLUE);
     }
+
+    @Override
+    public void tick() {
+
+    }
 }

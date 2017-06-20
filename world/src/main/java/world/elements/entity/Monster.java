@@ -12,4 +12,9 @@ public class Monster extends Entity {
         super(position, dimension, SPRITE, PERMEABILITY);
         this.setBackground(Color.GREEN);
     }
+
+    @Override
+    public void tick() {
+
+    }
 }
