@@ -12,6 +12,6 @@ public class Dirt extends Block{
 
     public Dirt(Position position, Dimension dimension){
         super(position, dimension, SPRITE, PERMEABILITY);
-        this.setForeground(Color.ORANGE);
+        this.setBackground(Color.ORANGE);
     }
 }

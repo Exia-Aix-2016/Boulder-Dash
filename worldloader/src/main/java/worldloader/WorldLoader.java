@@ -1,18 +1,16 @@
 package worldloader;
 
 import dao.IMap;
+import dao.ObjectType;
 import dao.RawElement;
 import dao.RawMap;
 import world.ICreateWorld;
 import world.Position;
 import world.World;
 
-import java.io.BufferedReader;
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Iterator;
-import java.awt.*;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -80,6 +78,10 @@ public abstract class WorldLoader {
                                 new Position(element.getX() * elementSize, element.getY() * elementSize),
                                 new Dimension(elementDimension)));
                         break;
+                    case EXIT:
+                        world.addBlock(FactoryElement.getNewExit(
+                                new Position(element.getX() * elementSize, element.getY() * elementSize),
+                                new Dimension(elementDimension)));
                 }
             }
             return (World) world;
