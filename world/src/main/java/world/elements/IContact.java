@@ -1,4 +1,4 @@
-package world.elements.entity;
+package world.elements;
 
 public interface IContact {
 

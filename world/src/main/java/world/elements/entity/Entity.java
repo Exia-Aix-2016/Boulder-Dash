@@ -1,38 +1,50 @@
 package world.elements.entity;
 
+import engine.Context;
 import engine.Engine;
 import engine.TickListener;
 import world.Permeability;
 import world.Position;
 import world.elements.Elements;
+import world.elements.IContact;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.Optional;
 
-public abstract class Entity extends Elements implements TickListener, IContact{
+public abstract class Entity extends Elements implements TickListener {
 
-    public State state;
-    public Engine engine;
+    protected State state;
+    protected Engine engine;
 
     Entity(Position position, Dimension dimension, String sprite, Permeability permeability){
         super(position, dimension, sprite, permeability);
         state = new State();
     }
 
-    private Optional<IContact> getForwardElement(){
+    protected Optional<IContact> getContext(Rectangle rec){
+        Context context = this.engine.getContext(rec);
 
-        // TODO
+        Optional<JComponent> component = context.get();
+
+        if (component.isPresent()){
+            return Optional.of((IContact) component.get());
+        }
+
+        return Optional.empty();
+    }
+
+    protected Optional<IContact> getForwardElement(){
+
         switch (this.state.getStateType()){
             case UP:
-                break;
+                return this.getContext(this.getProjection(0, 1));
             case DOWN:
-                break;
+                return this.getContext(this.getProjection(0, -1));
             case LEFT:
-                break;
+                return this.getContext(this.getProjection(-1, 0));
             case RIGHT:
-                break;
-            case WAITING:
-                break;
+                return this.getContext(this.getProjection(1, 0));
         }
 
         return Optional.empty();

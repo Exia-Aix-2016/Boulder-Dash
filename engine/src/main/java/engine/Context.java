@@ -10,11 +10,10 @@ import java.util.Optional;
  * @see Runnable
  * @see JComponent
  */
-public class Context implements Runnable  {
+public class Context {
 
     private Rectangle rectangle;
     private Collection<JComponent> worldComponents;
-    private JComponent foundCompenent = null;
 
 
     /**
@@ -22,23 +21,9 @@ public class Context implements Runnable  {
      * @param worldComponents Collection(JComponent)
      * @param rectangle the cursor element to search in worldComponents
      * */
-    public Context(Collection<JComponent> worldComponents, Rectangle rectangle){
+    Context(Collection<JComponent> worldComponents, Rectangle rectangle){
         this.rectangle = rectangle;
         this.worldComponents = worldComponents;
-    }
-
-    /**
-     * Allow to calculate the context (check collision)
-     * */
-    @Override
-    public void run() {
-        for(JComponent component : worldComponents){
-            if(rectangle.intersects(component.getBounds())){
-                foundCompenent = component;
-            }
-        }
-
-        this.notify();
     }
 
     /**
@@ -48,19 +33,14 @@ public class Context implements Runnable  {
      * @see Optional
      * @see Runnable
      * */
-    public Optional<JComponent> getContext(){
-        Thread startCalcContext = new Thread(this);
-        startCalcContext.start();
+    public Optional<JComponent> get(){
 
-        try {
-            this.wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        for(JComponent component : worldComponents){
+            if(rectangle.intersects(component.getBounds())){
+                return  Optional.of(component);
+            }
         }
-        if(foundCompenent != null){
-            return Optional.of(foundCompenent);
-        }else {
-            return Optional.empty();
-        }
+
+        return Optional.empty();
     }
 }

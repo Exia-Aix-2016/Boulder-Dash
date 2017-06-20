@@ -6,7 +6,7 @@ import world.Position;
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class Elements extends JComponent {
+public abstract class Elements extends JComponent implements IContact{
 
     private Position position;
     private String sprite;
@@ -39,18 +39,13 @@ public abstract class Elements extends JComponent {
     private void updateBounds(){
         Rectangle bounds = new Rectangle(this.position.getX(), this.position.getY(), this.getSize().width, this.getSize().height);
         this.setBounds(bounds);
-        System.out.println("define bounds");
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-
         g.setColor(this.getBackground());
-
         Rectangle rec = this.getBounds();
-        System.out.println("draw " + rec + g.getColor());
-
         g.fillRect(0, 0, rec.width, rec.height);
     }
 }

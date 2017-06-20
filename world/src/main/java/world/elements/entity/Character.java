@@ -16,6 +16,7 @@ public class Character extends Entity {
 
     @Override
     public void tick() {
-
+        this.state.setStateType(StateType.DOWN);
+        System.out.println(this.getForwardElement());
     }
 }

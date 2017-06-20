@@ -17,10 +17,6 @@ public class State {
         return lastSate;
     }
 
-    public void setLastSate(Entity entity){
-        this.lastSate = entity.state;
-    }
-
     public StateType getStateType() {
         return stateType;
     }
