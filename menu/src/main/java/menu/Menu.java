@@ -2,13 +2,16 @@ package menu;
 
 import dao.IMap;
 import game.ILaunch;
+import javafx.stage.FileChooser;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
-public class Menu extends JPanel implements IMenuAction{
+public class Menu extends JPanel implements IMenuAction {
 
     private JPanel rootPanel;
     private JPanel worldsPanel;
@@ -17,7 +20,7 @@ public class Menu extends JPanel implements IMenuAction{
 
     private ILaunch worldLaucher;
 
-    public Menu(IMap mapDao, ILaunch worldLauncher){
+    public Menu(IMap mapDao, ILaunch worldLauncher) {
 
         this.worldLaucher = worldLauncher;
 
@@ -35,7 +38,7 @@ public class Menu extends JPanel implements IMenuAction{
         this.setPanel(this.rootPanel);
     }
 
-    private void setPanel(JPanel panel){
+    private void setPanel(JPanel panel) {
         this.removeAll();
         this.add(panel);
         this.revalidate();
@@ -64,5 +67,22 @@ public class Menu extends JPanel implements IMenuAction{
     @Override
     public void playWorld(String worldName) {
         this.worldLaucher.launch(worldName);
+    }
+
+    @Override
+    public File loadWorld() {
+        FileSystemView vueSysteme = FileSystemView.getFileSystemView();
+
+        File defaut = vueSysteme.getDefaultDirectory();
+
+        JFileChooser fileChooser = new JFileChooser(defaut);
+        fileChooser.showOpenDialog(null);
+
+        File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+
+        System.out.println(file.getAbsolutePath());
+
+        return file;
+
     }
 }
