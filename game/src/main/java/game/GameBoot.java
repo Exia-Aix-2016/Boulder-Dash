@@ -3,6 +3,8 @@ package game;
 import dao.IMap;
 import dao.MapDAO;
 import engine.Engine;
+import world.World;
+import worldloader.WorldLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,16 +27,23 @@ public class GameBoot extends JFrame implements ILaunch{
         this.add(menu);
     }
 
-    public void boot(){
+    void boot(){
         this.setVisible(true);
     }
 
     @Override
     public void launch(String worldName) {
         System.out.println("Launching world: " + worldName);
-        this.remove(menu);
-        this.add(engine);
-        this.revalidate();
-        this.repaint();
+        try {
+            World world = WorldLoader.getMap(worldName, mapDao);
+            System.out.println(world);
+            engine.loadWorld(world);
+            this.remove(menu);
+            this.add(engine);
+            this.revalidate();
+            this.repaint();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

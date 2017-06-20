@@ -4,10 +4,12 @@ import world.elements.block.Block;
 import world.elements.entity.Entity;
 import world.elements.entity.Character;
 
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
-public class World implements ICreateWorld {
+public class World implements ICreateWorld, IWorld {
     private String name;
     private Dimension dimension;
     private int score;
@@ -80,4 +82,19 @@ public class World implements ICreateWorld {
     }
 
 
+    @Override
+    public IControllable getControllable() {
+        return null;
+    }
+
+    @Override
+    public Collection<JComponent> getComponents() {
+        Collection<JComponent> components = new ArrayList<>();
+        components.addAll(blocks);
+        components.addAll(entities);
+        if (character != null){
+            components.add(character);
+        }
+        return components;
+    }
 }
