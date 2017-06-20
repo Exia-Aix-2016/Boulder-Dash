@@ -10,5 +10,6 @@ public enum ObjectType {
     MONSTER,
     WALL,
     CHARACTER,
+    EXIT,
     TEST
 }
