@@ -1,28 +1,27 @@
 package world.elements.entity;
 
+import engine.Engine;
+import engine.TickListener;
+
 import java.util.Stack;
 
 /**
  * Manage the stat of Entity
  */
-public class StateManager {
+public class StateManager implements TickListener{
     private static final int SIZE_STACK = 5;
     private Stack<State> stateStack;
+
+    private StateType requestState;
 
     public StateManager(){
         stateStack = new Stack<>();
         stateStack.setSize(SIZE_STACK);
     }
     public void pushState(StateType stateType){
-        stateStack.push(new State(stateType));
+        stateStack.push(new State(stateType, false));
     }
 
-    /**
-     * Increment the last State Tick
-     * */
-    public  void incrementStateTick(){
-        this.getCurrentState().incrementTick();
-    }
 
     /**
      * @return  the last State which push in Stack
@@ -37,4 +36,13 @@ public class StateManager {
         return stateStack.get(index);
     }
 
+    public void setBlockState(){
+        stateStack.push(new State(this.getCurrentState().getStateType(), true));
+
+    }
+
+    @Override
+    public void tick() {
+        this.getCurrentState().incrementTick();
+    }
 }

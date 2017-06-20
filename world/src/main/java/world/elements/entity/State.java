@@ -6,20 +6,10 @@ public class State {
     private boolean moving;
     private boolean blocked;
 
-    State(StateType stateType){
+    State(StateType stateType, Boolean blocked){
         this.stateType = stateType;
         this.moving = false;
-        this.blocked = true;
-    }
-
-
-    /**
-     * Set type (UP, DOWN, etc...)
-     * @param stateType Set a type of this State
-     * */
-    public void setStateType(StateType stateType) {
-        if(this.moving == false)
-            this.stateType = stateType;
+        this.blocked = blocked;
     }
     /**
      * @return the state type
@@ -36,12 +26,6 @@ public class State {
         this.tick++;
     }
 
-    /**
-     * block the state
-     * */
-    public void setBlocked(boolean blocked) {
-        this.blocked = blocked;
-    }
     /**
      * set moving the state
      * */
