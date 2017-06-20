@@ -14,13 +14,14 @@ import java.awt.*;
 import java.util.Optional;
 
 public abstract class Entity extends Elements implements TickListener {
-
-    protected State state;
     protected Engine engine;
+    protected StateManager stateManager;
 
     Entity(Position position, Dimension dimension, String sprite, Permeability permeability){
         super(position, dimension, sprite, permeability);
-        state = new State();
+         stateManager = new StateManager();
+
+
     }
 
     protected Optional<IContact> getContext(Rectangle rec){
@@ -37,7 +38,7 @@ public abstract class Entity extends Elements implements TickListener {
 
     protected Optional<IContact> getForwardElement(){
 
-        switch (this.state.getStateType()){
+        switch (this.stateManager.getNowState().getStateType()){
             case UP:
                 return this.getContext(this.getProjection(0, 1));
             case DOWN:

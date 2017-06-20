@@ -21,13 +21,13 @@ public class StateManager {
      * Increment the last State Tick
      * */
     public  void incrementStateTick(){
-        this.getNowState().incrementTick();
+        this.getCurrentState().incrementTick();
     }
 
     /**
      * @return  the last State which push in Stack
      * */
-    public State getNowState(){
+    public State getCurrentState(){
         return stateStack.firstElement();
     }
     /**
