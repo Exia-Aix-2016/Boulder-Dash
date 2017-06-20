@@ -1,9 +1,7 @@
 package world.elements.entity;
 
-import world.Dimension;
 import world.Position;
 import world.Permeability;
-import world.elements.block.Block;
 
 import java.awt.*;
 

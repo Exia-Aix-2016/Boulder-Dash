@@ -1,7 +1,8 @@
 package worldloader;
 
-import dao.*;
-import world.Dimension;
+import dao.IMap;
+import dao.RawElement;
+import dao.RawMap;
 import world.ICreateWorld;
 import world.Position;
 import world.World;
@@ -11,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Iterator;
+import java.awt.*;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -21,8 +23,6 @@ import java.util.Scanner;
  */
 public abstract class WorldLoader {
 
-    private static ICreateWorld world = null;
-
     /**
      * Allow to get map with her name
      *
@@ -32,64 +32,60 @@ public abstract class WorldLoader {
      * @see ICreateWorld
      * @see world
      * @see Optional
-     */
-    public static World getMap(final String nameMap, IMap MapDAO) throws Exception {
+     * */
+    public static World getMap(final String nameMap, IMap MapDAO, Dimension screenSize) throws Exception{
 
-        Optional<RawMap> rawMap = MapDAO.getMap(nameMap);
+        Optional<RawMap> rawMapO = MapDAO.getMap(nameMap);
 
-        if (rawMap.isPresent()) {
-            return WorldLoader.genWorld(rawMap.get());
+        if (rawMapO.isPresent()){
+            RawMap rawMap = rawMapO.get();
+
+            Dimension dimension = new Dimension(rawMap.getWidth(), rawMap.getHeight());
+
+            int elementSize = screenSize.width / dimension.width;
+
+            Dimension elementDimension = new Dimension(elementSize, elementSize);
+
+            ICreateWorld world = new World(rawMap.getName(), dimension, rawMap.getNbrDiamond(), rawMap.getTimeRemaining());
+
+            for (RawElement element : rawMap.getElements()){
+                switch (element.getObjectType()){
+                    case CHARACTER:
+                        world.addEntity(FactoryElement.getNewCharacter(
+                                new Position(element.getX() * elementSize, element.getY() * elementSize),
+                                new Dimension(elementDimension)));
+                        break;
+                    case MONSTER:
+                        world.addEntity(FactoryElement.getNewMonster(
+                                new Position(element.getX() * elementSize, element.getY() * elementSize),
+                                new Dimension(elementDimension)));
+                        break;
+                    case DIAMOND:
+                        world.addEntity(FactoryElement.getNewDiamond(
+                                new Position(element.getX() * elementSize, element.getY() * elementSize),
+                                new Dimension(elementDimension)));
+                        break;
+                    case ROCK:
+                        world.addEntity(FactoryElement.getNewRock(
+                                new Position(element.getX() * elementSize, element.getY() * elementSize),
+                                new Dimension(elementDimension)));
+                        break;
+                    case WALL:
+                        world.addBlock(FactoryElement.getNewWall(
+                                new Position(element.getX() * elementSize, element.getY() * elementSize),
+                                new Dimension(elementDimension)));
+                        break;
+                    case DIRT:
+                        world.addBlock(FactoryElement.getNewDirt(
+                                new Position(element.getX() * elementSize, element.getY() * elementSize),
+                                new Dimension(elementDimension)));
+                        break;
+                }
+            }
+            return (World) world;
         } else {
             throw new Exception("Error of map loading");
         }
-    }
-
-    /**
-     * It's used by getWorld to create the world
-     *
-     * @param rawMap its a representation of database Map
-     */
-    private static World genWorld(final RawMap rawMap) {
-
-        Dimension dimension = new Dimension(rawMap.getWidth(), rawMap.getHeight());
-
-        ICreateWorld world = new World(rawMap.getName(), dimension, rawMap.getNbrDiamond(), rawMap.getTimeRemaining());
-
-        for (RawElement element : rawMap.getElements()) {
-            switch (element.getObjectType()) {
-                case CHARACTER:
-                    world.addEntity(FactoryElement.getNewCharacter(
-                            new Position(element.getX(), element.getY()),
-                            new Dimension(16, 16)));
-                    break;
-                case MONSTER:
-                    world.addEntity(FactoryElement.getNewMonster(
-                            new Position(element.getX(), element.getY()),
-                            new Dimension(16, 16)));
-                    break;
-                case DIAMOND:
-                    world.addEntity(FactoryElement.getNewDiamond(
-                            new Position(element.getX(), element.getY()),
-                            new Dimension(16, 16)));
-                    break;
-                case ROCK:
-                    world.addEntity(FactoryElement.getNewRock(
-                            new Position(element.getX(), element.getY()),
-                            new Dimension(16, 16)));
-                    break;
-                case WALL:
-                    world.addBlock(FactoryElement.getNewWall(
-                            new Position(element.getX(), element.getY()),
-                            new Dimension(16, 16)));
-                    break;
-                case DIRT:
-                    world.addBlock(FactoryElement.getNewDirt(
-                            new Position(element.getX(), element.getY()),
-                            new Dimension(16, 16)));
-                    break;
-            }
-        }
-        return (World) world;
     }
 
 

@@ -5,6 +5,7 @@ import world.elements.entity.Entity;
 import world.elements.entity.Character;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -39,6 +40,7 @@ public class World implements ICreateWorld, IWorld {
         return timeRemaining;
     }
 
+    @Override
     public Dimension getDimension() {
         return dimension;
     }

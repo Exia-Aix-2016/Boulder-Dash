@@ -1,6 +1,5 @@
 package world.elements.block;
 
-import world.Dimension;
 import world.Position;
 import world.Permeability;
 
