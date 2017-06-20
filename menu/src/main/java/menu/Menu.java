@@ -3,6 +3,8 @@ package menu;
 import dao.IMap;
 import game.ILaunch;
 import javafx.stage.FileChooser;
+import world.World;
+import worldloader.WorldLoader;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -17,11 +19,12 @@ public class Menu extends JPanel implements IMenuAction {
     private JPanel worldsPanel;
 
     private Image backgroundImage;
-
+    private IMap mapDao;
     private ILaunch worldLaucher;
 
     public Menu(IMap mapDao, ILaunch worldLauncher) {
 
+        this.mapDao = mapDao;
         this.worldLaucher = worldLauncher;
 
         this.setLayout(new GridBagLayout());
@@ -70,7 +73,7 @@ public class Menu extends JPanel implements IMenuAction {
     }
 
     @Override
-    public File loadWorld() {
+    public void loadWorld() {
         FileSystemView vueSysteme = FileSystemView.getFileSystemView();
 
         File defaut = vueSysteme.getDefaultDirectory();
@@ -82,7 +85,13 @@ public class Menu extends JPanel implements IMenuAction {
 
         System.out.println(file.getAbsolutePath());
 
-        return file;
+        try {
+
+            WorldLoader.SendToDataBase(WorldLoader.genRawMapFILE(file), this.mapDao);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

@@ -93,9 +93,17 @@ public abstract class WorldLoader {
     }
 
 
+    /**
+     * With a file this method can generate a RawMap which will send in dataBase.
+     * @param file File of the map
+     *  @return RawMap representation of the world
+     *  @throws Exception send exeption when readFile fail.
+     * */
     public static RawMap genRawMapFILE(final File file) throws Exception {
 
         String mapName = file.getName();
+        mapName = mapName.substring(0, mapName.lastIndexOf('.'));
+
         Integer width = 0;
         Integer height = 0;
         Integer nbrDiamond = 0;
@@ -121,7 +129,6 @@ public abstract class WorldLoader {
                 rawMap = new RawMap(mapName, width, height, nbrDiamond, timeRemaining);
                 while (scanner.hasNextLine()) {
                     line = scanner.nextLine();
-
                     for (int i = 0; i < line.length(); i++) {
 
                         switch (line.charAt(i)) {
@@ -134,6 +141,9 @@ public abstract class WorldLoader {
                             case 'D':
                                 rawMap.addElement(new RawElement(ObjectType.DIAMOND, i, y));
                                 break;
+                            case 'X':
+                                rawMap.addElement(new RawElement(ObjectType.DIRT, i, y));
+                                break;
                             case 'W':
                                 rawMap.addElement(new RawElement(ObjectType.WALL, i, y));
                                 break;
@@ -144,11 +154,9 @@ public abstract class WorldLoader {
                                 rawMap.addElement(new RawElement(ObjectType.EXIT, i, y));
                         }
                     }
-
                     y++;
                 }
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

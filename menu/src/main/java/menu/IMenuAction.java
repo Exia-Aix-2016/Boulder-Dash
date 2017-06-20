@@ -1,11 +1,12 @@
 package menu;
 
-import java.io.File;
+import dao.IMap;
+import worldloader.WorldLoader;
 
 interface IMenuAction {
     void exit();
     void home();
     void enterPlay();
     void playWorld(String worldName);
-    File loadWorld();
+    void loadWorld();
 }
