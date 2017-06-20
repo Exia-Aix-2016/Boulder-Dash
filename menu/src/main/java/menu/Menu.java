@@ -36,7 +36,7 @@ public class Menu extends JPanel implements IMenuAction {
         }
 
         this.rootPanel = new RootPanel(this);
-        this.worldsPanel = new WorldsPanel(this, mapDao);
+
 
         this.setPanel(this.rootPanel);
     }
@@ -64,6 +64,7 @@ public class Menu extends JPanel implements IMenuAction {
 
     @Override
     public void enterPlay() {
+        this.worldsPanel = new WorldsPanel(this, mapDao);
         this.setPanel(worldsPanel);
     }
 
@@ -87,7 +88,7 @@ public class Menu extends JPanel implements IMenuAction {
 
         try {
 
-            WorldLoader.SendToDataBase(WorldLoader.genRawMapFILE(file), this.mapDao);
+            this.mapDao.addMap(WorldLoader.genRawMapFILE(file));
         } catch (Exception e) {
             e.printStackTrace();
         }

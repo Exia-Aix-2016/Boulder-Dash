@@ -19,13 +19,11 @@ class WorldsPanel extends SubMenu {
 
         for (MButton worldButton: worldsButtons){
             this.add(worldButton);
-
             worldButton.addActionListener((e -> this.menu.playWorld(worldButton.getText())));
         }
 
         this.add(backButton);
-
-        backButton.addActionListener((e) -> { this.menu.home(); });
+        backButton.addActionListener((e) -> this.menu.home());
     }
 
     private ArrayList<MButton> getWorldsButtons(){

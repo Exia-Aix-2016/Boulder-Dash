@@ -162,10 +162,6 @@ public abstract class WorldLoader {
         }
         return rawMap;
     }
-
-    public static void SendToDataBase(final RawMap rawMap, IMap MapDAO){
-        MapDAO.addMap(rawMap);
-    }
 }
 
 
