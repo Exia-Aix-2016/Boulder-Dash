@@ -1,6 +1,5 @@
 package worldloader;
 
-import world.Dimension;
 import world.Position;
 import world.elements.block.Dirt;
 import world.elements.block.Exit;
@@ -9,6 +8,9 @@ import world.elements.entity.Character;
 import world.elements.entity.Diamond;
 import world.elements.entity.Monster;
 import world.elements.entity.Rock;
+
+import java.awt.*;
+
 /**
  * Factory Element use to create Element which will compose the world.
  */

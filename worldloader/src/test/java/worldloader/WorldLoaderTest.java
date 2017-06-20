@@ -3,6 +3,9 @@ package worldloader;
 import dao.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.awt.*;
+
 import static org.junit.Assert.fail;
 
 
@@ -33,7 +36,7 @@ public class WorldLoaderTest {
         map.addElement(new RawElement(ObjectType.DIRT, 1, 1));
         mapDao.addMap(map);
         try {
-            WorldLoader.getMap("test", mapDao);
+            WorldLoader.getMap("test", mapDao, new Dimension(800, 800));
         } catch (Exception e) {
             e.printStackTrace();
             fail("Fail WorldLoader : getMap()");
