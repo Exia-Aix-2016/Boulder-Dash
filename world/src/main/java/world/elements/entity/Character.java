@@ -13,4 +13,9 @@ public class Character extends Entity {
         super(position, dimension, SPRITE, PERMEABILITY);
         this.setBackground(Color.RED);
     }
+
+    @Override
+    public void tick() {
+
+    }
 }

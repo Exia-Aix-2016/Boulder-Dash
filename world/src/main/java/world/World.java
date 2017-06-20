@@ -1,5 +1,6 @@
 package world;
 
+import engine.TickListener;
 import world.elements.block.Block;
 import world.elements.entity.Entity;
 import world.elements.entity.Character;
@@ -98,5 +99,14 @@ public class World implements ICreateWorld, IWorld {
             components.add(character);
         }
         return components;
+    }
+
+    @Override
+    public Collection<TickListener> getTickListeners() {
+        Collection<TickListener> tickListeners = new ArrayList<>();
+        tickListeners.addAll(this.entities);
+        tickListeners.add(this.character);
+
+        return tickListeners;
     }
 }
