@@ -8,7 +8,7 @@ import java.util.Stack;
 /**
  * Manage the stat of Entity
  */
-public class StateManager implements TickListener{
+public class StateManager{
     private static final int SIZE_STACK = 5;
     private Stack<State> stateStack;
 
@@ -41,8 +41,7 @@ public class StateManager implements TickListener{
 
     }
 
-    @Override
-    public void tick() {
+    public void tickStateManager{
         this.getCurrentState().incrementTick();
     }
 }
