@@ -29,13 +29,14 @@ public class GameBoot extends JFrame implements ILaunch{
 
     void boot(){
         this.setVisible(true);
+        engine.setSize(this.getSize());
     }
 
     @Override
     public void launch(String worldName) {
         System.out.println("Launching world: " + worldName);
         try {
-            World world = WorldLoader.getMap(worldName, mapDao);
+            World world = WorldLoader.getMap(worldName, mapDao, this.getSize());
             System.out.println(world);
             engine.loadWorld(world);
             this.remove(menu);
