@@ -1,11 +1,12 @@
 package world.elements.entity;
 
-import world.Position;
+import world.IControllable;
 import world.Permeability;
+import world.Position;
 
 import java.awt.*;
 
-public class Character extends Entity {
+public class Character extends Entity implements IControllable{
 
     private static String SPRITE = "";
     private static Permeability PERMEABILITY = Permeability.PERMEABLE;
@@ -18,5 +19,30 @@ public class Character extends Entity {
     public void tick() {
         this.state.setStateType(StateType.DOWN);
         System.out.println(this.getForwardElement());
+    }
+
+    @Override
+    public void goLeft() {
+
+    }
+
+    @Override
+    public void goRight() {
+
+    }
+
+    @Override
+    public void goUp() {
+
+    }
+
+    @Override
+    public void goDown() {
+
+    }
+
+    @Override
+    public void goRest() {
+
     }
 }

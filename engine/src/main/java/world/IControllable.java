@@ -5,4 +5,5 @@ public interface IControllable {
     void goRight();
     void goUp();
     void goDown();
+    void goRest();
 }

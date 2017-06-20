@@ -3,6 +3,7 @@ package world.elements.entity;
 import engine.Context;
 import engine.Engine;
 import engine.TickListener;
+import world.IControllable;
 import world.Permeability;
 import world.Position;
 import world.elements.Elements;
