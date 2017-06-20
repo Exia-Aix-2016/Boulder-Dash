@@ -32,10 +32,12 @@ public class WorldLoaderTest {
         map.addElement(new RawElement(ObjectType.WALL, 5, 5));
         map.addElement(new RawElement(ObjectType.DIRT, 1, 1));
         mapDao.addMap(map);
-        if(!WorldLoader.getMap("test", mapDao).isPresent()){
+        try {
+            WorldLoader.getMap("test", mapDao);
+        } catch (Exception e) {
+            e.printStackTrace();
             fail("Fail WorldLoader : getMap()");
-        }else{
-            mapDao.removeMap("test");
         }
+        mapDao.removeMap("test");
     }
 }

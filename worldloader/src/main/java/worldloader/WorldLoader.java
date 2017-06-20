@@ -28,25 +28,26 @@ public abstract class WorldLoader {
      * @see world
      * @see Optional
      * */
-    public static Optional<ICreateWorld> getMap(final String nameMap, IMap MapDAO){
-        MapDAO.getMap(nameMap).ifPresent(WorldLoader::genWorld);
-        if(world == null){
-            return Optional.empty();
-        }else {
-            return Optional.of(world);
-        }
+    public static World getMap(final String nameMap, IMap MapDAO) throws Exception{
 
+        Optional<RawMap> rawMap = MapDAO.getMap(nameMap);
+
+        if (rawMap.isPresent()){
+            return WorldLoader.genWorld(rawMap.get());
+        } else {
+            throw new Exception("Error of map loading");
+        }
     }
 
     /**
      * It's used by getWorld to create the world
      * @param rawMap its a representation of database Map
      * */
-    private static void genWorld(final RawMap rawMap){
+    private static World genWorld(final RawMap rawMap){
 
         Dimension dimension = new Dimension(rawMap.getWidth(), rawMap.getHeight());
 
-        world = new World(rawMap.getName(), dimension, rawMap.getNbrDiamond(), rawMap.getTimeRemaining());
+        ICreateWorld world = new World(rawMap.getName(), dimension, rawMap.getNbrDiamond(), rawMap.getTimeRemaining());
 
         for (RawElement element : rawMap.getElements()){
             switch (element.getObjectType()){
@@ -82,5 +83,6 @@ public abstract class WorldLoader {
                     break;
             }
         }
+        return (World) world;
     }
 }
