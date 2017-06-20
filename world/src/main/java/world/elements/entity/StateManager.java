@@ -41,7 +41,7 @@ public class StateManager{
 
     }
 
-    public void tickStateManager{
+    public void tickStateManager(){
         this.getCurrentState().incrementTick();
     }
 }
