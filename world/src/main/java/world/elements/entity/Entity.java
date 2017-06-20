@@ -2,7 +2,9 @@ package world.elements.entity;
 
 import engine.Context;
 import engine.Engine;
+import engine.IEngine;
 import engine.TickListener;
+import world.IControllable;
 import world.Permeability;
 import world.Position;
 import world.elements.Elements;
@@ -12,14 +14,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Optional;
 
-public abstract class Entity extends Elements implements TickListener {
-
-    protected State state;
+public abstract class Entity extends Elements implements TickListener, IEngine {
     protected Engine engine;
+    protected StateManager stateManager;
 
     Entity(Position position, Dimension dimension, String sprite, Permeability permeability){
         super(position, dimension, sprite, permeability);
-        state = new State();
+         stateManager = new StateManager();
+
+
     }
 
     protected Optional<IContact> getContext(Rectangle rec){
@@ -36,7 +39,7 @@ public abstract class Entity extends Elements implements TickListener {
 
     protected Optional<IContact> getForwardElement(){
 
-        switch (this.state.getStateType()){
+        switch (this.stateManager.getCurrentState().getStateType()){
             case UP:
                 return this.getContext(this.getProjection(0, 1));
             case DOWN:
