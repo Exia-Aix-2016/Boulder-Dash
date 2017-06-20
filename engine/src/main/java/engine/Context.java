@@ -37,6 +37,8 @@ public class Context implements Runnable  {
                 foundCompenent = component;
             }
         }
+
+        this.notify();
     }
 
     /**
@@ -49,6 +51,12 @@ public class Context implements Runnable  {
     public Optional<JComponent> getContext(){
         Thread startCalcContext = new Thread(this);
         startCalcContext.start();
+
+        try {
+            this.wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if(foundCompenent != null){
             return Optional.of(foundCompenent);
         }else {

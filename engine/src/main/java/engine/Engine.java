@@ -3,7 +3,9 @@ package engine;
 import world.IWorld;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Collection;
+import java.util.Optional;
 
 public class Engine extends JPanel{
 
@@ -21,7 +23,7 @@ public class Engine extends JPanel{
         this.world = world;
 
         this.loadComponents();
-        this.addEntityTick();
+        this.configureEntity();
 
         this.revalidate();
         this.repaint();
@@ -29,6 +31,10 @@ public class Engine extends JPanel{
        this.tickGeneratorThread = new Thread(tickGenerator);
 
        this.tickGeneratorThread.start();
+    }
+
+    public Context getContext(Rectangle rectangle){
+        return new Context(this.world.getComponents(), rectangle);
     }
 
     private void loadComponents(){
@@ -40,8 +46,12 @@ public class Engine extends JPanel{
         }
     }
 
-    private void addEntityTick(){
+    private void configureEntity(){
         Collection<TickListener> tickListeners = world.getTickListeners();
+        //Set Engine for all Entity
+        for(TickListener tickListener : tickListeners){
+            tickListener.setEngine(this);
+        }
         this.tickGenerator.addAllTickListeners(tickListeners);
     }
 }
