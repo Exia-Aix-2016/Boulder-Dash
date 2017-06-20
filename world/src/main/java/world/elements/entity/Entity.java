@@ -8,9 +8,11 @@ import java.awt.*;
 
 public abstract class Entity extends Elements{
 
+    public State state;
+
     Entity(Position position, Dimension dimension, String sprite, Permeability permeability){
         super(position, dimension, sprite, permeability);
-        State state = new State();
+        state = new State();
     }
 
 }

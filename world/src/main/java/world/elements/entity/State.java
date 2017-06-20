@@ -16,4 +16,8 @@ public class State {
     public State getLastSate (){
         return lastSate;
     }
+
+    public void setLastSate(Entity entity){
+        this.lastSate = entity.state;
+    }
 }
