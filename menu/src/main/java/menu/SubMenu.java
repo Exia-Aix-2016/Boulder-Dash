@@ -7,17 +7,20 @@ abstract class SubMenu extends JPanel {
 
     protected IMenuAction menu;
 
+    protected GridLayout layout;
+
     SubMenu(int rows, IMenuAction menu){
         this.menu = menu;
 
         this.setOpaque(false);
 
-        GridLayout layout = new GridLayout();
-        layout.setHgap(20);
-        layout.setVgap(20);
-        layout.setColumns(1);
-        layout.setRows(rows);
+        this.layout = new GridLayout();
+        this.layout.setHgap(20);
+        this.layout.setVgap(20);
+        this.layout.setColumns(1);
+        this.layout.setRows(rows);
 
-        this.setLayout(layout);
+        this.setLayout(this.layout);
     }
 }
+
