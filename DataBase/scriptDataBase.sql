@@ -75,6 +75,7 @@ INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('DIRT');
 INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('MONSTER');
 INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('ROCK');
 INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('WALL');
+INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('EXIT');
 #------------------------------------------------------------
 #                          Stock routines
 #------------------------------------------------------------
