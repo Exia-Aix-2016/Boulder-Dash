@@ -8,11 +8,10 @@ import java.awt.*;
 
 public class Character extends Entity implements IControllable{
 
-    private static String SPRITE = "";
+    private static String SPRITE = "ressources\\Sprites\\Character\\Character_waiting.png";
     private static Permeability PERMEABILITY = Permeability.PERMEABLE;
     public Character(Position position, Dimension dimension) {
         super(position, dimension, SPRITE, PERMEABILITY);
-        this.setBackground(Color.RED);
     }
 
     @Override
