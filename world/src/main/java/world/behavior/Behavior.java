@@ -4,10 +4,10 @@ import world.elements.entity.IMovement;
 
 public abstract class Behavior{
 
-    protected IMovement elements;
+    protected IMovement element;
 
-    Behavior(IMovement elements){
-        this.elements = elements;
+    Behavior(IMovement element){
+        this.element = element;
     }
 
     public abstract void execute();
