@@ -1,16 +1,17 @@
 package engine;
 
+import world.IComponent;
+import world.IEntity;
 import world.IWorld;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Collection;
-import java.util.Optional;
 
-public class Engine extends JPanel{
+public class Engine extends JPanel implements IEngine{
 
     private IWorld world;
 
@@ -22,6 +23,9 @@ public class Engine extends JPanel{
 
     public Engine(){
         this.setLayout(null);
+        this.setFocusable(true);
+        this.requestFocusInWindow();
+
         this.tickGenerator = new TickGenerator();
 
 
@@ -51,22 +55,22 @@ public class Engine extends JPanel{
     }
 
     private void loadComponents(){
-        Collection<JComponent> components = world.getComponents();
+        Collection<IComponent> components = world.getComponents();
 
-        for (JComponent component: components){
-            component.setOpaque(false);
+        for (IComponent component: components){
             System.out.println(component);
-            this.add(component);
+            this.add((JComponent) component);
         }
     }
 
     private void configureEntity(){
-        Collection<TickListener> tickListeners = world.getTickListeners();
+        Collection<IEntity> entities = world.getEntities();
         //Set Engine for all Entity
-        for(TickListener tickListener : tickListeners){
-            ((IEngine)tickListener).setEngine(this);
+        for(IEntity entity : entities){
+            entity.setEngine(this);
+            this.tickGenerator.addTickListener(entity);
+            entity.loadBehaviors();
         }
-        this.tickGenerator.addAllTickListeners(tickListeners);
     }
 
 

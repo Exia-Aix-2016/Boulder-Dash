@@ -14,7 +14,17 @@ public class Diamond extends Entity {
     }
 
     @Override
-    public void tick() {
+    public void loadBehaviors() {
 
+    }
+
+    @Override
+    public void run() {
+        System.out.println("tick Diamond ");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

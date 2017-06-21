@@ -23,8 +23,6 @@ public class GameBoot extends JFrame implements ILaunch{
         this.setSize(new Dimension(800, 800));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
-
         this.setIconImage(icone);
 
         menu = new menu.Menu(mapDao, this);

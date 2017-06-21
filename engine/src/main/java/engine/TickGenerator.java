@@ -5,25 +5,26 @@ import java.util.Collection;
 
 public class TickGenerator implements Runnable{
 
+    private int missTick = 0;
+
     private Collection<TickListener> tickListeners = new ArrayList<>();
 
-    public synchronized void addTickListener(TickListener tickListener){
+    public void addTickListener(TickListener tickListener){
         tickListeners.add(tickListener);
     }
 
-    public synchronized void removeTickListener(TickListener tickListener){
+    public void removeTickListener(TickListener tickListener){
         tickListeners.remove(tickListener);
     }
 
-    public synchronized void addAllTickListeners(Collection<TickListener> tickListeners){
-        this.tickListeners.addAll(tickListeners);
+    public int getMissTick() {
+        return missTick;
     }
-
     private void fireTick(){
-        for (TickListener tickListener: tickListeners){
-            tickListener.tick();
+        for(TickListener listener : tickListeners) {
+            listener.tick();
+
         }
-        System.out.println("tick");
     }
 
     @Override

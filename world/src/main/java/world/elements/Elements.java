@@ -1,5 +1,7 @@
 package world.elements;
 
+import engine.IEngine;
+import world.IComponent;
 import world.Permeability;
 import world.Position;
 
@@ -13,16 +15,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.BufferUnderflowException;
 
-public abstract class Elements extends JComponent implements IContact{
+public abstract class Elements extends JComponent implements IComponent{
 
-    private Position position;
-    private String sprite;
-    private Permeability permeability;
+    protected IEngine engine;
+    protected String sprite;
+    protected Permeability permeability;
+    protected Position position;
 
     private BufferedImage image;
-
-    private String backgroudSprite;
-    private BufferedImage backgroud;
 
     public Elements(Position position, final Dimension dimension, final String sprite,  Permeability permeability){
         this.sprite = sprite;
@@ -38,8 +38,6 @@ public abstract class Elements extends JComponent implements IContact{
             this.image = ImageIO.read(new File(this.sprite));
         } catch (IOException ex) {
         }
-
-        this.setOpaque(false);
     }
 
     public Permeability getPermeability() {
@@ -69,10 +67,10 @@ public abstract class Elements extends JComponent implements IContact{
         g.fillRect(0, 0, rec.width, rec.height);
         g.drawImage(this.image, 0, 0, this.getWidth(), this.getHeight(), this);
 
-
-
     }
 
-
-
+    @Override
+    public void setEngine(IEngine engine) {
+        this.engine = engine;
+    }
 }
