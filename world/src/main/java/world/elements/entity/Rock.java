@@ -17,4 +17,9 @@ public class Rock extends Entity {
     public void tick() {
 
     }
+
+    @Override
+    public void loadBehaviors() {
+
+    }
 }

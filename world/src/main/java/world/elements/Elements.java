@@ -1,5 +1,7 @@
 package world.elements;
 
+import engine.IEngine;
+import world.IComponent;
 import world.Permeability;
 import world.Position;
 
@@ -13,11 +15,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.BufferUnderflowException;
 
-public abstract class Elements extends JComponent implements IContact{
+public abstract class Elements extends JComponent implements IComponent{
 
-    private Position position;
-    private String sprite;
-    private Permeability permeability;
+    protected IEngine engine;
 
     private BufferedImage image;
 
@@ -66,6 +66,8 @@ public abstract class Elements extends JComponent implements IContact{
 
     }
 
-
-
+    @Override
+    public void setEngine(IEngine engine) {
+        this.engine = engine;
+    }
 }

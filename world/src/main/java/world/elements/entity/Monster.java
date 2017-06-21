@@ -16,4 +16,9 @@ public class Monster extends Entity {
     public void tick() {
 
     }
+
+    @Override
+    public void loadBehaviors() {
+
+    }
 }

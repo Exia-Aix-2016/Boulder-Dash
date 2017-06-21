@@ -1,11 +1,9 @@
 package world;
 
-import engine.TickListener;
 import world.elements.block.Block;
-import world.elements.entity.Entity;
 import world.elements.entity.Character;
+import world.elements.entity.Entity;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -50,8 +48,11 @@ public class World implements ICreateWorld, IWorld {
         return blocks;
     }
 
-    public ArrayList<Entity> getEntities() {
-        return entities;
+    public ArrayList<IEntity> getEntities() {
+        ArrayList<IEntity> r = new ArrayList<>();
+        r.addAll(entities);
+        r.add(character);
+        return r;
     }
 
     public Character getCharacter() {
@@ -91,22 +92,13 @@ public class World implements ICreateWorld, IWorld {
     }
 
     @Override
-    public Collection<JComponent> getComponents() {
-        Collection<JComponent> components = new ArrayList<>();
+    public Collection<IComponent> getComponents() {
+        Collection<IComponent> components = new ArrayList<>();
         components.addAll(blocks);
         components.addAll(entities);
         if (character != null){
             components.add(character);
         }
         return components;
-    }
-
-    @Override
-    public Collection<TickListener> getTickListeners() {
-        Collection<TickListener> tickListeners = new ArrayList<>();
-        tickListeners.addAll(this.entities);
-        tickListeners.add(this.character);
-
-        return tickListeners;
     }
 }
