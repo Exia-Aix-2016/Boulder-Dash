@@ -27,6 +27,7 @@ public class Engine extends JPanel implements IEngine{
         this.requestFocusInWindow();
 
         this.tickGenerator = new TickGenerator();
+        
 
 
     }
