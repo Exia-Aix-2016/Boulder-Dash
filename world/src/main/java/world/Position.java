@@ -1,5 +1,11 @@
 package world;
 
+/**
+ * Position
+ * class to define the x and y position of an element on the window's graphic
+ *@see world.elements.Elements
+ * */
+
 public class Position {
     private int x;
     private int y;

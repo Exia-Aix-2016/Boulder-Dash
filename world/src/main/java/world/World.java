@@ -9,6 +9,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+/**
+ * World
+ * object were are stocked every informations needed to diplay a world on the window
+ * @see ICreateWorld
+ * @see world.IWorld
+ * */
+
 public class World implements ICreateWorld, IWorld {
     private String name;
     private Dimension dimension;
@@ -20,6 +27,12 @@ public class World implements ICreateWorld, IWorld {
     private Character character;
 
     private int timeRemaining;
+
+    /**
+     * World
+     * The constructor of the class, called to creat a new world. Composed mainly of two arrayList, which contain the elements of the world
+     * @see Dimension
+     * */
 
     public World(String name, Dimension dimension, int diamonds_left, int timeRemaining){
         this.name = name;
@@ -47,6 +60,12 @@ public class World implements ICreateWorld, IWorld {
     public ArrayList<Block> getBlocks() {
         return blocks;
     }
+
+    /**
+     * getEntitties
+     * Needed for get the entities which compose the world
+     * @return  IEntity
+     * */
 
     public ArrayList<IEntity> getEntities() {
         ArrayList<IEntity> r = new ArrayList<>();

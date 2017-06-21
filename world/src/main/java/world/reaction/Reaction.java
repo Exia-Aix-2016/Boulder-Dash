@@ -2,6 +2,14 @@ package world.reaction;
 
 import world.elements.IAction;
 
+/**
+ * Abstract class Reaction
+ *
+ * TODO
+ *
+ * @see IAction
+ * */
+
 public abstract class Reaction <From extends IAction, To extends IAction> {
 
     protected To to;

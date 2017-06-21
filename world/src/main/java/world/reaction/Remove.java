@@ -3,6 +3,16 @@ package world.reaction;
 import world.elements.IAction;
 import world.elements.entity.IMovement;
 
+/**
+ * class Remove
+ *
+ * TODO
+ *
+ * @see Reaction
+ * @see IMovement
+ * @see IAction
+ * */
+
 public class Remove extends Reaction<IMovement, IAction> {
 
     private int delay;

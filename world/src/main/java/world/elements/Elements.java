@@ -15,6 +15,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Abstract class Elements
+ * 
+ * */
 public abstract class Elements extends JComponent implements IComponent, IAction {
 
     protected IEngine engine;
