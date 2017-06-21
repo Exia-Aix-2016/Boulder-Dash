@@ -24,6 +24,7 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
     Entity(Position position, Dimension dimension, String sprite, Permeability permeability){
         super(position, dimension, sprite, permeability);
          stateManager = new StateManager();
+         stateManager.pushState(StateType.WAITING);
     }
 
     protected Optional<IAction> getContext(Rectangle rec){
@@ -90,6 +91,7 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
                 this.stateManager.setBlockState(false);
             }
         }
+        this.stateManager.tickStateManager();
     }
 
     protected void executeBehaviors(){

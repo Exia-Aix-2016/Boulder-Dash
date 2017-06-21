@@ -17,7 +17,9 @@ public class Character extends Entity{
 
     @Override
     public void run() {
-        this.stateManager.pushState(StateType.WAITING);
+        super.run();
+        //System.out.println(this.stateManager.getCurrentState());
+       /* this.stateManager.pushState(StateType.WAITING);
         System.out.println("tick Character ");
 
 
@@ -26,7 +28,7 @@ public class Character extends Entity{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //stateManager.tickStateManager();
+        //stateManager.tickStateManager();*/
 
     }
 

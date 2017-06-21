@@ -9,14 +9,29 @@ public class StateManager{
     private static final int SIZE_STACK = 5;
     private Stack<State> stateStack;
 
-    private StateType requestState;
+    private StateType requestState = null;
 
     public StateManager(){
         stateStack = new Stack<>();
         stateStack.setSize(SIZE_STACK);
     }
     public void pushState(StateType stateType){
-        stateStack.push(new State(stateType, false));
+        this.requestState = stateType;
+        if (this.getCurrentState() == null){
+            this.setRequestedState();
+        }
+    }
+
+    private void setRequestedState(){
+        stateStack.push(new State(requestState, false));
+        System.out.println(this.getCurrentState());
+        this.requestState = null;
+    }
+
+    private void refreshState(){
+        if (requestState != null && requestState != this.getCurrentState().getStateType()){
+            this.setRequestedState();
+        }
     }
 
 
@@ -41,6 +56,7 @@ public class StateManager{
 
 
     public void tickStateManager(){
+        this.refreshState();
         this.getCurrentState().incrementTick();
     }
 }
