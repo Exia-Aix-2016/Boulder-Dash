@@ -2,6 +2,7 @@ package world.elements.entity;
 
 import world.Position;
 import world.Permeability;
+import world.behavior.MonsterMove;
 
 import java.awt.*;
 
@@ -16,10 +17,12 @@ public class Monster extends Entity {
 
     @Override
     public void loadBehaviors() {
+        this.behaviors.add(new MonsterMove(this));
 
     }
     @Override
     public void run() {
+        super.run();
 
     }
 }

@@ -8,4 +8,6 @@ public interface IMovement extends IAction {
     void goUp();
     void goDown();
     void goRest();
+
+    StateManager getStateManager();
 }
