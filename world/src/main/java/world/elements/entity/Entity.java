@@ -81,29 +81,31 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
             this.thread.start();
         }
     }
-
     @Override
     public void goUp() {
-
+        this.stateManager.pushState(StateType.UP);
     }
 
     @Override
     public void goDown() {
+        this.stateManager.pushState(StateType.DOWN);
 
     }
 
     @Override
     public void goLeft() {
+        this.stateManager.pushState(StateType.LEFT);
 
     }
 
     @Override
     public void goRight() {
-
+        this.stateManager.pushState(StateType.RIGHT);
     }
 
     @Override
     public void goRest() {
+        this.stateManager.pushState(StateType.WAITING);
 
     }
 }

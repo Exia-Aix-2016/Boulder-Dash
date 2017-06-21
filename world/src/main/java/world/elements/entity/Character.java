@@ -17,9 +17,10 @@ public class Character extends Entity{
 
     @Override
     public void run() {
+        this.stateManager.pushState(StateType.WAITING);
         System.out.println("tick Character ");
-        //this.state.setStateType(StateType.DOWN);
-        //System.out.println(this.getForwardElement());
+        
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
