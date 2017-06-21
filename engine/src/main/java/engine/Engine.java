@@ -30,11 +30,10 @@ public class Engine extends JPanel{
     public void loadWorld(IWorld world){
         this.world = world;
 
-
+        this.setBackground(Color.black);
+        
         this.loadComponents();
         this.configureEntity();
-
-
         this.revalidate();
 
         this.repaint();
@@ -55,6 +54,7 @@ public class Engine extends JPanel{
         Collection<JComponent> components = world.getComponents();
 
         for (JComponent component: components){
+            component.setOpaque(false);
             System.out.println(component);
             this.add(component);
         }

@@ -6,10 +6,8 @@ import engine.Engine;
 import world.World;
 import worldloader.WorldLoader;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class GameBoot extends JFrame implements ILaunch{
 
@@ -48,25 +46,10 @@ public class GameBoot extends JFrame implements ILaunch{
         try {
             World world = WorldLoader.getMap(worldName, mapDao, this.getSize());
             System.out.println(world);
-
             engine.loadWorld(world);
             this.remove(menu);
             this.add(engine);
             this.revalidate();
-
-            JLabel backgroundDirt;
-            try {
-                backgroundDirt = new JLabel(new ImageIcon(ImageIO.read(this.getClass().getResource("backgroundDirt.jpg"))));
-
-               // this.setContentPane(backgroundDirt);
-
-            } catch (IOException e) {
-                System.out.println("tqejfsjgsidgsiogsoighdihohood");
-                e.printStackTrace();
-            }
-
-
-
             this.repaint();
         } catch (Exception e){
             e.printStackTrace();
