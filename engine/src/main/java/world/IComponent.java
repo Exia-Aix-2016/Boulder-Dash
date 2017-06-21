@@ -1,10 +1,10 @@
 package world;
 
-import engine.Engine;
+import engine.IEngine;
 
 import java.awt.*;
 
 public interface IComponent {
-    void setEngine(Engine engine);
+    void setEngine(IEngine engine);
     Rectangle getBounds();
 }

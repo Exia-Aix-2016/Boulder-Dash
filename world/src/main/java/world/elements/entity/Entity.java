@@ -1,25 +1,27 @@
 package world.elements.entity;
 
 import engine.Context;
-import engine.Engine;
 import world.IComponent;
 import world.IEntity;
 import world.Permeability;
 import world.Position;
-import world.behavior.IDisplacementBehavior;
+import world.behavior.IBehavior;
+import world.behavior.IBehaviorControl;
 import world.elements.Elements;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Optional;
 
-public abstract class Entity extends Elements implements IEntity, IDisplacementBehavior {
+public abstract class Entity extends Elements implements IEntity, IBehavior {
+
     protected StateManager stateManager;
+    protected Collection<IBehaviorControl> behaviors = new ArrayList<>();
 
     Entity(Position position, Dimension dimension, String sprite, Permeability permeability){
         super(position, dimension, sprite, permeability);
          stateManager = new StateManager();
-
-
     }
 
     protected Optional<IComponent> getContext(Rectangle rec){
@@ -67,5 +69,10 @@ public abstract class Entity extends Elements implements IEntity, IDisplacementB
     @Override
     public StateManager getStateManager() {
         return stateManager;
+    }
+
+    @Override
+    public void run() {
+
     }
 }

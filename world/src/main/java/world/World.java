@@ -51,6 +51,7 @@ public class World implements ICreateWorld, IWorld {
     public ArrayList<IEntity> getEntities() {
         ArrayList<IEntity> r = new ArrayList<>();
         r.addAll(entities);
+        r.add(character);
         return r;
     }
 

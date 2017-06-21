@@ -1,12 +1,13 @@
 package world.elements.entity;
 
-import world.IControllable;
 import world.Permeability;
 import world.Position;
+import world.behavior.IBehavior;
+import world.behavior.KeyboardControl;
 
 import java.awt.*;
 
-public class Character extends Entity implements IControllable{
+public class Character extends Entity implements IBehavior{
 
     private static String SPRITE = "";
     private static Permeability PERMEABILITY = Permeability.PERMEABLE;
@@ -17,36 +18,18 @@ public class Character extends Entity implements IControllable{
 
     @Override
     public void tick() {
+        System.out.println("tick Character");
         //this.state.setStateType(StateType.DOWN);
-        System.out.println(this.getForwardElement());
+        //System.out.println(this.getForwardElement());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void goLeft() {
-
-        this.stateManager.pushState(StateType.LEFT);
-
-    }
-
-    @Override
-    public void goRight() {
-        this.stateManager.pushState(StateType.RIGHT);
-
-    }
-
-    @Override
-    public void goUp() {
-        this.stateManager.pushState(StateType.UP);
-    }
-
-    @Override
-    public void goDown() {
-        this.stateManager.pushState(StateType.DOWN);
-    }
-
-    @Override
-    public void goRest() {
-        this.stateManager.pushState(StateType.WAITING);
-
+    public void loadBehaviors() {
+        this.behaviors.add(new KeyboardControl(this, this.engine));
     }
 }

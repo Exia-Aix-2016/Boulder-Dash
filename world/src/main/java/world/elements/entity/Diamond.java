@@ -16,6 +16,11 @@ public class Diamond extends Entity {
 
     @Override
     public void tick() {
+        System.out.println("tick Diamond");
+    }
+
+    @Override
+    public void loadBehaviors() {
 
     }
 }

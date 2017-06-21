@@ -6,9 +6,11 @@ import world.IWorld;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Collection;
 
-public class Engine extends JPanel{
+public class Engine extends JPanel implements IEngine{
 
     IWorld world;
 
@@ -17,6 +19,9 @@ public class Engine extends JPanel{
 
     public Engine(){
         this.setLayout(null);
+        this.setFocusable(true);
+        this.requestFocusInWindow();
+
         this.tickGenerator = new TickGenerator();
     }
 
@@ -53,6 +58,7 @@ public class Engine extends JPanel{
         for(IEntity entity : entities){
             entity.setEngine(this);
             this.tickGenerator.addTickListener(entity);
+            entity.loadBehaviors();
         }
     }
 }

@@ -1,17 +1,16 @@
 package world.elements;
 
-import engine.Engine;
+import engine.IEngine;
 import world.IComponent;
 import world.Permeability;
 import world.Position;
-import world.behavior.IBehavior;
 
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class Elements extends JComponent implements IBehavior, IComponent{
+public abstract class Elements extends JComponent implements IComponent{
 
-    protected Engine engine;
+    protected IEngine engine;
 
 
     protected Position position;
@@ -56,12 +55,7 @@ public abstract class Elements extends JComponent implements IBehavior, ICompone
     }
 
     @Override
-    public void setEngine(Engine engine) {
+    public void setEngine(IEngine engine) {
         this.engine = engine;
-    }
-
-    @Override
-    public void destroy() {
-
     }
 }

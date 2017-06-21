@@ -1,6 +1,6 @@
 package world.behavior;
 
-public abstract class Behavior {
+public abstract class Behavior implements IBehaviorControl{
 
     protected IBehavior elements;
 
