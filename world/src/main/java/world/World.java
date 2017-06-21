@@ -60,6 +60,22 @@ public class World implements ICreateWorld, IWorld {
     public Dimension getDimension() {
         return dimension;
     }
+
+    @Override
+    public void removeEntity(IComponent element) {
+        this.entities.remove(element);
+    }
+
+    @Override
+    public void removeBlock(IComponent element) {
+        this.blocks.remove(element);
+    }
+
+    @Override
+    public void removeCharacter(IComponent element) {
+        this.character = null;
+    }
+
     /**
      * TODO
      * */

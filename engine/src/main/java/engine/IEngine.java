@@ -1,5 +1,8 @@
 package engine;
 
+import world.IComponent;
+
+import javax.xml.bind.Element;
 import java.awt.*;
 import java.awt.event.KeyListener;
 
@@ -16,4 +19,10 @@ public interface IEngine {
      * TODO
      * */
     Context getContext(Rectangle rectangle);
+
+    void removeEntity(IComponent element);
+
+    void removeBlock(IComponent element);
+
+    void removeCharacter(IComponent element);
 }

@@ -26,6 +26,6 @@ public class Remove extends Reaction<IMovement, IAction> {
 
     @Override
     protected void execute() {
-
+        this.to.destroy();
     }
 }

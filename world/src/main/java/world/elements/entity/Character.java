@@ -37,5 +37,8 @@ public class Character extends Entity{
         this.behaviors.add(new ArrowKeyControl(this, this.engine));
     }
 
-
+    @Override
+    public void destroy() {
+        this.engine.removeCharacter(this);
+    }
 }

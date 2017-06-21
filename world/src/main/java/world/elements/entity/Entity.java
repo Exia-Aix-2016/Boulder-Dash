@@ -137,4 +137,9 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
         this.stateManager.pushState(StateType.WAITING);
 
     }
+
+    @Override
+    public void destroy() {
+        this.engine.removeEntity(this);
+    }
 }

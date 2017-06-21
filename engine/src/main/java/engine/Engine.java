@@ -54,6 +54,31 @@ public class Engine extends JPanel implements IEngine{
     public Context getContext(Rectangle rectangle){
         return new Context(this.world.getComponents(), rectangle);
     }
+
+    @Override
+    public void removeEntity(IComponent element) {
+        this.remove((JComponent) element);
+        this.revalidate();
+        this.repaint();
+        this.world.removeEntity(element);
+    }
+
+    @Override
+    public void removeBlock(IComponent element) {
+        this.remove((JComponent) element);
+        this.revalidate();
+        this.repaint();
+        this.world.removeBlock(element);
+    }
+
+    @Override
+    public void removeCharacter(IComponent element) {
+        this.remove((JComponent) element);
+        this.revalidate();
+        this.repaint();
+        this.world.removeCharacter(element);
+    }
+
     /**
      * TODO
      * */
@@ -63,6 +88,7 @@ public class Engine extends JPanel implements IEngine{
         for (IComponent component: components){
             System.out.println(component);
             this.add((JComponent) component);
+            component.setEngine(this);
         }
     }
     /**
@@ -72,7 +98,6 @@ public class Engine extends JPanel implements IEngine{
         Collection<IEntity> entities = world.getEntities();
         //Set Engine for all Entity
         for(IEntity entity : entities){
-            entity.setEngine(this);
             this.tickGenerator.addTickListener(entity);
             entity.loadBehaviors();
         }

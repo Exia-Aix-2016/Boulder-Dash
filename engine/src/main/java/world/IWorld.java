@@ -23,4 +23,10 @@ public interface IWorld {
      * TODO
      * */
     Dimension getDimension();
+
+    void removeEntity(IComponent element);
+
+    void removeBlock(IComponent element);
+
+    void removeCharacter(IComponent element);
 }

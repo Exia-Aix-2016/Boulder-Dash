@@ -108,11 +108,6 @@ public abstract class Elements extends JComponent implements IComponent, IAction
     }
 
     @Override
-    public void destroy() {
-
-    }
-
-    @Override
     public void explode() {
 
     }
