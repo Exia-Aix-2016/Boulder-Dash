@@ -3,6 +3,10 @@ package engine;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * TODO
+ * @version 1.0
+ * */
 public class TickGenerator implements Runnable{
 
     private int missTick = 0;
@@ -27,6 +31,9 @@ public class TickGenerator implements Runnable{
         }
     }
 
+    /**
+     * @see Runnable
+     * */
     @Override
     public void run() {
         while (true){

@@ -10,14 +10,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-
 /**
- * Abstract class Elements
- * 
+ * TODO
  * */
 public abstract class Elements extends JComponent implements IComponent, IAction {
 
@@ -29,7 +26,9 @@ public abstract class Elements extends JComponent implements IComponent, IAction
     private BufferedImage image;
 
     protected Collection<Reaction> reactions = new ArrayList<>();
-
+    /**
+     * TODO
+     * */
     public Elements(Position position, final Dimension dimension, final String sprite,  Permeability permeability){
         this.sprite = sprite;
         this.permeability = permeability;
@@ -45,28 +44,36 @@ public abstract class Elements extends JComponent implements IComponent, IAction
         } catch (IOException ex) {
         }
     }
-
+    /**
+     * TODO
+     * */
     public Permeability getPermeability() {
         return permeability;
     }
-
+    /**
+     * TODO
+     * */
     public Position getPosition() {
         return position;
     }
-
+    /**
+     * TODO
+     * */
     public void setPosition(Position position) {
         this.position = position;
         this.updateBounds();
     }
 
-
+    /**
+     * TODO
+     * */
     private void updateBounds(){
         Rectangle bounds = new Rectangle(this.position.getX(), this.position.getY(), this.getSize().width, this.getSize().height);
         this.setBounds(bounds);
     }
 
     @Override
-    public boolean isReaction(Class<? extends IAction> from) {
+    public boolean isReaction(Object from) {
         for (Reaction reaction: this.reactions){
             if (reaction.isReaction(from)){
                 return true;
@@ -76,7 +83,7 @@ public abstract class Elements extends JComponent implements IComponent, IAction
     }
 
     @Override
-    public void performReaction(Class<? extends IAction> from, int ticks) {
+    public void performReaction(Object from, int ticks) {
         for (Reaction reaction: this.reactions){
             if (reaction.isReaction(from)){
                 reaction.perform(from, ticks);

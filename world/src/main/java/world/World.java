@@ -43,11 +43,15 @@ public class World implements ICreateWorld, IWorld {
         this.entities = new ArrayList<>();
         this.blocks = new ArrayList<>();
     }
-
+    /**
+     * TODO
+     * */
     public String getName() {
         return name;
     }
-
+    /**
+     * TODO
+     * */
     public int getTimeRemaining() {
         return timeRemaining;
     }
@@ -56,7 +60,9 @@ public class World implements ICreateWorld, IWorld {
     public Dimension getDimension() {
         return dimension;
     }
-
+    /**
+     * TODO
+     * */
     public ArrayList<Block> getBlocks() {
         return blocks;
     }
@@ -73,19 +79,27 @@ public class World implements ICreateWorld, IWorld {
         r.add(character);
         return r;
     }
-
+    /**
+     * TODO
+     * */
     public Character getCharacter() {
         return character;
     }
-
+    /**
+     * TODO
+     * */
     public Date getStartTime() {
         return startTime;
     }
-
+    /**
+     * TODO
+     * */
     public int getDiamonds_left() {
         return diamonds_left;
     }
-
+    /**
+     * TODO
+     * */
     public int getScore() {
         return score;
     }

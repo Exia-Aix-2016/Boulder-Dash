@@ -8,15 +8,27 @@ import worldloader.WorldLoader;
 
 import javax.swing.*;
 import java.awt.*;
-
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+/**
+ * TODO
+ * */
 public class GameBoot extends JFrame implements ILaunch{
 
     private IMap  mapDao = new MapDAO();
     private menu.Menu menu;
     private Engine engine;
-
+    /**
+     * TODO
+     * */
     private Image icone = Toolkit.getDefaultToolkit().getImage("world\\src\\main\\resources\\world\\elements\\entity\\Character_waiting.png");
 
+    KeyboardFocusManager keyboardFocusManager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+
+    private JPanel panelKeyEvent;
+    /**
+     * TODO
+     * */
     GameBoot(){
 
         this.setTitle("BoulderDash");
@@ -30,14 +42,36 @@ public class GameBoot extends JFrame implements ILaunch{
 
         this.add(menu);
 
+        this.panelKeyEvent = this.menu;
 
+        GameBoot self = this;
+        this.keyboardFocusManager.addKeyEventDispatcher((KeyEvent e) -> {
+                for (KeyListener keyListener: self.panelKeyEvent.getKeyListeners()) {
+                    switch (e.getID()) {
+                        case KeyEvent.KEY_PRESSED:
+                            keyListener.keyPressed(e);
+                            break;
+                        case KeyEvent.KEY_RELEASED:
+                            keyListener.keyReleased(e);
+                            break;
+                        case KeyEvent.KEY_TYPED:
+                            keyListener.keyTyped(e);
+                            break;
+                    }
+                }
+                return true;
+            });
     }
-
+    /**
+     * TODO
+     * */
     void boot(){
         this.setVisible(true);
         engine.setSize(this.getSize());
     }
-
+    /**
+     * TODO
+     * */
     @Override
     public void launch(String worldName) {
         System.out.println("Launching world: " + worldName);
@@ -49,6 +83,7 @@ public class GameBoot extends JFrame implements ILaunch{
             this.add(engine);
             this.revalidate();
             this.repaint();
+            this.panelKeyEvent = this.engine;
         } catch (Exception e){
             e.printStackTrace();
         }

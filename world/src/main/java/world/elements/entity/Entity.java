@@ -7,6 +7,7 @@ import world.Permeability;
 import world.Position;
 import world.behavior.Behavior;
 import world.elements.Elements;
+import world.elements.IAction;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -25,19 +26,19 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
          stateManager = new StateManager();
     }
 
-    protected Optional<IComponent> getContext(Rectangle rec){
+    protected Optional<IAction> getContext(Rectangle rec){
         Context context = this.engine.getContext(rec);
 
         Optional<IComponent> component = context.get();
 
         if (component.isPresent()){
-            return Optional.of(component.get());
+            return Optional.of((IAction) component.get());
         }
 
         return Optional.empty();
     }
 
-    protected Optional<IComponent> getForwardElement(){
+    protected Optional<IAction> getForwardElement(){
 
         switch (this.stateManager.getCurrentState().getStateType()){
             case UP:
@@ -71,6 +72,32 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
         return stateManager;
     }
 
+    public void run(){
+        State currentState = this.stateManager.getCurrentState();
+        if (!currentState.isMoving()){
+            this.executeBehaviors();
+        }
+        if (currentState.getStateType() != StateType.WAITING){
+            Optional<IAction> forwardEl = this.getForwardElement();
+            if (forwardEl.isPresent()){
+                IAction el = forwardEl.get();
+                if (el.isReaction(this)){
+                    el.performReaction(this, currentState.getTicks());
+                } else {
+                    this.stateManager.setBlockState(true);
+                }
+            } else {
+                this.stateManager.setBlockState(false);
+            }
+        }
+    }
+
+    protected void executeBehaviors(){
+        for (Behavior behavior: behaviors){
+            behavior.execute();
+        }
+    }
+
     @Override
     public void tick() {
         if (this.thread == null) {
@@ -81,29 +108,31 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
             this.thread.start();
         }
     }
-
     @Override
     public void goUp() {
-
+        this.stateManager.pushState(StateType.UP);
     }
 
     @Override
     public void goDown() {
+        this.stateManager.pushState(StateType.DOWN);
 
     }
 
     @Override
     public void goLeft() {
+        this.stateManager.pushState(StateType.LEFT);
 
     }
 
     @Override
     public void goRight() {
-
+        this.stateManager.pushState(StateType.RIGHT);
     }
 
     @Override
     public void goRest() {
+        this.stateManager.pushState(StateType.WAITING);
 
     }
 }

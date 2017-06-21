@@ -1,8 +1,22 @@
 package world.elements;
-
+/**
+ * TODO
+ * */
 public interface IAction {
+    /**
+     * TODO
+     * */
     void destroy();
+    /**
+     * TODO
+     * */
     void explode();
-    boolean isReaction(Class<? extends IAction> from);
-    void performReaction(Class<? extends IAction> from, int ticks);
+    /**
+     * TODO
+     * */
+    boolean isReaction(Object from);
+    /**
+     * TODO
+     * */
+    void performReaction(Object from, int ticks);
 }

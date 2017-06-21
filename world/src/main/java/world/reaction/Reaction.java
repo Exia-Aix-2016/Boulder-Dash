@@ -14,21 +14,29 @@ public abstract class Reaction <From extends IAction, To extends IAction> {
 
     protected To to;
     private Class<? extends From> fromClass;
-
+    /**
+     * TODO
+     * */
     Reaction(To to, Class<? extends From> fromClass){
         this.to = to;
         this.fromClass = fromClass;
     }
-
-    public boolean isReaction(Class<? extends IAction> from){
+    /**
+     * TODO
+     * */
+    public boolean isReaction(Object from){
         return fromClass.isInstance(from);
     }
-
-    public void perform(Class<? extends IAction> from, int ticks){
+    /**
+     * TODO
+     * */
+    public void perform(Object from, int ticks){
         if (isReaction(from)){
             this.execute();
         }
     }
-
+    /**
+     * TODO
+     * */
     protected abstract void execute();
 }

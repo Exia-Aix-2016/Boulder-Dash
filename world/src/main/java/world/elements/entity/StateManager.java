@@ -33,9 +33,10 @@ public class StateManager{
         return stateStack.get(index);
     }
 
-    public void setBlockState(){
-        stateStack.push(new State(this.getCurrentState().getStateType(), true));
-
+    public void setBlockState(boolean blocked){
+        if (!this.getCurrentState().isBlocked() == blocked){
+            stateStack.push(new State(this.getCurrentState().getStateType(), blocked));
+        }
     }
 
 

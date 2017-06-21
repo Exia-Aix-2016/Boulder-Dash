@@ -4,13 +4,14 @@ import world.IComponent;
 import world.IEntity;
 import world.IWorld;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Collection;
 
+/**
+ * TODO
+ * @version 1.0
+ * */
 public class Engine extends JPanel implements IEngine{
 
     private IWorld world;
@@ -28,10 +29,11 @@ public class Engine extends JPanel implements IEngine{
 
         this.tickGenerator = new TickGenerator();
 
-
-
     }
 
+    /**
+     * TODO
+     * */
     public void loadWorld(IWorld world){
         this.world = world;
 
@@ -42,18 +44,19 @@ public class Engine extends JPanel implements IEngine{
 
         this.repaint();
 
-
        this.tickGeneratorThread = new Thread(tickGenerator);
 
        this.tickGeneratorThread.start();
-
-
     }
-
+    /**
+     * TODO
+     * */
     public Context getContext(Rectangle rectangle){
         return new Context(this.world.getComponents(), rectangle);
     }
-
+    /**
+     * TODO
+     * */
     private void loadComponents(){
         Collection<IComponent> components = world.getComponents();
 
@@ -62,7 +65,9 @@ public class Engine extends JPanel implements IEngine{
             this.add((JComponent) component);
         }
     }
-
+    /**
+     * TODO
+     * */
     private void configureEntity(){
         Collection<IEntity> entities = world.getEntities();
         //Set Engine for all Entity
@@ -72,7 +77,4 @@ public class Engine extends JPanel implements IEngine{
             entity.loadBehaviors();
         }
     }
-
-
-
 }
