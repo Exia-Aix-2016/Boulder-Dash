@@ -15,7 +15,7 @@ public class GameBoot extends JFrame implements ILaunch{
     private menu.Menu menu;
     private Engine engine;
 
-    private Image icone = Toolkit.getDefaultToolkit().getImage("ressources\\Sprites\\Character\\Character_waiting.png");
+    private Image icone = Toolkit.getDefaultToolkit().getImage("world\\src\\main\\resources\\world\\elements\\entity\\Character_waiting.png");
 
     GameBoot(){
 
