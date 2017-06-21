@@ -27,7 +27,7 @@ public class Engine extends JPanel implements IEngine{
         this.requestFocusInWindow();
 
         this.tickGenerator = new TickGenerator();
-        
+
 
 
     }
@@ -36,7 +36,6 @@ public class Engine extends JPanel implements IEngine{
         this.world = world;
 
         this.setBackground(Color.black);
-        
         this.loadComponents();
         this.configureEntity();
         this.revalidate();

@@ -83,8 +83,8 @@ public abstract class Entity extends Elements implements IEntity, IBehavior {
         }
         if(!this.thread.isAlive()){
             this.thread = new Thread(this);
+            this.thread.start();
         }
-        this.thread.start();
 
     }
 
