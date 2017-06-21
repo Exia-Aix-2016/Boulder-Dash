@@ -1,8 +1,5 @@
 package world.elements.entity;
 
-import engine.Engine;
-import engine.TickListener;
-
 import java.util.Stack;
 
 /**

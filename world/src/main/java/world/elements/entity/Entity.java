@@ -4,9 +4,9 @@ import engine.Context;
 import engine.Engine;
 import engine.IEngine;
 import engine.TickListener;
-import world.IControllable;
 import world.Permeability;
 import world.Position;
+import world.behavior.IDisplacementBehavior;
 import world.elements.Elements;
 import world.elements.IContact;
 
@@ -14,7 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Optional;
 
-public abstract class Entity extends Elements implements TickListener, IEngine {
+public abstract class Entity extends Elements implements TickListener, IEngine, IDisplacementBehavior {
     protected Engine engine;
     protected StateManager stateManager;
 
@@ -71,5 +71,8 @@ public abstract class Entity extends Elements implements TickListener, IEngine {
         this.engine = engine;
     }
 
-
+    @Override
+    public StateManager getStateManager() {
+        return stateManager;
+    }
 }

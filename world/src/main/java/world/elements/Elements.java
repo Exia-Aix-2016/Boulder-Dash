@@ -2,11 +2,12 @@ package world.elements;
 
 import world.Permeability;
 import world.Position;
+import world.behavior.IBehavior;
 
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class Elements extends JComponent implements IContact{
+public abstract class Elements extends JComponent implements IContact, IBehavior{
 
     private Position position;
     private String sprite;
@@ -47,5 +48,10 @@ public abstract class Elements extends JComponent implements IContact{
         g.setColor(this.getBackground());
         Rectangle rec = this.getBounds();
         g.fillRect(0, 0, rec.width, rec.height);
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }
