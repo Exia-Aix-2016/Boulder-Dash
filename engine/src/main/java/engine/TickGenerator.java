@@ -5,6 +5,8 @@ import java.util.Collection;
 
 public class TickGenerator implements Runnable{
 
+    private int missTick = 0;
+
     private Collection<TickListener> tickListeners = new ArrayList<>();
 
     public void addTickListener(TickListener tickListener){
@@ -15,9 +17,13 @@ public class TickGenerator implements Runnable{
         tickListeners.remove(tickListener);
     }
 
+    public int getMissTick() {
+        return missTick;
+    }
     private void fireTick(){
-        for (TickListener tickListener: tickListeners){
-            tickListener.tick();
+        for(TickListener listener : tickListeners) {
+            listener.tick();
+
         }
     }
 

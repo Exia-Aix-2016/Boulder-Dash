@@ -12,13 +12,14 @@ public class Monster extends Entity {
         super(position, dimension, SPRITE, PERMEABILITY);
     }
 
-    @Override
-    public void tick() {
 
-    }
 
     @Override
     public void loadBehaviors() {
+
+    }
+    @Override
+    public void run() {
 
     }
 }

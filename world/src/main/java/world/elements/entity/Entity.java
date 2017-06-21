@@ -13,8 +13,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Random;
 
 public abstract class Entity extends Elements implements IEntity, IBehavior {
+
+
+
+    protected Thread thread = null;
 
     protected StateManager stateManager;
     protected Collection<IBehaviorControl> behaviors = new ArrayList<>();
@@ -72,7 +77,15 @@ public abstract class Entity extends Elements implements IEntity, IBehavior {
     }
 
     @Override
-    public void run() {
+    public void tick() {
+        if(this.thread == null){
+            this.thread = new Thread(this);
+        }
+        if(!this.thread.isAlive()){
+            this.thread = new Thread(this);
+        }
+        this.thread.start();
 
     }
+
 }
