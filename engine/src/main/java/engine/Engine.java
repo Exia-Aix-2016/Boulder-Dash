@@ -55,8 +55,8 @@ public class Engine extends JPanel implements IEngine{
         hud.setSize((int)this.getSize().getWidth(), 30);
         hud.setBackground(Color.YELLOW);
         hud.add(info);
-        hud.add(new Info("Diamond remaining", 100));
-        hud.add(new Info("Time", 1000));
+        hud.add(new Info("Diamond remaining", this.world.getDiamonds_left()));
+        hud.add(new Info("Time",this.world.getTimeRemaining()));
 
 
        this.tickGeneratorThread = new Thread(tickGenerator);
