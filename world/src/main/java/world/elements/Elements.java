@@ -4,18 +4,18 @@ import engine.IEngine;
 import world.IComponent;
 import world.Permeability;
 import world.Position;
+import world.reaction.Reaction;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.BufferUnderflowException;
+import java.util.ArrayList;
+import java.util.Collection;
 
-public abstract class Elements extends JComponent implements IComponent{
+public abstract class Elements extends JComponent implements IComponent, IAction {
 
     protected IEngine engine;
     protected String sprite;
@@ -23,6 +23,8 @@ public abstract class Elements extends JComponent implements IComponent{
     protected Position position;
 
     private BufferedImage image;
+
+    protected Collection<Reaction> reactions = new ArrayList<>();
 
     public Elements(Position position, final Dimension dimension, final String sprite,  Permeability permeability){
         this.sprite = sprite;
@@ -60,6 +62,26 @@ public abstract class Elements extends JComponent implements IComponent{
     }
 
     @Override
+    public boolean isReaction(Class<? extends IAction> from) {
+        for (Reaction reaction: this.reactions){
+            if (reaction.isReaction(from)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void performReaction(Class<? extends IAction> from, int ticks) {
+        for (Reaction reaction: this.reactions){
+            if (reaction.isReaction(from)){
+                reaction.perform(from, ticks);
+                break;
+            }
+        }
+    }
+
+    @Override
     public void paint(Graphics g) {
         super.paint(g);
         g.setColor(this.getBackground());
@@ -72,5 +94,15 @@ public abstract class Elements extends JComponent implements IComponent{
     @Override
     public void setEngine(IEngine engine) {
         this.engine = engine;
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+
+    @Override
+    public void explode() {
+
     }
 }

@@ -2,12 +2,11 @@ package world.elements.entity;
 
 import world.Permeability;
 import world.Position;
-import world.behavior.IBehavior;
-import world.behavior.KeyboardControl;
+import world.behavior.ArrowKeyControl;
 
 import java.awt.*;
 
-public class Character extends Entity implements IBehavior{
+public class Character extends Entity{
 
 
     private static String SPRITE = "ressources\\Sprites\\Character\\Character_waiting.png";
@@ -32,7 +31,7 @@ public class Character extends Entity implements IBehavior{
 
     @Override
     public void loadBehaviors() {
-        this.behaviors.add(new KeyboardControl(this, this.engine));
+        this.behaviors.add(new ArrowKeyControl(this, this.engine));
     }
 
 

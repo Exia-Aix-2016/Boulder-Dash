@@ -1,10 +1,14 @@
 package world.behavior;
 
-public abstract class Behavior implements IBehaviorControl{
+import world.elements.entity.IMovement;
 
-    protected IBehavior elements;
+public abstract class Behavior{
 
-    public Behavior(IBehavior elements){
+    protected IMovement elements;
+
+    Behavior(IMovement elements){
         this.elements = elements;
     }
+
+    public abstract void execute();
 }

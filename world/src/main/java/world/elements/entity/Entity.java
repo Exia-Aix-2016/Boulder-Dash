@@ -5,24 +5,20 @@ import world.IComponent;
 import world.IEntity;
 import world.Permeability;
 import world.Position;
-import world.behavior.IBehavior;
-import world.behavior.IBehaviorControl;
+import world.behavior.Behavior;
 import world.elements.Elements;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
-import java.util.Random;
 
-public abstract class Entity extends Elements implements IEntity, IBehavior {
-
-
+public abstract class Entity extends Elements implements IEntity, IMovement {
 
     protected Thread thread = null;
 
     protected StateManager stateManager;
-    protected Collection<IBehaviorControl> behaviors = new ArrayList<>();
+    protected Collection<Behavior> behaviors = new ArrayList<>();
 
     Entity(Position position, Dimension dimension, String sprite, Permeability permeability){
         super(position, dimension, sprite, permeability);
@@ -71,7 +67,6 @@ public abstract class Entity extends Elements implements IEntity, IBehavior {
         return rec;
     }
 
-    @Override
     public StateManager getStateManager() {
         return stateManager;
     }
@@ -85,7 +80,30 @@ public abstract class Entity extends Elements implements IEntity, IBehavior {
             this.thread = new Thread(this);
         }
         this.thread.start();
+    }
+
+    @Override
+    public void goUp() {
 
     }
 
+    @Override
+    public void goDown() {
+
+    }
+
+    @Override
+    public void goLeft() {
+
+    }
+
+    @Override
+    public void goRight() {
+
+    }
+
+    @Override
+    public void goRest() {
+
+    }
 }
