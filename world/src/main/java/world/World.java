@@ -8,7 +8,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-
+/**
+ * TODO
+ * */
 public class World implements ICreateWorld, IWorld {
     private String name;
     private Dimension dimension;
@@ -20,7 +22,9 @@ public class World implements ICreateWorld, IWorld {
     private Character character;
 
     private int timeRemaining;
-
+    /**
+     * TODO
+     * */
     public World(String name, Dimension dimension, int diamonds_left, int timeRemaining){
         this.name = name;
         this. dimension = dimension;
@@ -30,11 +34,15 @@ public class World implements ICreateWorld, IWorld {
         this.entities = new ArrayList<>();
         this.blocks = new ArrayList<>();
     }
-
+    /**
+     * TODO
+     * */
     public String getName() {
         return name;
     }
-
+    /**
+     * TODO
+     * */
     public int getTimeRemaining() {
         return timeRemaining;
     }
@@ -43,30 +51,42 @@ public class World implements ICreateWorld, IWorld {
     public Dimension getDimension() {
         return dimension;
     }
-
+    /**
+     * TODO
+     * */
     public ArrayList<Block> getBlocks() {
         return blocks;
     }
-
+    /**
+     * TODO
+     * */
     public ArrayList<IEntity> getEntities() {
         ArrayList<IEntity> r = new ArrayList<>();
         r.addAll(entities);
         r.add(character);
         return r;
     }
-
+    /**
+     * TODO
+     * */
     public Character getCharacter() {
         return character;
     }
-
+    /**
+     * TODO
+     * */
     public Date getStartTime() {
         return startTime;
     }
-
+    /**
+     * TODO
+     * */
     public int getDiamonds_left() {
         return diamonds_left;
     }
-
+    /**
+     * TODO
+     * */
     public int getScore() {
         return score;
     }
