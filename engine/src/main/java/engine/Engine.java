@@ -2,35 +2,49 @@ package engine;
 
 import world.IWorld;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Optional;
 
 public class Engine extends JPanel{
 
-    IWorld world;
+    private IWorld world;
 
-    TickGenerator tickGenerator;
-    Thread tickGeneratorThread;
+    private TickGenerator tickGenerator;
+    private Thread tickGeneratorThread;
+
+    private Image backgroundDirt;
+    private Graphics g;
 
     public Engine(){
         this.setLayout(null);
         this.tickGenerator = new TickGenerator();
+
+
     }
 
     public void loadWorld(IWorld world){
         this.world = world;
 
+
         this.loadComponents();
         this.configureEntity();
 
+
         this.revalidate();
+
         this.repaint();
+
 
        this.tickGeneratorThread = new Thread(tickGenerator);
 
        this.tickGeneratorThread.start();
+
+
     }
 
     public Context getContext(Rectangle rectangle){
@@ -54,4 +68,7 @@ public class Engine extends JPanel{
         }
         this.tickGenerator.addAllTickListeners(tickListeners);
     }
+
+
+
 }

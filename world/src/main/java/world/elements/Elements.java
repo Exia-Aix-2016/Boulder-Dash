@@ -3,14 +3,26 @@ package world.elements;
 import world.Permeability;
 import world.Position;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.BufferUnderflowException;
 
 public abstract class Elements extends JComponent implements IContact{
 
     private Position position;
     private String sprite;
     private Permeability permeability;
+
+    private BufferedImage image;
+
+    private String backgroudSprite;
+    private BufferedImage backgroud;
 
     public Elements(Position position, final Dimension dimension, final String sprite,  Permeability permeability){
         this.sprite = sprite;
@@ -21,6 +33,13 @@ public abstract class Elements extends JComponent implements IContact{
         this.setSize(dimension);
 
         this.updateBounds();
+
+        try {
+            this.image = ImageIO.read(new File(this.sprite));
+        } catch (IOException ex) {
+        }
+
+        this.setOpaque(false);
     }
 
     public Permeability getPermeability() {
@@ -36,6 +55,7 @@ public abstract class Elements extends JComponent implements IContact{
         this.updateBounds();
     }
 
+
     private void updateBounds(){
         Rectangle bounds = new Rectangle(this.position.getX(), this.position.getY(), this.getSize().width, this.getSize().height);
         this.setBounds(bounds);
@@ -47,5 +67,12 @@ public abstract class Elements extends JComponent implements IContact{
         g.setColor(this.getBackground());
         Rectangle rec = this.getBounds();
         g.fillRect(0, 0, rec.width, rec.height);
+        g.drawImage(this.image, 0, 0, this.getWidth(), this.getHeight(), this);
+
+
+
     }
+
+
+
 }

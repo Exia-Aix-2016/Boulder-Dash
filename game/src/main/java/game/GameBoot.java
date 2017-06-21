@@ -6,8 +6,10 @@ import engine.Engine;
 import world.World;
 import worldloader.WorldLoader;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class GameBoot extends JFrame implements ILaunch{
 
@@ -15,16 +17,24 @@ public class GameBoot extends JFrame implements ILaunch{
     private menu.Menu menu;
     private Engine engine;
 
+    private Image icone = Toolkit.getDefaultToolkit().getImage("ressources\\Sprites\\Character\\Character_waiting.png");
+
     GameBoot(){
 
         this.setTitle("BoulderDash");
         this.setSize(new Dimension(800, 800));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
+
+        this.setIconImage(icone);
+
         menu = new menu.Menu(mapDao, this);
         engine = new Engine();
 
         this.add(menu);
+
+
     }
 
     void boot(){
@@ -38,10 +48,16 @@ public class GameBoot extends JFrame implements ILaunch{
         try {
             World world = WorldLoader.getMap(worldName, mapDao, this.getSize());
             System.out.println(world);
+
             engine.loadWorld(world);
             this.remove(menu);
             this.add(engine);
             this.revalidate();
+
+   
+
+
+
             this.repaint();
         } catch (Exception e){
             e.printStackTrace();
