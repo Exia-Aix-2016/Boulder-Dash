@@ -1,5 +1,7 @@
 package world.elements;
 
+import engine.Engine;
+import world.IComponent;
 import world.Permeability;
 import world.Position;
 import world.behavior.IBehavior;
@@ -7,11 +9,14 @@ import world.behavior.IBehavior;
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class Elements extends JComponent implements IContact, IBehavior{
+public abstract class Elements extends JComponent implements IBehavior, IComponent{
 
-    private Position position;
-    private String sprite;
-    private Permeability permeability;
+    protected Engine engine;
+
+
+    protected Position position;
+    protected String sprite;
+    protected Permeability permeability;
 
     public Elements(Position position, final Dimension dimension, final String sprite,  Permeability permeability){
         this.sprite = sprite;
@@ -48,6 +53,11 @@ public abstract class Elements extends JComponent implements IContact, IBehavior
         g.setColor(this.getBackground());
         Rectangle rec = this.getBounds();
         g.fillRect(0, 0, rec.width, rec.height);
+    }
+
+    @Override
+    public void setEngine(Engine engine) {
+        this.engine = engine;
     }
 
     @Override

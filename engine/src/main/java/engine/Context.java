@@ -1,5 +1,7 @@
 package engine;
 
+import world.IComponent;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Collection;
@@ -13,7 +15,7 @@ import java.util.Optional;
 public class Context {
 
     private Rectangle rectangle;
-    private Collection<JComponent> worldComponents;
+    private Collection<IComponent> worldComponents;
 
 
     /**
@@ -21,7 +23,7 @@ public class Context {
      * @param worldComponents Collection(JComponent)
      * @param rectangle the cursor element to search in worldComponents
      * */
-    Context(Collection<JComponent> worldComponents, Rectangle rectangle){
+    Context(Collection<IComponent> worldComponents, Rectangle rectangle){
         this.rectangle = rectangle;
         this.worldComponents = worldComponents;
     }
@@ -33,9 +35,9 @@ public class Context {
      * @see Optional
      * @see Runnable
      * */
-    public Optional<JComponent> get(){
+    public Optional<IComponent> get(){
 
-        for(JComponent component : worldComponents){
+        for(IComponent component : worldComponents){
             if(rectangle.intersects(component.getBounds())){
                 return  Optional.of(component);
             }

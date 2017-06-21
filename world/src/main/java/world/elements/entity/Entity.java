@@ -2,20 +2,17 @@ package world.elements.entity;
 
 import engine.Context;
 import engine.Engine;
-import engine.IEngine;
-import engine.TickListener;
+import world.IComponent;
+import world.IEntity;
 import world.Permeability;
 import world.Position;
 import world.behavior.IDisplacementBehavior;
 import world.elements.Elements;
-import world.elements.IContact;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.Optional;
 
-public abstract class Entity extends Elements implements TickListener, IEngine, IDisplacementBehavior {
-    protected Engine engine;
+public abstract class Entity extends Elements implements IEntity, IDisplacementBehavior {
     protected StateManager stateManager;
 
     Entity(Position position, Dimension dimension, String sprite, Permeability permeability){
@@ -25,19 +22,19 @@ public abstract class Entity extends Elements implements TickListener, IEngine, 
 
     }
 
-    protected Optional<IContact> getContext(Rectangle rec){
+    protected Optional<IComponent> getContext(Rectangle rec){
         Context context = this.engine.getContext(rec);
 
-        Optional<JComponent> component = context.get();
+        Optional<IComponent> component = context.get();
 
         if (component.isPresent()){
-            return Optional.of((IContact) component.get());
+            return Optional.of(component.get());
         }
 
         return Optional.empty();
     }
 
-    protected Optional<IContact> getForwardElement(){
+    protected Optional<IComponent> getForwardElement(){
 
         switch (this.stateManager.getCurrentState().getStateType()){
             case UP:
@@ -65,10 +62,6 @@ public abstract class Entity extends Elements implements TickListener, IEngine, 
         );
 
         return rec;
-    }
-
-    public void setEngine(Engine engine) {
-        this.engine = engine;
     }
 
     @Override

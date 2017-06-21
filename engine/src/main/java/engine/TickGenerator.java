@@ -15,10 +15,6 @@ public class TickGenerator implements Runnable{
         tickListeners.remove(tickListener);
     }
 
-    public synchronized void addAllTickListeners(Collection<TickListener> tickListeners){
-        this.tickListeners.addAll(tickListeners);
-    }
-
     private void fireTick(){
         for (TickListener tickListener: tickListeners){
             tickListener.tick();

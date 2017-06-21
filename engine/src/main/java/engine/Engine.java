@@ -1,11 +1,12 @@
 package engine;
 
+import world.IComponent;
+import world.IEntity;
 import world.IWorld;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Collection;
-import java.util.Optional;
 
 public class Engine extends JPanel{
 
@@ -38,20 +39,20 @@ public class Engine extends JPanel{
     }
 
     private void loadComponents(){
-        Collection<JComponent> components = world.getComponents();
+        Collection<IComponent> components = world.getComponents();
 
-        for (JComponent component: components){
+        for (IComponent component: components){
             System.out.println(component);
-            this.add(component);
+            this.add((JComponent) component);
         }
     }
 
     private void configureEntity(){
-        Collection<TickListener> tickListeners = world.getTickListeners();
+        Collection<IEntity> entities = world.getEntities();
         //Set Engine for all Entity
-        for(TickListener tickListener : tickListeners){
-            ((IEngine)tickListener).setEngine(this);
+        for(IEntity entity : entities){
+            entity.setEngine(this);
+            this.tickGenerator.addTickListener(entity);
         }
-        this.tickGenerator.addAllTickListeners(tickListeners);
     }
 }
