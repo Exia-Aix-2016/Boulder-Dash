@@ -1,7 +1,7 @@
 package world;
 
 import world.elements.block.Block;
-import world.elements.entity.Character;
+import world.elements.entity.movable.Character;
 import world.elements.entity.Entity;
 
 import java.awt.*;

@@ -21,7 +21,7 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
     protected StateManager stateManager;
     protected Collection<Behavior> behaviors = new ArrayList<>();
 
-    Entity(Position position, Dimension dimension, String sprite, Permeability permeability){
+    protected Entity(Position position, Dimension dimension, String sprite, Permeability permeability){
         super(position, dimension, sprite, permeability);
          stateManager = new StateManager();
          stateManager.pushState(StateType.WAITING);

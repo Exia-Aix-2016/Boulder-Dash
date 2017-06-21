@@ -2,7 +2,7 @@ package world.elements.block;
 
 import world.Permeability;
 import world.Position;
-import world.elements.entity.Character;
+import world.elements.entity.movable.Character;
 import world.reaction.Reaction;
 import world.reaction.Remove;
 

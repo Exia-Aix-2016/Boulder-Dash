@@ -4,9 +4,9 @@ import world.Position;
 import world.elements.block.Dirt;
 import world.elements.block.Exit;
 import world.elements.block.Wall;
-import world.elements.entity.Character;
+import world.elements.entity.movable.Character;
 import world.elements.entity.Diamond;
-import world.elements.entity.Monster;
+import world.elements.entity.movable.Monster;
 import world.elements.entity.Rock;
 
 import java.awt.*;
