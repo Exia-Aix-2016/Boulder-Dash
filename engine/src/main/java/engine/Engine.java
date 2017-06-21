@@ -50,7 +50,7 @@ public class Engine extends JPanel{
         Collection<TickListener> tickListeners = world.getTickListeners();
         //Set Engine for all Entity
         for(TickListener tickListener : tickListeners){
-            tickListener.setEngine(this);
+            ((IEngine)tickListener).setEngine(this);
         }
         this.tickGenerator.addAllTickListeners(tickListeners);
     }

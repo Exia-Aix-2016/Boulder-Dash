@@ -7,9 +7,10 @@ import java.util.ArrayList;
 class WorldsPanel extends SubMenu {
 
     IMap mapDao;
+    private int nbWorlds;
 
     WorldsPanel(IMenuAction menu, IMap madDao) {
-        super(3, menu);
+        super(1, menu);
 
         this.mapDao = madDao;
 
@@ -24,6 +25,13 @@ class WorldsPanel extends SubMenu {
 
         this.add(backButton);
         backButton.addActionListener((e) -> this.menu.home());
+
+        this.nbWorlds = worldsButtons.size() + 1;
+
+
+        this.layout.setRows(nbWorlds);
+
+
     }
 
     private ArrayList<MButton> getWorldsButtons(){
