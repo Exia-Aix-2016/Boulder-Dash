@@ -35,7 +35,7 @@ public abstract class Elements extends JComponent implements IComponent{
         this.updateBounds();
 
         try {
-            this.image = ImageIO.read(new File(this.sprite));
+            this.image = ImageIO.read((this.getClass().getResource(this.sprite)));
         } catch (IOException ex) {
         }
     }

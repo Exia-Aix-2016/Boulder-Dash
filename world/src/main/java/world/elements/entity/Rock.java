@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class Rock extends Entity {
 
-    private static String SPRITE = "ressources\\Sprites\\Blocks\\Rock.png";
+    private static String SPRITE = "Rock.png";
     private static Permeability PERMEABILITY = Permeability.PERMEABLE;
     public Rock(Position position, Dimension dimension){
         super(position, dimension, SPRITE, PERMEABILITY);

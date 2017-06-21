@@ -10,7 +10,7 @@ import java.awt.*;
 public class Character extends Entity implements IBehavior{
 
 
-    private static String SPRITE = "ressources\\Sprites\\Character\\Character_waiting.png";
+    private static String SPRITE = "Character_waiting.png";
     private static Permeability PERMEABILITY = Permeability.PERMEABLE;
     public Character(Position position, Dimension dimension) {
         super(position, dimension, SPRITE, PERMEABILITY);

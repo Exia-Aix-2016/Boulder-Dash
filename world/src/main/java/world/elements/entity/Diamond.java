@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class Diamond extends Entity {
 
-    private static String SPRITE = "ressources\\Sprites\\Blocks\\Diamond.png";
+    private static String SPRITE = "Diamond.png";
     private static Permeability PERMEABILITY = Permeability.PERMEABLE;
     public Diamond(Position position, Dimension dimension){
         super(position, dimension, SPRITE, PERMEABILITY);

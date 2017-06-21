@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class Dirt extends Block{
 
-    private static String SPRITE = "ressources\\Sprites\\Blocks\\Dirt.png";
+    private static String SPRITE = "Dirt.png";
     private static Permeability PERMEABILITY = Permeability.PERMEABLE;
 
     public Dirt(Position position, Dimension dimension){
