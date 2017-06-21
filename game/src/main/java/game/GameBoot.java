@@ -39,11 +39,9 @@ public class GameBoot extends JFrame implements ILaunch{
         this.panelKeyEvent = this.menu;
 
         GameBoot self = this;
-        this.keyboardFocusManager.addKeyEventDispatcher(new KeyEventDispatcher() {
-            @Override
-            public boolean dispatchKeyEvent(KeyEvent e) {
+        this.keyboardFocusManager.addKeyEventDispatcher((KeyEvent e) -> {
                 for (KeyListener keyListener: self.panelKeyEvent.getKeyListeners()) {
-                    switch (e.getID()){
+                    switch (e.getID()) {
                         case KeyEvent.KEY_PRESSED:
                             keyListener.keyPressed(e);
                             break;
@@ -56,9 +54,7 @@ public class GameBoot extends JFrame implements ILaunch{
                     }
                 }
                 return true;
-            }
-        });
-
+            });
     }
 
     void boot(){

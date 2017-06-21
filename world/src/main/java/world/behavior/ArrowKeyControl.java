@@ -10,8 +10,8 @@ public class ArrowKeyControl extends Behavior implements KeyListener{
 
     private IEngine engine;
 
-    public ArrowKeyControl(IMovement elements, IEngine engine) {
-        super(elements);
+    public ArrowKeyControl(IMovement element, IEngine engine) {
+        super(element);
         this.engine = engine;
 
         this.engine.addKeyListener(this);
@@ -29,11 +29,24 @@ public class ArrowKeyControl extends Behavior implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("coucou");
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_UP:
+                this.element.goUp();
+                break;
+            case KeyEvent.VK_DOWN:
+                this.element.goDown();
+                break;
+            case KeyEvent.VK_LEFT:
+                this.element.goLeft();
+                break;
+            case KeyEvent.VK_RIGHT:
+                this.element.goRight();
+                break;
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        this.element.goRest();
     }
 }
