@@ -1,5 +1,7 @@
 package engine;
 
+import Hud.Hud;
+import Hud.Info;
 import world.IComponent;
 import world.IEntity;
 import world.IWorld;
@@ -7,6 +9,7 @@ import world.IWorld;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Collection;
+
 
 /**
  * TODO
@@ -35,17 +38,28 @@ public class Engine extends JPanel implements IEngine{
      * TODO
      * */
     public void loadWorld(IWorld world){
-        this.world = world;
 
+        this.world = world;
         this.setBackground(Color.black);
         this.loadComponents();
         this.configureEntity();
         this.revalidate();
-
         this.repaint();
 
-       this.tickGeneratorThread = new Thread(tickGenerator);
+        Hud hud = new Hud(new GridLayout(1, 3));
+        Info info = new Info("Score");
 
+
+        this.setComponentZOrder(hud, 0);
+
+        hud.setSize((int)this.getSize().getWidth(), 30);
+        hud.setBackground(Color.YELLOW);
+        hud.add(info);
+        hud.add(new Info("Diamond remaining", 100));
+        hud.add(new Info("Time", 1000));
+
+
+       this.tickGeneratorThread = new Thread(tickGenerator);
        this.tickGeneratorThread.start();
     }
     /**

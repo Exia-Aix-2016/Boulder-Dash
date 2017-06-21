@@ -4,44 +4,47 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Mandel on 21/06/2017.
+ *
  */
-public class Score extends JLabel {
+public class Info extends JLabel {
 
-    private int score;
+    private int info;
 
-    public Score(){
-        this.score = 0;
 
-        //this.setFont(new Font("Arial", Font.PLAIN, 20));
-        this.refreshScore();
+    public Info(final String name){
+        this.init(0, name);
     }
-    public Score(final int score){
-        this.score = score;
-
-       // this.setFont(new Font("Arial", Font.PLAIN, 20));
-        this.refreshScore();
+    public Info(final String name, final int info){
+        this.init(info, name);
     }
 
-    private void refreshScore(){
-        this.setText("Score : " + this.score);
-    }
-    public void incrementScore(){
-        this.score++;
-        this.refreshScore();
-    }
-    public void decrementScore(){
-        this.score--;
-        this.refreshScore();
+    private void init(final int info, final String name){
+        this.info = info;
+        this.setName(name);
+        this.setFont(new Font("Arial", Font.PLAIN, 20));
+        this.refresh();
     }
 
-    public void setScore(int score) {
-        this.score = score;
-        this.refreshScore();
+
+    private void refresh(){
+        this.setText(this.getName() + " : " + this.info);
+    }
+    public void increment(){
+        this.info++;
+        this.refresh();
+    }
+    public void decrement(){
+        this.info--;
+        this.refresh();
     }
 
-    public int getScore() {
-        return this.score;
+    public void set(int info) {
+        this.info = info;
+        this.refresh();
+    }
+
+    public int get() {
+        return this.info;
 
     }
 }
