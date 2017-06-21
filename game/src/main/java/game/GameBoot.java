@@ -8,6 +8,8 @@ import worldloader.WorldLoader;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class GameBoot extends JFrame implements ILaunch{
 
@@ -16,6 +18,10 @@ public class GameBoot extends JFrame implements ILaunch{
     private Engine engine;
 
     private Image icone = Toolkit.getDefaultToolkit().getImage("world\\src\\main\\resources\\world\\elements\\entity\\Character_waiting.png");
+
+    KeyboardFocusManager keyboardFocusManager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+
+    private JPanel panelKeyEvent;
 
     GameBoot(){
 
@@ -30,6 +36,28 @@ public class GameBoot extends JFrame implements ILaunch{
 
         this.add(menu);
 
+        this.panelKeyEvent = this.menu;
+
+        GameBoot self = this;
+        this.keyboardFocusManager.addKeyEventDispatcher(new KeyEventDispatcher() {
+            @Override
+            public boolean dispatchKeyEvent(KeyEvent e) {
+                for (KeyListener keyListener: self.panelKeyEvent.getKeyListeners()) {
+                    switch (e.getID()){
+                        case KeyEvent.KEY_PRESSED:
+                            keyListener.keyPressed(e);
+                            break;
+                        case KeyEvent.KEY_RELEASED:
+                            keyListener.keyReleased(e);
+                            break;
+                        case KeyEvent.KEY_TYPED:
+                            keyListener.keyTyped(e);
+                            break;
+                    }
+                }
+                return true;
+            }
+        });
 
     }
 
@@ -49,6 +77,7 @@ public class GameBoot extends JFrame implements ILaunch{
             this.add(engine);
             this.revalidate();
             this.repaint();
+            this.panelKeyEvent = this.engine;
         } catch (Exception e){
             e.printStackTrace();
         }
