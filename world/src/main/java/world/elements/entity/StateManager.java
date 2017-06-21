@@ -1,8 +1,5 @@
 package world.elements.entity;
 
-import engine.Engine;
-import engine.TickListener;
-
 import java.util.Stack;
 
 /**
@@ -27,7 +24,7 @@ public class StateManager{
      * @return  the last State which push in Stack
      * */
     public State getCurrentState(){
-        return stateStack.firstElement();
+        return stateStack.lastElement();
     }
     /**
      * @return  the State where index
@@ -40,6 +37,7 @@ public class StateManager{
         stateStack.push(new State(this.getCurrentState().getStateType(), true));
 
     }
+
 
     public void tickStateManager(){
         this.getCurrentState().incrementTick();

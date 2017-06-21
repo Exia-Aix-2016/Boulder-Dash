@@ -38,12 +38,16 @@ public abstract class Entity extends Elements implements TickListener, IEngine {
     }
 
     protected Optional<IContact> getForwardElement(){
+        if(this.stateManager.getCurrentState() == null){
+            System.out.println("JE RETOURNE NULL");
+            return Optional.empty();
 
+        }
         switch (this.stateManager.getCurrentState().getStateType()){
             case UP:
-                return this.getContext(this.getProjection(0, 1));
-            case DOWN:
                 return this.getContext(this.getProjection(0, -1));
+            case DOWN:
+                return this.getContext(this.getProjection(0, 1));
             case LEFT:
                 return this.getContext(this.getProjection(-1, 0));
             case RIGHT:
