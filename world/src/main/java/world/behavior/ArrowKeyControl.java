@@ -23,8 +23,8 @@ public class ArrowKeyControl extends Behavior implements KeyListener{
      * @see IMovement
      * @see IEngine
      * */
-    public ArrowKeyControl(IMovement elements, IEngine engine) {
-        super(elements);
+    public ArrowKeyControl(IMovement element, IEngine engine) {
+        super(element);
         this.engine = engine;
 
         this.engine.addKeyListener(this);

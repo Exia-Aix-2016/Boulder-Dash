@@ -9,15 +9,15 @@ import world.elements.entity.IMovement;
  * */
 public abstract class Behavior{
 
-    protected IMovement elements;
+    protected IMovement element;
 
     /**
      * Behavior
      * change the movement of  an element
      * @see IMovement
      * */
-    Behavior(IMovement elements){
-        this.elements = elements;
+    Behavior(IMovement element){
+        this.element = element;
     }
 
     public abstract void execute();
