@@ -54,7 +54,16 @@ public class GameBoot extends JFrame implements ILaunch{
             this.add(engine);
             this.revalidate();
 
-   
+            JLabel backgroundDirt;
+            try {
+                backgroundDirt = new JLabel(new ImageIcon(ImageIO.read(this.getClass().getResource("backgroundDirt.jpg"))));
+
+               // this.setContentPane(backgroundDirt);
+
+            } catch (IOException e) {
+                System.out.println("tqejfsjgsidgsiogsoighdihohood");
+                e.printStackTrace();
+            }
 
 
 
