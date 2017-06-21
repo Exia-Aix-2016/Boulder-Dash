@@ -73,13 +73,14 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
 
     @Override
     public void tick() {
-        if(this.thread == null){
+        if (this.thread == null) {
             this.thread = new Thread(this);
         }
-        if(!this.thread.isAlive()){
+        if (!this.thread.isAlive()) {
             this.thread = new Thread(this);
             this.thread.start();
         }
+    }
 
     @Override
     public void goUp() {
