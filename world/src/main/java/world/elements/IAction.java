@@ -14,9 +14,9 @@ public interface IAction {
     /**
      * TODO
      * */
-    boolean isReaction(Class<? extends IAction> from);
+    boolean isReaction(Object from);
     /**
      * TODO
      * */
-    void performReaction(Class<? extends IAction> from, int ticks);
+    void performReaction(Object from, int ticks);
 }

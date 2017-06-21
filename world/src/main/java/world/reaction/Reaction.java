@@ -18,13 +18,13 @@ public abstract class Reaction <From extends IAction, To extends IAction> {
     /**
      * TODO
      * */
-    public boolean isReaction(Class<? extends IAction> from){
+    public boolean isReaction(Object from){
         return fromClass.isInstance(from);
     }
     /**
      * TODO
      * */
-    public void perform(Class<? extends IAction> from, int ticks){
+    public void perform(Object from, int ticks){
         if (isReaction(from)){
             this.execute();
         }

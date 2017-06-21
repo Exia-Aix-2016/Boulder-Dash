@@ -73,7 +73,7 @@ public abstract class Elements extends JComponent implements IComponent, IAction
     }
 
     @Override
-    public boolean isReaction(Class<? extends IAction> from) {
+    public boolean isReaction(Object from) {
         for (Reaction reaction: this.reactions){
             if (reaction.isReaction(from)){
                 return true;
@@ -83,7 +83,7 @@ public abstract class Elements extends JComponent implements IComponent, IAction
     }
 
     @Override
-    public void performReaction(Class<? extends IAction> from, int ticks) {
+    public void performReaction(Object from, int ticks) {
         for (Reaction reaction: this.reactions){
             if (reaction.isReaction(from)){
                 reaction.perform(from, ticks);

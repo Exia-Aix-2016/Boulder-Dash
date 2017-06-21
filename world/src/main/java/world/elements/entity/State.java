@@ -45,4 +45,8 @@ public class State {
     public boolean isMoving() {
         return moving;
     }
+
+    public int getTicks() {
+        return tick;
+    }
 }
