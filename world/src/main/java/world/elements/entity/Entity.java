@@ -38,7 +38,6 @@ public abstract class Entity extends Elements implements IEntity, IBehavior {
 
     protected Optional<IComponent> getForwardElement(){
 
-        }
         switch (this.stateManager.getCurrentState().getStateType()){
             case UP:
                 return this.getContext(this.getProjection(0, -1));

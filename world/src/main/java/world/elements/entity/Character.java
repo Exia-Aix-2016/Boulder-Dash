@@ -26,7 +26,7 @@ public class Character extends Entity implements IBehavior{
             e.printStackTrace();
         }
         
-        stateManager.tickStateManager();
+        //stateManager.tickStateManager();
     }
 
     @Override

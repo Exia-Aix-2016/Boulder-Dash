@@ -18,6 +18,9 @@ import java.nio.BufferUnderflowException;
 public abstract class Elements extends JComponent implements IComponent{
 
     protected IEngine engine;
+    protected String sprite;
+    protected Permeability permeability;
+    protected Position position;
 
     private BufferedImage image;
 
