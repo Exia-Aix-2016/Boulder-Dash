@@ -12,7 +12,7 @@ public class Character extends Entity{
     private static String SPRITE = "Character_waiting.png";
     private static Permeability PERMEABILITY = Permeability.PERMEABLE;
     public Character(Position position, Dimension dimension) {
-        super(position, dimension, SPRITE, PERMEABILITY);
+        super(position, dimension, SPRITE, PERMEABILITY, 20);
     }
 
     @Override

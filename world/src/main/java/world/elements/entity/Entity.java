@@ -21,9 +21,11 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
     protected StateManager stateManager;
     protected Collection<Behavior> behaviors = new ArrayList<>();
 
-    Entity(Position position, Dimension dimension, String sprite, Permeability permeability){
+    protected Rectangle futurBounds = null;
+
+    Entity(Position position, Dimension dimension, String sprite, Permeability permeability, int speed){
         super(position, dimension, sprite, permeability);
-         stateManager = new StateManager();
+         stateManager = new StateManager(speed);
          stateManager.pushState(StateType.WAITING);
     }
 
@@ -74,24 +76,90 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
     }
 
     public void run(){
-        State currentState = this.stateManager.getCurrentState();
-        if (!currentState.isMoving()){
+
+        if (!this.stateManager.getCurrentState().isMoving()){
             this.executeBehaviors();
-        }
-        if (currentState.getStateType() != StateType.WAITING){
-            Optional<IAction> forwardEl = this.getForwardElement();
-            if (forwardEl.isPresent()){
-                IAction el = forwardEl.get();
-                if (el.isReaction(this)){
-                    el.performReaction(this, currentState.getTicks());
+
+            if (this.stateManager.getCurrentState().getStateType() != StateType.WAITING){
+                Optional<IAction> forwardEl = this.getForwardElement();
+                if (forwardEl.isPresent()){
+                    IAction el = forwardEl.get();
+                    if (el.isReaction(this)){
+                        el.performReaction(this, this.stateManager.getCurrentState().getTicks());
+                    } else {
+                        this.stateManager.setBlockState(true);
+                    }
                 } else {
-                    this.stateManager.setBlockState(true);
+                    this.stateManager.setBlockState(false);
+                    this.stateManager.getCurrentState().setMoving(true);
+                    switch (this.stateManager.getCurrentState().getStateType()){
+                        case UP:
+                            this.futurBounds = this.getProjection(0, -1);
+                            break;
+                        case DOWN:
+                            this.futurBounds = this.getProjection(0, 1);
+                            break;
+                        case LEFT:
+                            this.futurBounds = this.getProjection(-1, 0);
+                            break;
+                        case RIGHT:
+                            this.futurBounds = this.getProjection(1, 0);
+                            break;
+                    }
                 }
-            } else {
-                this.stateManager.setBlockState(false);
             }
         }
+
+        if (this.stateManager.getCurrentState().isMoving()){
+            this.move();
+        }
+
         this.stateManager.tickStateManager();
+    }
+
+    protected void move(){
+
+        State currentState = this.stateManager.getCurrentState();
+
+        int x = this.position.getX();
+        int y = this.position.getY();
+
+        switch (currentState.getStateType()){
+            case UP:
+                y -= currentState.getSpeed();
+                break;
+            case DOWN:
+                y += currentState.getSpeed();
+                break;
+            case LEFT:
+                x -= currentState.getSpeed();
+                break;
+            case RIGHT:
+                x += currentState.getSpeed();
+                break;
+        }
+
+        this.setPosition(this.calculateFuture(x, y));
+
+        System.out.println(this.getBounds() + " " + this.futurBounds);
+
+        if (this.getBounds().getX() == this.futurBounds.getX() && this.getBounds().getY() == this.futurBounds.getY()){
+            currentState.setMoving(false);
+        }
+
+    }
+
+    protected Position calculateFuture(int x, int y){
+
+        if (Math.abs(this.futurBounds.getY() - y) > 0){
+            y = (int) this.futurBounds.getY();
+        }
+
+        if (Math.abs(this.futurBounds.getX() - x) > 0){
+            x = (int) this.futurBounds.getX();
+        }
+
+        return new Position(x, y);
     }
 
     protected void executeBehaviors(){

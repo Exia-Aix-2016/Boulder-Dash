@@ -10,7 +10,7 @@ public class Rock extends Entity {
     private static String SPRITE = "Rock.png";
     private static Permeability PERMEABILITY = Permeability.PERMEABLE;
     public Rock(Position position, Dimension dimension){
-        super(position, dimension, SPRITE, PERMEABILITY);
+        super(position, dimension, SPRITE, PERMEABILITY, 30);
     }
 
     @Override

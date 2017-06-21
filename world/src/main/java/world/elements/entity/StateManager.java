@@ -11,26 +11,30 @@ public class StateManager{
 
     private StateType requestState = null;
 
-    public StateManager(){
+    private int default_speed;
+
+    public StateManager(int default_speed){
         stateStack = new Stack<>();
         stateStack.setSize(SIZE_STACK);
+        this.default_speed = default_speed;
     }
+
     public void pushState(StateType stateType){
         this.requestState = stateType;
         if (this.getCurrentState() == null){
-            this.setRequestedState();
+            this.setRequestedState(default_speed);
         }
     }
 
-    private void setRequestedState(){
-        stateStack.push(new State(requestState, false));
+    private void setRequestedState(int speed){
+        stateStack.push(new State(requestState, false, speed));
         System.out.println(this.getCurrentState());
         this.requestState = null;
     }
 
     private void refreshState(){
         if (requestState != null && requestState != this.getCurrentState().getStateType()){
-            this.setRequestedState();
+            this.setRequestedState(this.getCurrentState().getSpeed());
         }
     }
 
@@ -49,8 +53,14 @@ public class StateManager{
     }
 
     public void setBlockState(boolean blocked){
-        if (!this.getCurrentState().isBlocked() == blocked){
-            stateStack.push(new State(this.getCurrentState().getStateType(), blocked));
+        if (!this.getCurrentState().isBlocked() == blocked && !this.getCurrentState().isMoving()){
+            stateStack.push(new State(this.getCurrentState().getStateType(), blocked, this.getCurrentState().getSpeed()));
+        }
+    }
+
+    public void setSpeed(int speed){
+        if (!this.getCurrentState().isMoving() && this.getCurrentState().getSpeed() != speed){
+            stateStack.push(new State(this.getCurrentState().getStateType(), false, speed));
         }
     }
 
