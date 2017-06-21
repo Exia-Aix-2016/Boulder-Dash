@@ -19,7 +19,7 @@ public class Character extends Entity{
     public void run() {
         this.stateManager.pushState(StateType.WAITING);
         System.out.println("tick Character ");
-        
+
 
         try {
             Thread.sleep(1000);

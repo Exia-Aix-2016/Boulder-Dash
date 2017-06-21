@@ -5,28 +5,38 @@ import world.elements.entity.IMovement;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+/**
+ * TODO
+ * */
 public class ArrowKeyControl extends Behavior implements KeyListener{
 
     private IEngine engine;
-
+    /**
+     * TODO
+     * */
     public ArrowKeyControl(IMovement element, IEngine engine) {
         super(element);
         this.engine = engine;
 
         this.engine.addKeyListener(this);
     }
-
+    /**
+     * TODO
+     * */
     @Override
     public void execute() {
 
     }
-
+    /**
+     * TODO
+     * */
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
-
+    /**
+     * TODO
+     * */
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()){
@@ -44,7 +54,9 @@ public class ArrowKeyControl extends Behavior implements KeyListener{
                 break;
         }
     }
-
+    /**
+     * TODO
+     * */
     @Override
     public void keyReleased(KeyEvent e) {
         this.element.goRest();

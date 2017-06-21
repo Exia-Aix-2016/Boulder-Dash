@@ -10,19 +10,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+/**
+ * TODO
+ * */
 public class GameBoot extends JFrame implements ILaunch{
 
     private IMap  mapDao = new MapDAO();
     private menu.Menu menu;
     private Engine engine;
-
+    /**
+     * TODO
+     * */
     private Image icone = Toolkit.getDefaultToolkit().getImage("world\\src\\main\\resources\\world\\elements\\entity\\Character_waiting.png");
 
     KeyboardFocusManager keyboardFocusManager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 
     private JPanel panelKeyEvent;
-
+    /**
+     * TODO
+     * */
     GameBoot(){
 
         this.setTitle("BoulderDash");
@@ -56,12 +62,16 @@ public class GameBoot extends JFrame implements ILaunch{
                 return true;
             });
     }
-
+    /**
+     * TODO
+     * */
     void boot(){
         this.setVisible(true);
         engine.setSize(this.getSize());
     }
-
+    /**
+     * TODO
+     * */
     @Override
     public void launch(String worldName) {
         System.out.println("Launching world: " + worldName);

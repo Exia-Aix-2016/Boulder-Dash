@@ -1,5 +1,7 @@
 package world.elements.entity;
-
+/**
+ * TODO
+ * */
 public enum StateType {
     UP,
     DOWN,
