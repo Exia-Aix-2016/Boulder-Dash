@@ -93,6 +93,11 @@ public class Engine extends JPanel implements IEngine{
         this.world.removeCharacter(element);
     }
 
+    @Override
+    public void lose() {
+        System.out.println("Game Over");
+    }
+
     /**
      * TODO
      * */

@@ -2,6 +2,7 @@ package world.elements.entity;
 
 import world.Position;
 import world.Permeability;
+import world.behavior.Gravity;
 
 import java.awt.*;
 
@@ -15,10 +16,10 @@ public class Rock extends Entity {
 
     @Override
     public void loadBehaviors() {
-
+        this.behaviors.add(new Gravity(this));
     }
     @Override
     public void run() {
-
+        super.run();
     }
 }

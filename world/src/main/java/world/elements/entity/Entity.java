@@ -8,6 +8,7 @@ import world.Position;
 import world.behavior.Behavior;
 import world.elements.Elements;
 import world.elements.IAction;
+import world.reaction.Sides;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -75,6 +76,21 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
         return stateManager;
     }
 
+    public Sides getReactionSide(){
+        switch (this.stateManager.getCurrentState().getStateType()){
+
+            case UP:
+                return Sides.BOTTOM;
+            case DOWN:
+                return Sides.TOP;
+            case LEFT:
+                return Sides.RIGHT;
+            case RIGHT:
+                return Sides.LEFT;
+        }
+        return null;
+    }
+
     public void run(){
 
         if (!this.stateManager.getCurrentState().isMoving()){
@@ -86,8 +102,8 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
 
                 if (forwardEl.isPresent()){
                     IAction el = forwardEl.get();
-                    if (el.isReaction(this)){
-                        move = el.performReaction(this, this.stateManager.getCurrentState().getTicks());
+                    if (el.isReaction(this, this.getReactionSide())){
+                        move = el.performReaction(this, this.getReactionSide(), this.stateManager.getCurrentState().getTicks());
                     } else {
                         this.stateManager.setBlockState(true);
                     }

@@ -11,8 +11,6 @@ public abstract class Behavior{
 
     protected IMovement element;
 
-
-
     /**
      * Behavior
      * change the movement of  an element

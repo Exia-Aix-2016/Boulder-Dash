@@ -25,4 +25,6 @@ public interface IEngine {
     void removeBlock(IComponent element);
 
     void removeCharacter(IComponent element);
+
+    void lose();
 }

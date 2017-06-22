@@ -1,4 +1,7 @@
 package world.elements;
+
+import world.reaction.Sides;
+
 /**
  * TODO
  * */
@@ -14,9 +17,9 @@ public interface IAction {
     /**
      * TODO
      * */
-    boolean isReaction(Object from);
+    boolean isReaction(Object from, Sides side);
     /**
      * TODO
      * */
-    boolean performReaction(Object from, int ticks);
+    boolean performReaction(Object from, Sides side, int ticks);
 }

@@ -3,6 +3,8 @@ package world.elements.entity;
 import world.Permeability;
 import world.Position;
 import world.behavior.ArrowKeyControl;
+import world.reaction.Remove;
+import world.reaction.Sides;
 
 import java.awt.*;
 
@@ -23,10 +25,13 @@ public class Character extends Entity{
     @Override
     public void loadBehaviors() {
         this.behaviors.add(new ArrowKeyControl(this, this.engine));
+        Sides[] sides = {Sides.LEFT};
+        this.reactions.add(new Remove(this, Monster.class, sides,0));
     }
 
     @Override
     public void destroy() {
         this.engine.removeCharacter(this);
+        this.engine.lose();
     }
 }
