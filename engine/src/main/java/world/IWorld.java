@@ -23,6 +23,8 @@ public interface IWorld {
      * TODO
      * */
     Dimension getDimension();
+    int getTimeRemaining();
+    int getDiamonds_left();
 
     void removeEntity(IComponent element);
 

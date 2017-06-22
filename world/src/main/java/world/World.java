@@ -1,7 +1,8 @@
 package world;
 
 import world.elements.block.Block;
-import world.elements.entity.movable.Character;
+import world.elements.entity.Character;
+import world.elements.entity.Diamond;
 import world.elements.entity.Entity;
 
 import java.awt.*;
@@ -55,6 +56,7 @@ public class World implements ICreateWorld, IWorld {
     public int getTimeRemaining() {
         return timeRemaining;
     }
+
 
     @Override
     public Dimension getDimension() {
@@ -111,7 +113,7 @@ public class World implements ICreateWorld, IWorld {
      * TODO
      * */
     public int getDiamonds_left() {
-        return diamonds_left;
+        return this.diamonds_left;
     }
     /**
      * TODO

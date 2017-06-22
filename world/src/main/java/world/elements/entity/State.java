@@ -5,11 +5,13 @@ public class State {
     private int tick = 0;
     private boolean moving;
     private boolean blocked;
+    private int speed;
 
-    State(StateType stateType, Boolean blocked){
+    State(StateType stateType, Boolean blocked, int speed){
         this.stateType = stateType;
         this.moving = false;
         this.blocked = blocked;
+        this.speed = speed;
     }
     /**
      * @return the state type
@@ -48,5 +50,9 @@ public class State {
 
     public int getTicks() {
         return tick;
+    }
+
+    public int getSpeed() {
+        return speed;
     }
 }

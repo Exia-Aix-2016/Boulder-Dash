@@ -1,7 +1,9 @@
 package world.behavior;
 
 import engine.IEngine;
+import javafx.scene.input.KeyCode;
 import world.elements.entity.IMovement;
+import world.elements.entity.StateType;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -16,6 +18,7 @@ import java.awt.event.KeyListener;
 public class ArrowKeyControl extends Behavior implements KeyListener{
 
     private IEngine engine;
+    private int lastKey;
 
     /**
      * ArrowKeyControl
@@ -34,21 +37,7 @@ public class ArrowKeyControl extends Behavior implements KeyListener{
      * */
     @Override
     public void execute() {
-
-    }
-    /**
-     * TODO
-     * */
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-    /**
-     * TODO
-     * */
-    @Override
-    public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()){
+        switch (this.lastKey){
             case KeyEvent.VK_UP:
                 this.element.goUp();
                 break;
@@ -61,13 +50,30 @@ public class ArrowKeyControl extends Behavior implements KeyListener{
             case KeyEvent.VK_RIGHT:
                 this.element.goRight();
                 break;
+            default:
+                this.element.goRest();
         }
+    }
+
+    /**
+     * TODO
+     * */
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+    /**
+     * TODO
+     * */
+    @Override
+    public void keyPressed(KeyEvent e) {
+        this.lastKey = e.getKeyCode();
     }
     /**
      * TODO
      * */
     @Override
     public void keyReleased(KeyEvent e) {
-        this.element.goRest();
+        this.lastKey = -1;
     }
 }
