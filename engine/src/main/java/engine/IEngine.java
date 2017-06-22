@@ -28,4 +28,6 @@ public interface IEngine {
     void lose();
 
     boolean isOut(Rectangle projection);
+
+    void incScore();
 }

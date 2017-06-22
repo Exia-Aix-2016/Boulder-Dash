@@ -26,6 +26,5 @@ public class Rock extends Entity {
     @Override
     public void run() {
         super.run();
-        System.out.println(this.stateManager.getCurrentState().getStateType());
     }
 }

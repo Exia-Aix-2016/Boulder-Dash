@@ -104,6 +104,11 @@ public class Engine extends JPanel implements IEngine{
         return false;
     }
 
+    @Override
+    public void incScore() {
+        System.out.println("+1");
+    }
+
     /**
      * TODO
      * */
