@@ -1,5 +1,6 @@
 package world.elements.entity;
 
+import engine.Sound;
 import world.Permeability;
 import world.Position;
 import world.behavior.ArrowKeyControl;
@@ -17,9 +18,12 @@ public class Character extends Entity{
         super(position, dimension, SPRITE, PERMEABILITY, 10);
     }
 
+    private Sound sound = new Sound();
+
     @Override
     public void run() {
         super.run();
+
     }
 
     @Override
