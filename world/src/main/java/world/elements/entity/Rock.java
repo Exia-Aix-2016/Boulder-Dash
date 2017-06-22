@@ -3,6 +3,7 @@ package world.elements.entity;
 import world.Position;
 import world.Permeability;
 import world.behavior.Gravity;
+import world.reaction.Heap;
 
 import java.awt.*;
 
@@ -17,6 +18,7 @@ public class Rock extends Entity {
     @Override
     public void loadBehaviors() {
         this.behaviors.add(new Gravity(this));
+        this.reactions.add(new Heap(this, Rock.class));
     }
     @Override
     public void run() {

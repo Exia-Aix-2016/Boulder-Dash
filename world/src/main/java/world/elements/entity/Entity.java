@@ -65,7 +65,7 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
         return null;
     }
 
-    protected Rectangle getProjection(int xCase, int yCase){
+    public Rectangle getProjection(int xCase, int yCase){
 
         Rectangle center = this.getBounds();
 
@@ -217,6 +217,15 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
             this.thread.start();
         }
     }
+
+    @Override
+    public boolean isEmpty(int xCase, int yCase) {
+        if (!this.getContext(this.getProjection(xCase, yCase)).isPresent()){
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void goUp() {
         this.stateManager.pushState(StateType.UP);
