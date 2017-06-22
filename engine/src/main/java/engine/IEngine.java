@@ -2,7 +2,6 @@ package engine;
 
 import world.IComponent;
 
-import javax.xml.bind.Element;
 import java.awt.*;
 import java.awt.event.KeyListener;
 
@@ -27,4 +26,6 @@ public interface IEngine {
     void removeCharacter(IComponent element);
 
     void lose();
+
+    boolean isOut(Rectangle projection);
 }
