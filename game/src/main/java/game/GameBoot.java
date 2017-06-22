@@ -3,6 +3,7 @@ package game;
 import dao.IMap;
 import dao.MapDAO;
 import engine.Engine;
+import menu.FinalScreen;
 import world.World;
 import worldloader.WorldLoader;
 
@@ -18,6 +19,8 @@ public class GameBoot extends JFrame implements ILaunch{
     private IMap  mapDao = new MapDAO();
     private menu.Menu menu;
     private Engine engine;
+
+    private FinalScreen finalScreen;
     /**
      * TODO
      * */
@@ -38,9 +41,17 @@ public class GameBoot extends JFrame implements ILaunch{
         this.setIconImage(icone);
 
         menu = new menu.Menu(mapDao, this);
+
+        finalScreen= new FinalScreen(/*"You lose",*/ this.menu/*, false*/);
+
+
         engine = new Engine();
 
         this.add(menu);
+
+        this.add(finalScreen);
+
+
 
         this.panelKeyEvent = this.menu;
 
