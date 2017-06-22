@@ -13,7 +13,7 @@ public class Rock extends Entity {
 
     public Rock(Position position, Dimension dimension){
         super(position, dimension, new SpriteManager(
-                "Rock.png"
+                new String[]{"Rock.png", "Rock2.png","Rock3.png","Rock4.png"}
         ), 30);
     }
 
