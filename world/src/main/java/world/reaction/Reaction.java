@@ -13,7 +13,9 @@ import world.elements.IAction;
 public abstract class Reaction <From extends IAction, To extends IAction> {
 
     protected To to;
+    protected From from;
     private Class<? extends From> fromClass;
+
     /**
      * TODO
      * */
@@ -30,13 +32,15 @@ public abstract class Reaction <From extends IAction, To extends IAction> {
     /**
      * TODO
      * */
-    public void perform(Object from, int ticks){
+    public boolean perform(Object from, int ticks){
         if (isReaction(from)){
-            this.execute();
+            this.from = (From) from;
+            return this.execute(ticks);
         }
+        return false;
     }
     /**
      * TODO
      * */
-    protected abstract void execute();
+    protected abstract boolean execute(int ticks);
 }

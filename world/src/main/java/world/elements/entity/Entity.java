@@ -82,15 +82,22 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
 
             if (this.stateManager.getCurrentState().getStateType() != StateType.WAITING){
                 Optional<IAction> forwardEl = this.getForwardElement();
+                boolean move = false;
+
                 if (forwardEl.isPresent()){
                     IAction el = forwardEl.get();
                     if (el.isReaction(this)){
-                        el.performReaction(this, this.stateManager.getCurrentState().getTicks());
+                        move = el.performReaction(this, this.stateManager.getCurrentState().getTicks());
                     } else {
                         this.stateManager.setBlockState(true);
                     }
                 } else {
                     this.stateManager.setBlockState(false);
+                    this.stateManager.setDefaultSpeed();
+                    move = true;
+                }
+
+                if (move){
                     this.stateManager.getCurrentState().setMoving(true);
                     switch (this.stateManager.getCurrentState().getStateType()){
                         case UP:
@@ -140,8 +147,6 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
         }
 
         this.setPosition(this.calculateFuture(x, y));
-
-        System.out.println(this.getBounds() + " " + this.futurBounds);
 
         if (this.getBounds().getX() == this.futurBounds.getX() && this.getBounds().getY() == this.futurBounds.getY()){
             currentState.setMoving(false);
@@ -203,7 +208,6 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
     @Override
     public void goRest() {
         this.stateManager.pushState(StateType.WAITING);
-
     }
 
     @Override

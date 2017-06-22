@@ -16,7 +16,7 @@ public class Dirt extends Block{
     public Dirt(Position position, Dimension dimension){
         super(position, dimension, SPRITE, PERMEABILITY);
 
-        Reaction test = new Remove(this, Character.class, 20);
+        Reaction test = new Remove(this, Character.class, 5);
         this.reactions.add(test);
     }
 }
