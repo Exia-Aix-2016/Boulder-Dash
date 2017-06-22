@@ -25,6 +25,8 @@ public class Engine extends JPanel implements IEngine{
     private Image backgroundDirt;
     private Graphics g;
 
+    private Sound sound = new Sound();
+
     public Engine(){
         this.setLayout(null);
         this.setFocusable(true);
@@ -57,6 +59,8 @@ public class Engine extends JPanel implements IEngine{
         hud.add(info);
         hud.add(new Info("Diamond remaining", this.world.getDiamonds_left()));
         hud.add(new Info("Time",this.world.getTimeRemaining()));
+
+        sound.playSound("Start");
 
 
        this.tickGeneratorThread = new Thread(tickGenerator);
@@ -96,11 +100,13 @@ public class Engine extends JPanel implements IEngine{
     @Override
     public void lose() {
         System.out.println("Game Over");
+        sound.playSound("Lose");
     }
 
     @Override
     public void win() {
         System.out.println("win");
+        sound.playSound("Win");
     }
 
     // TODO

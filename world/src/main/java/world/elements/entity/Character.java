@@ -1,5 +1,6 @@
 package world.elements.entity;
 
+import engine.Sound;
 import world.Position;
 import world.behavior.ArrowKeyControl;
 import world.elements.SpriteManager;
@@ -20,9 +21,12 @@ public class Character extends Entity{
         ),10);
     }
 
+    private Sound sound = new Sound();
+
     @Override
     public void run() {
         super.run();
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package world.elements.entity;
 
+import engine.Sound;
 import world.Position;
 import world.behavior.Gravity;
 import world.elements.SpriteManager;
@@ -16,6 +17,8 @@ public class Diamond extends Entity {
         ), 20);
     }
 
+    Sound sound = new Sound();
+
     @Override
     public void loadBehaviors() {
         this.behaviors.add(new Gravity(this));
@@ -25,11 +28,14 @@ public class Diamond extends Entity {
     @Override
     public void run() {
         super.run();
+
     }
 
     @Override
     public void destroy() {
         super.destroy();
         this.engine.incScore();
+        sound.playSound("Pick");
+
     }
 }
