@@ -22,7 +22,7 @@ public class Diamond extends Entity {
     @Override
     public void loadBehaviors() {
         this.behaviors.add(new Gravity(this));
-        this.reactions.add(new Remove(this, Character.class, new Sides[]{Sides.LEFT, Sides.RIGHT, Sides.TOP, Sides.BOTTOM}, 0));
+        this.reactions.add(new Remove(this, Character.class, new Sides[]{Sides.LEFT, Sides.RIGHT, Sides.TOP, Sides.BOTTOM}));
     }
 
     @Override

@@ -4,6 +4,7 @@ import engine.Sound;
 import world.Position;
 import world.behavior.ArrowKeyControl;
 import world.elements.SpriteManager;
+import world.reaction.InertiaRemove;
 import world.reaction.Remove;
 import world.reaction.Sides;
 
@@ -32,7 +33,8 @@ public class Character extends Entity{
     @Override
     public void loadBehaviors() {
         this.behaviors.add(new ArrowKeyControl(this, this.engine));
-        this.reactions.add(new Remove(this, Monster.class, new Sides[]{Sides.LEFT},0));
+        this.reactions.add(new Remove(this, Monster.class, new Sides[]{Sides.LEFT}));
+        this.reactions.add(new InertiaRemove(this, Rock.class, new Sides[]{Sides.TOP}));
     }
 
     @Override

@@ -24,6 +24,11 @@ public class Remove extends Reaction<IMovement, IAction> {
         this.delay = delay;
     }
 
+    public Remove(IAction to, Class<? extends IMovement> typeClass, Sides[] sides){
+        super(to, typeClass, sides);
+        this.delay = 0;
+    }
+
     @Override
     protected boolean execute(int ticks) {
         if (ticks > this.delay){
