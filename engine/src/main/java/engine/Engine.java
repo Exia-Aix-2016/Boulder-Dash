@@ -106,6 +106,23 @@ public class Engine extends JPanel implements IEngine{
     // TODO
     @Override
     public boolean isOut(Rectangle projection) {
+
+        if ( 0 > projection.x){
+            return true;
+        }
+
+        if (0 > projection.y){
+            return true;
+        }
+
+        if (this.getSize().width < projection.x + projection.width){
+            return true;
+        }
+
+        if (this.getSize().height < projection.y + projection.height){
+            return true;
+        }
+
         return false;
     }
 
