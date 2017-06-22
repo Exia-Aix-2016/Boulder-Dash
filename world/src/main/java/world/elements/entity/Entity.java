@@ -24,6 +24,8 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
 
     protected Rectangle futureBounds = null;
 
+    protected  boolean behaviorIgnored = false;
+
     Entity(Position position, Dimension dimension, String sprite, Permeability permeability, int speed){
         super(position, dimension, sprite, permeability);
          stateManager = new StateManager(speed);
@@ -65,7 +67,7 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
         return null;
     }
 
-    protected Rectangle getProjection(int xCase, int yCase){
+    public Rectangle getProjection(int xCase, int yCase){
 
         Rectangle center = this.getBounds();
 
@@ -108,7 +110,12 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
     public void run(){
 
         if (!this.stateManager.getCurrentState().isMoving()){
-            this.executeBehaviors();
+
+            if (!this.behaviorIgnored){
+                this.executeBehaviors();
+            } else {
+                this.behaviorIgnored = false;
+            }
 
             if (this.stateManager.getCurrentState().getStateType() != StateType.WAITING){
                 Optional<IAction> forwardEl = this.getForwardElement();
@@ -208,6 +215,11 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
     }
 
     @Override
+    public void ignoreBehavior() {
+        this.behaviorIgnored = true;
+    }
+
+    @Override
     public void tick() {
         if (this.thread == null) {
             this.thread = new Thread(this);
@@ -217,6 +229,15 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
             this.thread.start();
         }
     }
+
+    @Override
+    public boolean isEmpty(int xCase, int yCase) {
+        if (!this.getContext(this.getProjection(xCase, yCase)).isPresent()){
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void goUp() {
         this.stateManager.pushState(StateType.UP);
@@ -247,5 +268,10 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
     @Override
     public void destroy() {
         this.engine.removeEntity(this);
+    }
+
+    @Override
+    public boolean hasFinish() {
+        return false;
     }
 }
