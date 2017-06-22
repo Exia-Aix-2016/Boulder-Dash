@@ -31,4 +31,10 @@ public class Monster extends Entity {
         super.run();
 
     }
+    @Override
+    public void destroy() {
+        this.engine.getInfo("Score").get().add(100);
+
+        super.destroy();
+    }
 }

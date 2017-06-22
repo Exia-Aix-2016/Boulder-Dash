@@ -9,6 +9,7 @@ import world.IWorld;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Collection;
+import java.util.Optional;
 
 
 /**
@@ -21,6 +22,9 @@ public class Engine extends JPanel implements IEngine{
 
     private TickGenerator tickGenerator;
     private Thread tickGeneratorThread;
+    private Hud hud;
+
+
 
     private Image backgroundDirt;
     private Graphics g;
@@ -48,23 +52,24 @@ public class Engine extends JPanel implements IEngine{
         this.revalidate();
         this.repaint();
 
-        Hud hud = new Hud(new GridLayout(1, 3));
-        Info info = new Info("Score");
-
+        hud = new Hud(new GridLayout(1, 3));
 
         this.setComponentZOrder(hud, 0);
 
         hud.setSize((int)this.getSize().getWidth(), 30);
         hud.setBackground(Color.YELLOW);
-        hud.add(info);
-        hud.add(new Info("Diamond remaining", this.world.getDiamonds_left()));
-        hud.add(new Info("Time",this.world.getTimeRemaining()));
+        hud.addInfo(new Info("Score"));
+        hud.addInfo(new Info("Diamond remaining", this.world.getDiamonds_left()));
+        hud.addInfo(new Info("Time",this.world.getTimeRemaining()));
 
         sound.playSound("Start");
 
-
        this.tickGeneratorThread = new Thread(tickGenerator);
        this.tickGeneratorThread.start();
+    }
+
+    public Optional<Info> getInfo(final String name){
+        return this.hud.getInfo(name);
     }
     /**
      * TODO
@@ -130,11 +135,6 @@ public class Engine extends JPanel implements IEngine{
         }
 
         return false;
-    }
-
-    @Override
-    public void incScore() {
-        System.out.println("+1");
     }
 
     @Override

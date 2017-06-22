@@ -1,5 +1,5 @@
 30
-10
+17
 4
 200
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
@@ -9,8 +9,13 @@ W         C           R      W
 WR                           W
 WX         R          R      W
 WMX       XXX      XXXXXXX   W
-W        DXXXD
-WXXXXXXXXXXXXXXXXXXXXXXXXXXXXW
-WXXXXXXXXXXXXXXXXXXXXXXXXXXXXW
+W        DXXXD               W
+W                            W
+W                            W
+W                            W
+W                            W
+W                            W
+W                            W
+W                            W
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW

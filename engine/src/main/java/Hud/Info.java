@@ -42,6 +42,10 @@ public class Info extends JLabel {
         this.info = info;
         this.refresh();
     }
+    public void add(int info){
+        this.info += info;
+        this.refresh();
+    }
 
     public int get() {
         return this.info;

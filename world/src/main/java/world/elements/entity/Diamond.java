@@ -33,9 +33,9 @@ public class Diamond extends Entity {
 
     @Override
     public void destroy() {
-        super.destroy();
-        this.engine.incScore();
+        this.engine.getInfo("Score").get().add(50);
+        this.engine.getInfo("Diamond remaining").get().decrement();
         sound.playSound("Pick");
-
+        super.destroy();
     }
 }

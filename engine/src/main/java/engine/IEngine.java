@@ -1,9 +1,11 @@
 package engine;
 
+import Hud.Info;
 import world.IComponent;
 
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.util.Optional;
 
 /**
  * TODO
@@ -25,13 +27,13 @@ public interface IEngine {
 
     void removeCharacter(IComponent element);
 
+    Optional<Info> getInfo(final String name);
+
     void lose();
 
     void win();
 
     boolean isOut(Rectangle projection);
-
-    void incScore();
 
     boolean levelCompleted();
 }
