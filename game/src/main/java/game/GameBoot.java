@@ -42,14 +42,11 @@ public class GameBoot extends JFrame implements ILaunch{
 
         menu = new menu.Menu(mapDao, this);
 
-        finalScreen= new FinalScreen(/*"You lose",*/ this.menu/*, false*/);
-
 
         engine = new Engine();
 
         this.add(menu);
 
-        this.add(finalScreen);
 
 
 
