@@ -5,6 +5,7 @@ import world.IComponent;
 import world.Permeability;
 import world.Position;
 import world.reaction.Reaction;
+import world.reaction.Sides;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -73,9 +74,9 @@ public abstract class Elements extends JComponent implements IComponent, IAction
     }
 
     @Override
-    public boolean isReaction(Object from) {
+    public boolean isReaction(Object from, Sides side) {
         for (Reaction reaction: this.reactions){
-            if (reaction.isReaction(from)){
+            if (reaction.isReaction(from, side)){
                 return true;
             }
         }
@@ -83,10 +84,10 @@ public abstract class Elements extends JComponent implements IComponent, IAction
     }
 
     @Override
-    public boolean performReaction(Object from, int ticks) {
+    public boolean performReaction(Object from, Sides side, int ticks) {
         for (Reaction reaction: this.reactions){
-            if (reaction.isReaction(from)){
-                return reaction.perform(from, ticks);
+            if (reaction.isReaction(from, side)){
+                return reaction.perform(from, side, ticks);
             }
         }
         return false;
