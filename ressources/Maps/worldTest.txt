@@ -6,10 +6,10 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 W                            W
 W         C           R      W
-WD                           W
+WR                           W
 WX         R          R      W
 WMX       XXX      XXXXXXX   W
-W         XXX                W
+W        DXXXD
 WXXXXXXXXXXXXXXXXXXXXXXXXXXXXW
 WXXXXXXXXXXXXXXXXXXXXXXXXXXXXW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
