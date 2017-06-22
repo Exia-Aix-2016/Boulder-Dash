@@ -126,7 +126,6 @@ public class Engine extends JPanel implements IEngine{
         Collection<IComponent> components = world.getComponents();
 
         for (IComponent component: components){
-            System.out.println(component);
             this.add((JComponent) component);
             component.setEngine(this);
         }
