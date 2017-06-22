@@ -24,6 +24,8 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
 
     protected Rectangle futureBounds = null;
 
+    protected  boolean behaviorIgnored = false;
+
     Entity(Position position, Dimension dimension, String sprite, Permeability permeability, int speed){
         super(position, dimension, sprite, permeability);
          stateManager = new StateManager(speed);
@@ -108,7 +110,12 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
     public void run(){
 
         if (!this.stateManager.getCurrentState().isMoving()){
-            this.executeBehaviors();
+
+            if (!this.behaviorIgnored){
+                this.executeBehaviors();
+            } else {
+                this.behaviorIgnored = false;
+            }
 
             if (this.stateManager.getCurrentState().getStateType() != StateType.WAITING){
                 Optional<IAction> forwardEl = this.getForwardElement();
@@ -205,6 +212,11 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
         for (Behavior behavior: behaviors){
             behavior.execute();
         }
+    }
+
+    @Override
+    public void ignoreBehavior() {
+        this.behaviorIgnored = true;
     }
 
     @Override

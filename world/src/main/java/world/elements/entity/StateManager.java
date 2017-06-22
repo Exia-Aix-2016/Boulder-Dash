@@ -60,7 +60,6 @@ public class StateManager{
     public void setSpeed(int speed){
         if (!this.getCurrentState().isMoving() && this.getCurrentState().getSpeed() != speed){
             stateStack.push(new State(this.getCurrentState().getStateType(), false, speed));
-            System.out.println("set speed");
         }
     }
 
@@ -72,5 +71,9 @@ public class StateManager{
     public void tickStateManager(){
         this.refreshState();
         this.getCurrentState().incrementTick();
+    }
+
+    public void clone(State state){
+        this.stateStack.push(state);
     }
 }
