@@ -12,7 +12,7 @@ public class Diamond extends Entity {
 
     public Diamond(Position position, Dimension dimension){
         super(position, dimension, new SpriteManager(
-                "Diamond.png"
+                new String[]{"Diamond.png", "Diamond2.png","Diamond3.png","Diamond4.png"}
         ), 20);
     }
 

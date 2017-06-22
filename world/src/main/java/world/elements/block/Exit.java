@@ -12,7 +12,7 @@ public class Exit extends Block{
 
     public Exit(Position position, Dimension dimension){
         super(position, dimension, new SpriteManager(
-                "Exit_close.png"
+                new String[]{"Exit_close.png", "Exit_close2.png","Exit_close3.png","Exit_close4.png"}
         ));
         this.reactions.add(new EndGame(this, Character.class, new Sides[]{Sides.BOTTOM, Sides.TOP, Sides.LEFT, Sides.RIGHT}));
     }
