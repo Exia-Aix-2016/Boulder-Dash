@@ -3,11 +3,11 @@ package world.elements.entity;
 import engine.Context;
 import world.IComponent;
 import world.IEntity;
-import world.Permeability;
 import world.Position;
 import world.behavior.Behavior;
 import world.elements.Elements;
 import world.elements.IAction;
+import world.elements.SpriteManager;
 import world.reaction.Sides;
 
 import java.awt.*;
@@ -26,8 +26,8 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
 
     protected  boolean behaviorIgnored = false;
 
-    Entity(Position position, Dimension dimension, String sprite, Permeability permeability, int speed){
-        super(position, dimension, sprite, permeability);
+    Entity(Position position, Dimension dimension, SpriteManager spriteManager, int speed){
+        super(position, dimension, spriteManager);
          stateManager = new StateManager(speed);
          stateManager.pushState(StateType.WAITING);
     }
@@ -163,6 +163,7 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
         }
 
         this.stateManager.tickStateManager();
+        this.setImage(this.spriteManager.getImage(this.stateManager.getCurrentState().getStateType()));
     }
 
     protected void move(){
