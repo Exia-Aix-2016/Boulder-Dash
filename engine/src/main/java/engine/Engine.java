@@ -98,6 +98,11 @@ public class Engine extends JPanel implements IEngine{
         System.out.println("Game Over");
     }
 
+    @Override
+    public void win() {
+        System.out.println("win");
+    }
+
     // TODO
     @Override
     public boolean isOut(Rectangle projection) {
@@ -107,6 +112,11 @@ public class Engine extends JPanel implements IEngine{
     @Override
     public void incScore() {
         System.out.println("+1");
+    }
+
+    @Override
+    public boolean levelCompleted() {
+        return true;
     }
 
     /**

@@ -34,4 +34,9 @@ public class Character extends Entity{
         this.engine.removeCharacter(this);
         this.engine.lose();
     }
+
+    @Override
+    public boolean hasFinish() {
+        return this.engine.levelCompleted();
+    }
 }

@@ -13,4 +13,5 @@ public interface IMovement extends IAction {
     StateManager getStateManager();
     boolean isEmpty(int xCase, int yCase);
     void ignoreBehavior();
+    boolean hasFinish();
 }

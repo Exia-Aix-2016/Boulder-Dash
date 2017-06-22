@@ -27,7 +27,11 @@ public interface IEngine {
 
     void lose();
 
+    void win();
+
     boolean isOut(Rectangle projection);
 
     void incScore();
+
+    boolean levelCompleted();
 }

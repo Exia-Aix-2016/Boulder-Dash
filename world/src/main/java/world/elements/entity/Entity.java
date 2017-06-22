@@ -269,4 +269,9 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
     public void destroy() {
         this.engine.removeEntity(this);
     }
+
+    @Override
+    public boolean hasFinish() {
+        return false;
+    }
 }
