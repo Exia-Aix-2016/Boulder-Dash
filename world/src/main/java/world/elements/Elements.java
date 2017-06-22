@@ -83,13 +83,13 @@ public abstract class Elements extends JComponent implements IComponent, IAction
     }
 
     @Override
-    public void performReaction(Object from, int ticks) {
+    public boolean performReaction(Object from, int ticks) {
         for (Reaction reaction: this.reactions){
             if (reaction.isReaction(from)){
-                reaction.perform(from, ticks);
-                break;
+                return reaction.perform(from, ticks);
             }
         }
+        return false;
     }
 
     @Override

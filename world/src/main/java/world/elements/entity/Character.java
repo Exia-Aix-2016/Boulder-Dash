@@ -12,24 +12,12 @@ public class Character extends Entity{
     private static String SPRITE = "Character_waiting.png";
     private static Permeability PERMEABILITY = Permeability.PERMEABLE;
     public Character(Position position, Dimension dimension) {
-        super(position, dimension, SPRITE, PERMEABILITY, 20);
+        super(position, dimension, SPRITE, PERMEABILITY, 10);
     }
 
     @Override
     public void run() {
         super.run();
-        //System.out.println(this.stateManager.getCurrentState());
-       /* this.stateManager.pushState(StateType.WAITING);
-        System.out.println("tick Character ");
-
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        //stateManager.tickStateManager();*/
-
     }
 
     @Override

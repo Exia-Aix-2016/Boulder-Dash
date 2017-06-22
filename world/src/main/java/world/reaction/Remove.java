@@ -25,7 +25,12 @@ public class Remove extends Reaction<IMovement, IAction> {
     }
 
     @Override
-    protected void execute() {
-        this.to.destroy();
+    protected boolean execute(int ticks) {
+        if (ticks > this.delay){
+            this.to.destroy();
+            this.from.getStateManager().setSpeed(2);
+            return true;
+        }
+        return false;
     }
 }

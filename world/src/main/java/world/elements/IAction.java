@@ -18,5 +18,5 @@ public interface IAction {
     /**
      * TODO
      * */
-    void performReaction(Object from, int ticks);
+    boolean performReaction(Object from, int ticks);
 }

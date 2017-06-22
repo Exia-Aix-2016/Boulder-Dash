@@ -28,7 +28,6 @@ public class StateManager{
 
     private void setRequestedState(int speed){
         stateStack.push(new State(requestState, false, speed));
-        System.out.println(this.getCurrentState());
         this.requestState = null;
     }
 
@@ -61,7 +60,12 @@ public class StateManager{
     public void setSpeed(int speed){
         if (!this.getCurrentState().isMoving() && this.getCurrentState().getSpeed() != speed){
             stateStack.push(new State(this.getCurrentState().getStateType(), false, speed));
+            System.out.println("set speed");
         }
+    }
+
+    public void setDefaultSpeed(){
+        this.setSpeed(this.default_speed);
     }
 
 
