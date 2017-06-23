@@ -10,7 +10,7 @@ import world.elements.entity.IMovement;
 public class Kill extends Reaction<IMovement, IMovement> {
     /**
      * Kill
-     * 
+     *
      * @param iMovement
      * @param fromClass
      * @param sides
