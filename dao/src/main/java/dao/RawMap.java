@@ -49,7 +49,7 @@ public class RawMap {
         this.nbrDiamond = nbrDiamond;
         this.timeRemaining = timeRemaining;
         elements = new ArrayList<>();
-    }//FINISH
+    }
 
     //Mutateur
     /**
@@ -59,7 +59,7 @@ public class RawMap {
      * */
     public void addElement(final RawElement element){
         this.elements.add(element);
-    }//FINISH
+    }
 
     //Assesseur
 
@@ -93,7 +93,7 @@ public class RawMap {
      * */
     public String getName() {
         return name;
-    }//FINISH
+    }
 
     /**
      * @return RawElement Array of this Map
@@ -101,10 +101,6 @@ public class RawMap {
      * */
     public ArrayList<RawElement> getElements() {
         return elements;
-    }//FINISH
-
-
-
-
+    }
 
 }

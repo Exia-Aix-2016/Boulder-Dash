@@ -12,23 +12,34 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 /**
- * TODO
+ * class GameBoot
+ * the window of the program, composed of many panels
+ * @see JFrame
+ * @see JPanel
+ * @see ILaunch
+ * @see IFinishWorld
  * */
 public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
 
+    /**
+     * mapDao
+     * the map which be loaded, from the database
+     * @see IMap
+     * */
     private IMap  mapDao = new MapDAO();
     private menu.Menu menu;
     private Engine engine;
-    /**
-     * TODO
-     * */
     private Image icone;
 
     KeyboardFocusManager keyboardFocusManager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 
     private JPanel panelKeyEvent;
+
     /**
-     * TODO
+     * GameBoot
+     * the constructor of the class. Here to initialize the window: set title, size, specifications, icon, engine and key events for the game
+     * @see Engine
+     * @see Menu
      * */
     GameBoot(){
 
@@ -75,15 +86,15 @@ public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
             });
     }
     /**
-     * TODO
+     * boot
+     * show the window and resize it, thank to the engine
+     * @see Engine
      * */
     void boot(){
         this.setVisible(true);
         engine.setSize(this.getSize());
     }
-    /**
-     * TODO
-     * */
+
     @Override
     public void launch(String worldName) {
         System.out.println("Launching world: " + worldName);
@@ -100,6 +111,7 @@ public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void finished(boolean win) {

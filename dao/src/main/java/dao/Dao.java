@@ -40,7 +40,7 @@ public class Dao {
             System.out.println("PLEASE VERIFY THE PARAMETERS CONNECTION !");
             e.printStackTrace();
         }
-    }//FINISH
+    }
 
     /**
      * Allow to access DAO instance to take connection.
@@ -54,7 +54,7 @@ public class Dao {
             }
         }
         return dao;
-    }//FINISH
+    }
 
     /**
      * Allow to access instance Instance
@@ -62,5 +62,5 @@ public class Dao {
      * */
     public Connection getConnection(){
         return connection;
-    }//FINISH
+    }
 }

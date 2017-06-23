@@ -9,6 +9,10 @@ import world.reaction.Sides;
 
 import java.awt.*;
 
+/**
+ *Rock entity
+ * @see Entity
+ * */
 public class Monster extends Entity {
 
     public Monster(Position position, Dimension dimension){
@@ -19,7 +23,7 @@ public class Monster extends Entity {
                 new String[]{"Monster1_walking1.png", "Monster1_walking2.png"},
                 new String[]{"Monster1_walking1.png", "Monster1_walking2.png"}
         ), 30);
-        this.reactions.add(new Remove(this, Rock.class, new Sides[]{Sides.BOTTOM,Sides.TOP}));
+        this.reactions.add(new Remove(this, Rock.class, new Sides[]{Sides.TOP}));
         this.reactions.add(new Kill(this, Character.class, new Sides[]{Sides.LEFT, Sides.RIGHT, Sides.TOP, Sides.BOTTOM}));
     }
 

@@ -67,7 +67,7 @@ public abstract class Elements extends JComponent implements IComponent, IAction
     /**
      * setPosition
      * configure a new position and set the news bounds of the element
-     * @param Position
+     * @param position Set a position
      * */
     public void setPosition(Position position) {
         this.position = position;

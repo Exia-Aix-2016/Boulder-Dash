@@ -26,7 +26,7 @@ public class MapDAO implements IMap {
      * */
    public MapDAO(){
        this.connection = Dao.getInstance().getConnection();
-    }//FINISH
+    }
     //CRUD
     @Override
     public void addObjectType(final ObjectType objectType){
@@ -34,7 +34,7 @@ public class MapDAO implements IMap {
         ArrayList<Parameters> parameters = new ArrayList<>();
         parameters.add(new Parameters<>(objectType.name(), TypeParameters.IN));
         this.createCallableStatement("boulderdash.addObjectType(?)", parameters).ifPresent(MapDAO::executeCallStatement);
-    }//FINISH
+    }
 
     @Override
     public void removeObjectType(final ObjectType objectType){
@@ -42,7 +42,7 @@ public class MapDAO implements IMap {
         ArrayList<Parameters> parameters = new ArrayList<>();
         parameters.add(new Parameters<>(objectType.name(), TypeParameters.IN));
         this.createCallableStatement("boulderdash.removeObjectType(?)", parameters).ifPresent(MapDAO::executeCallStatement);
-    }//FINISH
+    }
 
     @Override
     public Optional<RawMap> getMap(final String nameMap) {
@@ -103,7 +103,7 @@ public class MapDAO implements IMap {
         }
         MapDAO.closeStatement();
         return Optional.of(rawMap);
-    }//FINISH
+    }
 
     @Override
     public void addMap(RawMap rawMap) {
@@ -131,7 +131,7 @@ public class MapDAO implements IMap {
             parameters.clear();
         }
         closeStatement();
-    }//FINISH
+    }
 
     @Override
     public void removeMap(String nameMap) {
@@ -140,7 +140,7 @@ public class MapDAO implements IMap {
         this.createCallableStatement("boulderdash.removeMap(?)",parameters).ifPresent(MapDAO::executeCallStatement);
 
         closeStatement();
-    }//FINISH
+    }
 
     @Override
     public ArrayList<String> getMapListNames() {
@@ -231,7 +231,7 @@ public class MapDAO implements IMap {
             e.printStackTrace();
             return Optional.empty();
         }
-    }//FINISH
+    }
 
     //STEP 3 : Execute statement
     /**
@@ -248,7 +248,7 @@ public class MapDAO implements IMap {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }//FINISH
+    }
 
     //STEP 3 : get if possible ResultSet
     /**
@@ -286,5 +286,5 @@ public class MapDAO implements IMap {
      * */
     public final Connection getConnection() {
         return connection;
-    }//FINISH
+    }
 }

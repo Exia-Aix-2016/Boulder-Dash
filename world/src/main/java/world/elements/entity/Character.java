@@ -9,6 +9,11 @@ import world.reaction.Sides;
 
 import java.awt.*;
 
+/**
+ *Character Entity
+ * the character will be control by player
+ * @see Entity
+ * */
 public class Character extends Entity{
 
     public Character(Position position, Dimension dimension) {

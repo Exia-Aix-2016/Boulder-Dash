@@ -8,6 +8,10 @@ import world.reaction.Sides;
 
 import java.awt.*;
 
+/**
+ * Dirt Element
+ * @see Block
+ * */
 public class Dirt extends Block{
 
     public Dirt(Position position, Dimension dimension){

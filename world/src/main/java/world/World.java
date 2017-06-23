@@ -45,14 +45,13 @@ public class World implements ICreateWorld, IWorld {
         this.blocks = new ArrayList<>();
     }
     /**
-     * TODO
+     * @return the name map
      * */
     public String getName() {
         return name;
     }
-    /**
-     * TODO
-     * */
+
+    @Override
     public int getTimeRemaining() {
         return timeRemaining;
     }
@@ -79,7 +78,7 @@ public class World implements ICreateWorld, IWorld {
     }
 
     /**
-     * TODO
+     * @return all blocks (no entities)
      * */
     public ArrayList<Block> getBlocks() {
         return blocks;
@@ -98,25 +97,24 @@ public class World implements ICreateWorld, IWorld {
         return r;
     }
     /**
-     * TODO
+     * @return the character
      * */
     public Character getCharacter() {
         return character;
     }
     /**
-     * TODO
+     * @return the time
      * */
     public Date getStartTime() {
         return startTime;
     }
-    /**
-     * TODO
-     * */
+
+    @Override
     public int getDiamonds_left() {
         return this.diamonds_left;
     }
     /**
-     * TODO
+     * @return the score
      * */
     public int getScore() {
         return score;
