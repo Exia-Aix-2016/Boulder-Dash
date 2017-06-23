@@ -3,17 +3,27 @@ package world.reaction;
 import world.elements.entity.IMovement;
 import world.elements.entity.StateType;
 
+/**
+ * The type Heap.
+ */
 public class Heap extends Reaction<IMovement, IMovement>{
+
     /**
-     * TODO
+     * Instantiates a new Heap.
      *
-     * @param iMovement
-     * @param fromClass
+     * @param iMovement the to
+     * @param fromClass the from class
      */
     public Heap(IMovement iMovement, Class<? extends IMovement> fromClass) {
         super(iMovement, fromClass, new Sides[]{Sides.TOP});
     }
 
+    /**
+     * Try to create a heap.
+     *
+     * @param ticks the ticks
+     * @return the boolean
+     */
     @Override
     protected boolean execute(int ticks) {
 

@@ -1,7 +1,7 @@
 package world.reaction;
 
 /**
- * Created by hougo on 22/06/2017.
+ * The enum Sides define the sides of an element.
  */
 public enum Sides {
     TOP,

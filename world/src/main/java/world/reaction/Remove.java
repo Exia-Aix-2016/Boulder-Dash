@@ -4,7 +4,7 @@ import world.elements.IAction;
 import world.elements.entity.IMovement;
 
 /**
- * The type Remove is a reaction which define that an object can be removed by an other.
+ * The type Remove is a reaction which define that an element can be removed by an other.
  *
  * @see Reaction
  * @see IMovement
@@ -18,7 +18,7 @@ public class Remove extends Reaction<IMovement, IAction> {
      * Instantiates a new Remove.
      *
      * @param to        the to
-     * @param typeClass the type class
+     * @param typeClass the from class
      * @param sides     the sides
      * @param delay     the delay
      */
@@ -40,7 +40,10 @@ public class Remove extends Reaction<IMovement, IAction> {
     }
 
     /**
-     * Remove the to object when a delay is reach and slow the from object
+     * Remove the to element when a delay is reached and slow the from element.
+     *
+     * @param ticks the ticks
+     * @return the boolean
      */
     @Override
     protected boolean execute(int ticks) {

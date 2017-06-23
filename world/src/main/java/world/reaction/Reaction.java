@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * The type Reaction define the mechanics when an object hit an other.
+ * The type Reaction define the mechanics when an element hit an other.
  *
- * @param <From> the type the object that hit;
- * @param <To>   the type the object that be hit;
+ * @param <From> the type the element that hit;
+ * @param <To>   the type the element that be hit;
  */
 public abstract class Reaction <From extends IAction, To extends IAction> {
 
@@ -34,7 +34,7 @@ public abstract class Reaction <From extends IAction, To extends IAction> {
     }
 
     /**
-     * Is reaction test if and object will react.
+     * Is reaction test if and element will react.
      *
      * @param from the from
      * @param side the side

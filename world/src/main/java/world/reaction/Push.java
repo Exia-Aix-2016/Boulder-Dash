@@ -2,22 +2,32 @@ package world.reaction;
 
 import world.elements.entity.IMovement;
 
+/**
+ * The type Push.
+ */
 public class Push extends Reaction<IMovement, IMovement> {
 
     private int delay;
 
     /**
-     * TODO
+     * Instantiates a new Push.
      *
-     * @param iMovement
-     * @param fromClass
-     * @param sides
+     * @param iMovement the to
+     * @param fromClass the from class
+     * @param sides     the sides
+     * @param delay     the delay
      */
     public Push(IMovement iMovement, Class<? extends IMovement> fromClass, Sides[] sides, int delay) {
         super(iMovement, fromClass, sides);
         this.delay = delay;
     }
 
+    /**
+     * Push the to element when a delay is reached.
+     *
+     * @param ticks the ticks
+     * @return the boolean
+     */
     @Override
     protected boolean execute(int ticks) {
         if (ticks > delay){
