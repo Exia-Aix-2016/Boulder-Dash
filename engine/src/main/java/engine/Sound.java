@@ -26,7 +26,7 @@ public class Sound extends Thread{
             AudioStream audioStream = new AudioStream(in);
             AudioPlayer.player.start(audioStream);
         }catch (Exception e){
-
+            System.err.println(e);
         }
 
     }
