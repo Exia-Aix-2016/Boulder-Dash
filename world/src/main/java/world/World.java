@@ -32,6 +32,10 @@ public class World implements ICreateWorld, IWorld {
     /**
      * World
      * The constructor of the class, called to creat a new world. Composed mainly of two arrayList, which contain the elements of the world
+     * @param name name
+     * @param dimension dimension
+     * @param diamonds_left diamond_left
+     * @param timeRemaining timeRemaining
      * @see Dimension
      * */
 

@@ -20,7 +20,7 @@ public class Parameters<T> {
 
     /**
      * Contructor Parameters
-     * @param o Object of this parameter
+     * @param obj Object of this parameter
      * @param typeParameters Type of this Parameter OUT, IN, INOUT
      * @see TypeParameters
      * @see Object

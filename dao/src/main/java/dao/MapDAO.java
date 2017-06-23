@@ -239,7 +239,6 @@ public class MapDAO implements IMap {
      * when execution is success the statement is closes
      * @param callableStatement CallableStatement
      * @see CallableStatement
-     * @throws SQLException
      * */
     public static void executeCallStatement(final CallableStatement callableStatement){
         try {
