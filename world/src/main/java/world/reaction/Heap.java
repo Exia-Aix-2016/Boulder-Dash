@@ -7,8 +7,8 @@ public class Heap extends Reaction<IMovement, IMovement>{
     /**
      * TODO
      *
-     * @param iMovement
-     * @param fromClass
+     * @param iMovement TODO
+     * @param fromClass TODO
      */
     public Heap(IMovement iMovement, Class<? extends IMovement> fromClass) {
         super(iMovement, fromClass, new Sides[]{Sides.TOP});

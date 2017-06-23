@@ -9,9 +9,9 @@ public class Push extends Reaction<IMovement, IMovement> {
     /**
      * TODO
      *
-     * @param iMovement
-     * @param fromClass
-     * @param sides
+     * @param iMovement TODO
+     * @param fromClass TODO
+     * @param sides TODO
      */
     public Push(IMovement iMovement, Class<? extends IMovement> fromClass, Sides[] sides, int delay) {
         super(iMovement, fromClass, sides);

@@ -6,6 +6,10 @@ import world.elements.SpriteManager;
 
 import java.awt.*;
 
+/**
+ * Wall elements
+ * @see Block
+ * */
 public class Wall extends Block{
 
     public Wall(Position position, Dimension dimension){

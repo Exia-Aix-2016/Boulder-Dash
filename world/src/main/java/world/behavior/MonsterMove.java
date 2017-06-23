@@ -4,7 +4,7 @@ import world.elements.entity.IMovement;
 import world.elements.entity.StateType;
 
 /**
- * Created by Mandel on 21/06/2017.
+ * The Behavior Monvement for the Monster
  */
 public class MonsterMove extends Behavior {
 

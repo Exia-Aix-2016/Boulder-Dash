@@ -6,6 +6,10 @@ import world.elements.SpriteManager;
 
 import java.awt.*;
 
+/**
+ * Block Element
+ * @see Elements
+ * */
 public abstract class Block extends Elements {
 
     public Block(Position position, Dimension dimension, SpriteManager spriteManager) {

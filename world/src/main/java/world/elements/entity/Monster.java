@@ -9,6 +9,10 @@ import world.reaction.Sides;
 
 import java.awt.*;
 
+/**
+ *Rock entity
+ * @see Entity
+ * */
 public class Monster extends Entity {
 
     public Monster(Position position, Dimension dimension){

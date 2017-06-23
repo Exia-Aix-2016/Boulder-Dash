@@ -3,15 +3,15 @@ package world.reaction;
 import world.elements.entity.IMovement;
 
 /**
- * Created by hougo on 23/06/2017.
+ * TODO
  */
 public class Kill extends Reaction<IMovement, IMovement> {
     /**
      * TODO
      *
-     * @param iMovement
-     * @param fromClass
-     * @param sides
+     * @param iMovement TODO
+     * @param fromClass TODO
+     * @param sides TODO
      */
     public Kill(IMovement iMovement, Class<? extends IMovement> fromClass, Sides[] sides) {
         super(iMovement, fromClass, sides);

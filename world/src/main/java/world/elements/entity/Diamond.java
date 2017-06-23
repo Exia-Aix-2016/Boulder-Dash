@@ -11,7 +11,10 @@ import world.reaction.Sides;
 
 import java.awt.*;
 import java.util.Optional;
-
+/**
+ * Diamond Entity
+ * @see Entity
+ * */
 public class Diamond extends Entity {
 
     public Diamond(Position position, Dimension dimension){
