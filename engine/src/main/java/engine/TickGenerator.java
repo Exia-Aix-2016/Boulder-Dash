@@ -25,7 +25,7 @@ public class TickGenerator implements Runnable{
      * Allow to remove a TickListener
      * @param tickListener Remove the tickListener give in parameters
      * */
-    public void removeTickListener(TickListener tickListener){
+    public synchronized void removeTickListener(TickListener tickListener){
         tickListeners.remove(tickListener);
     }
 
@@ -39,7 +39,7 @@ public class TickGenerator implements Runnable{
     /**
      * Call the tick() method for all TickListener
      * */
-    private void fireTick(){
+    private synchronized void fireTick(){
         for(TickListener listener : tickListeners) {
             listener.tick();
 
