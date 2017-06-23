@@ -3,11 +3,12 @@ package world.elements.entity;
 import engine.Context;
 import world.IComponent;
 import world.IEntity;
-import world.Permeability;
 import world.Position;
 import world.behavior.Behavior;
 import world.elements.Elements;
 import world.elements.IAction;
+import world.elements.SpriteManager;
+import world.reaction.Sides;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -21,10 +22,12 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
     protected StateManager stateManager;
     protected Collection<Behavior> behaviors = new ArrayList<>();
 
-    protected Rectangle futurBounds = null;
+    protected Rectangle futureBounds = null;
 
-    Entity(Position position, Dimension dimension, String sprite, Permeability permeability, int speed){
-        super(position, dimension, sprite, permeability);
+    protected  boolean behaviorIgnored = false;
+
+    Entity(Position position, Dimension dimension, SpriteManager spriteManager, int speed){
+        super(position, dimension, spriteManager);
          stateManager = new StateManager(speed);
          stateManager.pushState(StateType.WAITING);
     }
@@ -43,21 +46,28 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
 
     protected Optional<IAction> getForwardElement(){
 
-        switch (this.stateManager.getCurrentState().getStateType()){
-            case UP:
-                return this.getContext(this.getProjection(0, -1));
-            case DOWN:
-                return this.getContext(this.getProjection(0, 1));
-            case LEFT:
-                return this.getContext(this.getProjection(-1, 0));
-            case RIGHT:
-                return this.getContext(this.getProjection(1, 0));
+        if (this.getForwardProjection() != null){
+            return this.getContext(this.getForwardProjection());
         }
 
         return Optional.empty();
     }
 
-    protected Rectangle getProjection(int xCase, int yCase){
+    protected Rectangle getForwardProjection(){
+        switch (this.stateManager.getCurrentState().getStateType()){
+            case UP:
+                return this.getProjection(0, -1);
+            case DOWN:
+                return this.getProjection(0, 1);
+            case LEFT:
+                return this.getProjection(-1, 0);
+            case RIGHT:
+                return this.getProjection(1, 0);
+        }
+        return null;
+    }
+
+    public Rectangle getProjection(int xCase, int yCase){
 
         Rectangle center = this.getBounds();
 
@@ -75,10 +85,37 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
         return stateManager;
     }
 
+    public Sides getReactionSide(){
+        switch (this.stateManager.getCurrentState().getStateType()){
+
+            case UP:
+                return Sides.BOTTOM;
+            case DOWN:
+                return Sides.TOP;
+            case LEFT:
+                return Sides.RIGHT;
+            case RIGHT:
+                return Sides.LEFT;
+        }
+        return null;
+    }
+
+    public boolean isMapBorder(){
+        if (this.getForwardProjection() != null){
+            return this.engine.isOut(this.getForwardProjection());
+        }
+        return false;
+    }
+
     public void run(){
 
         if (!this.stateManager.getCurrentState().isMoving()){
-            this.executeBehaviors();
+
+            if (!this.behaviorIgnored){
+                this.executeBehaviors();
+            } else {
+                this.behaviorIgnored = false;
+            }
 
             if (this.stateManager.getCurrentState().getStateType() != StateType.WAITING){
                 Optional<IAction> forwardEl = this.getForwardElement();
@@ -86,31 +123,35 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
 
                 if (forwardEl.isPresent()){
                     IAction el = forwardEl.get();
-                    if (el.isReaction(this)){
-                        move = el.performReaction(this, this.stateManager.getCurrentState().getTicks());
+                    if (el.isReaction(this, this.getReactionSide())){
+                        move = el.performReaction(this, this.getReactionSide(), this.stateManager.getCurrentState().getTicks());
                     } else {
                         this.stateManager.setBlockState(true);
                     }
                 } else {
-                    this.stateManager.setBlockState(false);
-                    this.stateManager.setDefaultSpeed();
-                    move = true;
+                    if (this.isMapBorder()){
+                        this.stateManager.setBlockState(true);
+                    } else {
+                        this.stateManager.setBlockState(false);
+                        this.stateManager.setDefaultSpeed();
+                        move = true;
+                    }
                 }
 
                 if (move){
                     this.stateManager.getCurrentState().setMoving(true);
                     switch (this.stateManager.getCurrentState().getStateType()){
                         case UP:
-                            this.futurBounds = this.getProjection(0, -1);
+                            this.futureBounds = this.getProjection(0, -1);
                             break;
                         case DOWN:
-                            this.futurBounds = this.getProjection(0, 1);
+                            this.futureBounds = this.getProjection(0, 1);
                             break;
                         case LEFT:
-                            this.futurBounds = this.getProjection(-1, 0);
+                            this.futureBounds = this.getProjection(-1, 0);
                             break;
                         case RIGHT:
-                            this.futurBounds = this.getProjection(1, 0);
+                            this.futureBounds = this.getProjection(1, 0);
                             break;
                     }
                 }
@@ -122,6 +163,7 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
         }
 
         this.stateManager.tickStateManager();
+        this.setImage(this.spriteManager.getImage(this.stateManager.getCurrentState().getStateType()));
     }
 
     protected void move(){
@@ -148,7 +190,7 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
 
         this.setPosition(this.calculateFuture(x, y));
 
-        if (this.getBounds().getX() == this.futurBounds.getX() && this.getBounds().getY() == this.futurBounds.getY()){
+        if (this.getBounds().getX() == this.futureBounds.getX() && this.getBounds().getY() == this.futureBounds.getY()){
             currentState.setMoving(false);
         }
 
@@ -156,12 +198,12 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
 
     protected Position calculateFuture(int x, int y){
 
-        if (Math.abs(this.futurBounds.getY() - y) > 0){
-            y = (int) this.futurBounds.getY();
+        if (Math.abs(this.futureBounds.getY() - y) > 0){
+            y = (int) this.futureBounds.getY();
         }
 
-        if (Math.abs(this.futurBounds.getX() - x) > 0){
-            x = (int) this.futurBounds.getX();
+        if (Math.abs(this.futureBounds.getX() - x) > 0){
+            x = (int) this.futureBounds.getX();
         }
 
         return new Position(x, y);
@@ -174,6 +216,11 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
     }
 
     @Override
+    public void ignoreBehavior() {
+        this.behaviorIgnored = true;
+    }
+
+    @Override
     public void tick() {
         if (this.thread == null) {
             this.thread = new Thread(this);
@@ -183,6 +230,15 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
             this.thread.start();
         }
     }
+
+    @Override
+    public boolean isEmpty(int xCase, int yCase) {
+        if (!this.getContext(this.getProjection(xCase, yCase)).isPresent()){
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void goUp() {
         this.stateManager.pushState(StateType.UP);
@@ -213,5 +269,10 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
     @Override
     public void destroy() {
         this.engine.removeEntity(this);
+    }
+
+    @Override
+    public boolean hasFinish() {
+        return false;
     }
 }

@@ -1,19 +1,25 @@
 package world.elements.entity;
 
 import world.Position;
-import world.Permeability;
 import world.behavior.MonsterMove;
+import world.elements.SpriteManager;
+import world.reaction.Remove;
+import world.reaction.Sides;
 
 import java.awt.*;
 
 public class Monster extends Entity {
-    private static String SPRITE = "Monster1_waiting.png";
-    private static Permeability PERMEABILITY = Permeability.PERMEABLE;
+
     public Monster(Position position, Dimension dimension){
-        super(position, dimension, SPRITE, PERMEABILITY, 30);
+        super(position, dimension, new SpriteManager(
+                new String[]{"Monster1_waiting.png"},
+                new String[]{"Monster1_walking1.png", "Monster1_walking2.png"},
+                new String[]{"Monster1_walking1.png", "Monster1_walking2.png"},
+                new String[]{"Monster1_walking1.png", "Monster1_walking2.png"},
+                new String[]{"Monster1_walking1.png", "Monster1_walking2.png"}
+        ), 30);
+        this.reactions.add(new Remove(this, Rock.class, new Sides[]{Sides.LEFT, Sides.RIGHT, Sides.TOP, Sides.BOTTOM}));
     }
-
-
 
     @Override
     public void loadBehaviors() {
@@ -24,5 +30,11 @@ public class Monster extends Entity {
     public void run() {
         super.run();
 
+    }
+    @Override
+    public void destroy() {
+        this.engine.getInfo("Score").get().add(100);
+
+        super.destroy();
     }
 }

@@ -19,9 +19,14 @@ public class Remove extends Reaction<IMovement, IAction> {
     /**
      * TODO
      * */
-    public Remove(IAction to, Class<? extends IMovement> typeClass, int delay){
-        super(to, typeClass);
+    public Remove(IAction to, Class<? extends IMovement> typeClass, Sides[] sides, int delay){
+        super(to, typeClass, sides);
         this.delay = delay;
+    }
+
+    public Remove(IAction to, Class<? extends IMovement> typeClass, Sides[] sides){
+        super(to, typeClass, sides);
+        this.delay = 0;
     }
 
     @Override

@@ -1,10 +1,11 @@
 package engine;
 
+import Hud.Info;
 import world.IComponent;
 
-import javax.xml.bind.Element;
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.util.Optional;
 
 /**
  * TODO
@@ -25,4 +26,14 @@ public interface IEngine {
     void removeBlock(IComponent element);
 
     void removeCharacter(IComponent element);
+
+    Optional<Info> getInfo(final String name);
+
+    void lose();
+
+    void win();
+
+    boolean isOut(Rectangle projection);
+
+    boolean levelCompleted();
 }

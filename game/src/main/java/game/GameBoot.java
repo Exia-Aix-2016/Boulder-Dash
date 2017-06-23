@@ -7,6 +7,7 @@ import menu.FinalScreen;
 import world.World;
 import worldloader.WorldLoader;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -24,7 +25,7 @@ public class GameBoot extends JFrame implements ILaunch{
     /**
      * TODO
      * */
-    private Image icone = Toolkit.getDefaultToolkit().getImage("world\\src\\main\\resources\\world\\elements\\entity\\Character_waiting.png");
+    private Image icone;
 
     KeyboardFocusManager keyboardFocusManager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 
@@ -37,6 +38,13 @@ public class GameBoot extends JFrame implements ILaunch{
         this.setTitle("BoulderDash");
         this.setSize(new Dimension(800, 800));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        try{
+            icone = ImageIO.read(this.getClass().getResource("Character_waiting.png"));
+
+        }catch (Exception e){
+            System.out.println("load fail");
+        }
 
         this.setIconImage(icone);
 

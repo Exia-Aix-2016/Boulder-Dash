@@ -2,15 +2,12 @@ package world.elements;
 
 import engine.IEngine;
 import world.IComponent;
-import world.Permeability;
 import world.Position;
 import world.reaction.Reaction;
+import world.reaction.Sides;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 /**
@@ -19,19 +16,17 @@ import java.util.Collection;
 public abstract class Elements extends JComponent implements IComponent, IAction {
 
     protected IEngine engine;
-    protected String sprite;
-    protected Permeability permeability;
     protected Position position;
 
-    private BufferedImage image;
+    private Image image;
+
+    protected SpriteManager spriteManager;
 
     protected Collection<Reaction> reactions = new ArrayList<>();
     /**
      * TODO
      * */
-    public Elements(Position position, final Dimension dimension, final String sprite,  Permeability permeability){
-        this.sprite = sprite;
-        this.permeability = permeability;
+    public Elements(Position position, final Dimension dimension, SpriteManager spriteManager){
         this.position = position;
 
         this.setPreferredSize(dimension);
@@ -39,17 +34,17 @@ public abstract class Elements extends JComponent implements IComponent, IAction
 
         this.updateBounds();
 
-        try {
-            this.image = ImageIO.read((this.getClass().getResource(this.sprite)));
-        } catch (IOException ex) {
-        }
+        this.spriteManager = spriteManager;
+
+        this.setImage(this.spriteManager.getImage());
     }
-    /**
-     * TODO
-     * */
-    public Permeability getPermeability() {
-        return permeability;
+
+    public void setImage(Image image) {
+        this.image = image;
+        this.revalidate();
+        this.repaint();
     }
+
     /**
      * TODO
      * */
@@ -73,9 +68,9 @@ public abstract class Elements extends JComponent implements IComponent, IAction
     }
 
     @Override
-    public boolean isReaction(Object from) {
+    public boolean isReaction(Object from, Sides side) {
         for (Reaction reaction: this.reactions){
-            if (reaction.isReaction(from)){
+            if (reaction.isReaction(from, side)){
                 return true;
             }
         }
@@ -83,10 +78,10 @@ public abstract class Elements extends JComponent implements IComponent, IAction
     }
 
     @Override
-    public boolean performReaction(Object from, int ticks) {
+    public boolean performReaction(Object from, Sides side, int ticks) {
         for (Reaction reaction: this.reactions){
-            if (reaction.isReaction(from)){
-                return reaction.perform(from, ticks);
+            if (reaction.isReaction(from, side)){
+                return reaction.perform(from, side, ticks);
             }
         }
         return false;

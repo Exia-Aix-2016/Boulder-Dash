@@ -9,6 +9,7 @@ import world.IWorld;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Collection;
+import java.util.Optional;
 
 
 /**
@@ -21,9 +22,14 @@ public class Engine extends JPanel implements IEngine{
 
     private TickGenerator tickGenerator;
     private Thread tickGeneratorThread;
+    private Hud hud;
+
+
 
     private Image backgroundDirt;
     private Graphics g;
+
+    private Sound sound = new Sound();
 
     public Engine(){
         this.setLayout(null);
@@ -46,21 +52,24 @@ public class Engine extends JPanel implements IEngine{
         this.revalidate();
         this.repaint();
 
-        Hud hud = new Hud(new GridLayout(1, 3));
-        Info info = new Info("Score");
-
+        hud = new Hud(new GridLayout(1, 3));
 
         this.setComponentZOrder(hud, 0);
 
         hud.setSize((int)this.getSize().getWidth(), 30);
         hud.setBackground(Color.YELLOW);
-        hud.add(info);
-        hud.add(new Info("Diamond remaining", this.world.getDiamonds_left()));
-        hud.add(new Info("Time",this.world.getTimeRemaining()));
+        hud.addInfo(new Info("Score"));
+        hud.addInfo(new Info("Diamond remaining", this.world.getDiamonds_left()));
+        hud.addInfo(new Info("Time",this.world.getTimeRemaining()));
 
+        sound.playSound("Start");
 
        this.tickGeneratorThread = new Thread(tickGenerator);
        this.tickGeneratorThread.start();
+    }
+
+    public Optional<Info> getInfo(final String name){
+        return this.hud.getInfo(name);
     }
     /**
      * TODO
@@ -93,6 +102,46 @@ public class Engine extends JPanel implements IEngine{
         this.world.removeCharacter(element);
     }
 
+    @Override
+    public void lose() {
+        System.out.println("Game Over");
+        sound.playSound("Lose");
+    }
+
+    @Override
+    public void win() {
+        System.out.println("win");
+        sound.playSound("Win");
+    }
+
+    // TODO
+    @Override
+    public boolean isOut(Rectangle projection) {
+
+        if ( 0 > projection.x){
+            return true;
+        }
+
+        if (0 > projection.y){
+            return true;
+        }
+
+        if (this.getSize().width < projection.x + projection.width){
+            return true;
+        }
+
+        if (this.getSize().height < projection.y + projection.height){
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean levelCompleted() {
+        return true;
+    }
+
     /**
      * TODO
      * */
@@ -100,7 +149,6 @@ public class Engine extends JPanel implements IEngine{
         Collection<IComponent> components = world.getComponents();
 
         for (IComponent component: components){
-            System.out.println(component);
             this.add((JComponent) component);
             component.setEngine(this);
         }
