@@ -109,14 +109,16 @@ public class Engine extends JPanel implements IEngine{
 
     @Override
     public void lose() {
-        System.out.println("Game Over");
+        this.game.finished(false);
         this.playSound("Lose");
+        this.unloadWorld();
     }
 
     @Override
     public void win() {
-        System.out.println("win");
+        this.game.finished(true);
         this.playSound("Win");
+        this.unloadWorld();
     }
     // TODO
     @Override
