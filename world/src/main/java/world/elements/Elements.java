@@ -47,7 +47,7 @@ public abstract class Elements extends JComponent implements IComponent, IAction
     /**
      * setImage
      * set the image of the element, like the image passed
-     * @param Image
+     * @param image image
      * */
     public void setImage(Image image) {
         this.image = image;

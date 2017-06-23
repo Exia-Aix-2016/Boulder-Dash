@@ -12,7 +12,7 @@ public interface IComponent {
     /**
      * setEngine
      * configure the engine of tne component
-     * @param IEngine
+     * @param engine interface engine
      * */
     void setEngine(IEngine engine);
     /**

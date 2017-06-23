@@ -45,6 +45,7 @@ public class StateManager{
         return stateStack.lastElement();
     }
     /**
+     * @param index index
      * @return  the State where index
      * */
     public State getState(final int index){

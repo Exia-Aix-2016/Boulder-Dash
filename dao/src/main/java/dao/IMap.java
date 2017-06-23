@@ -11,6 +11,7 @@ public interface IMap {
 
       /**
        * Search in DataBase map by her id
+       * @param nameMap Name of the map
        * @return Optional encapsulate RawMap if method is success return Optional(RawMap) else Optional.empty()
        * @see RawMap
        * @see Optional
@@ -37,17 +38,15 @@ public interface IMap {
 
       /**
      * Add Object type into dataBase.
-     *call sql function boulderdash.addObjectType()
-     * @return true if success or false is if failure
-     * @throws SQLException
+    *call sql function boulderdash.addObjectType()
+    * @param objectType type of the object
      **/
       void addObjectType(final ObjectType objectType);
 
     /**
      * Remove Object in ObjectType
      * call sql function boulderdash.removeObjectType()
-     * @return true if success or false if failure
-     * @throws SQLException
-     * * */
+     * @param objectType type of the object
+     * */
      void removeObjectType(final ObjectType objectType);
 }

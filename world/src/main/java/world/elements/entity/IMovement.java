@@ -44,6 +44,7 @@ public interface IMovement extends IAction {
     /**
      * hasFinished
      * check is the element had finished it current movement
+     * @return boolean
      * */
     boolean hasFinish();
 }

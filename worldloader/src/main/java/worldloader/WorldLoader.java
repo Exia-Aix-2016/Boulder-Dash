@@ -25,6 +25,7 @@ public abstract class WorldLoader {
      * Allow to get map with its name
      * @param nameMap name of map you can load
      * @param MapDAO  DAO which allow to search the map in database
+     * @param screenSize screen size
      * @return a Optional(ICreateWorld interface between WorldLoader and World)
      * @see ICreateWorld
      * @see world

@@ -6,6 +6,7 @@ package game;
 public interface IFinishWorld {
     /**
      * Call when the game is finish
+     * @param win define if finish in win or not
      * */
     void finished(boolean win);
 }
