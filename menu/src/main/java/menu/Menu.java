@@ -1,6 +1,6 @@
 package menu;
 
-import dao.IMap;
+import daotest.IMap;
 import game.ILaunch;
 import worldloader.WorldLoader;
 

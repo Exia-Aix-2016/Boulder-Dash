@@ -1,7 +1,7 @@
 package game;
 
-import dao.IMap;
-import dao.MapDAO;
+import daotest.IMap;
+import daotest.MapDAO;
 import engine.Engine;
 import world.World;
 import worldloader.WorldLoader;

@@ -1,4 +1,4 @@
-package dao;
+package daotest;
 
 /**
  * Enum which define all Elements which compose the map

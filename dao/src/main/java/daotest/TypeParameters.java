@@ -1,4 +1,4 @@
-package dao;
+package daotest;
 
 /**
  * Represents the different types of parameters a stored procedure can take

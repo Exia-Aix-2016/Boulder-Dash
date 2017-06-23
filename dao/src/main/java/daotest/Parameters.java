@@ -1,4 +1,4 @@
-package dao;
+package daotest;
 
 /**
  *Represente Parameters which used by CallStatement
