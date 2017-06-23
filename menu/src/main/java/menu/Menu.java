@@ -88,8 +88,6 @@ public class Menu extends JPanel implements IMenuAction {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "Map Loader");
         fileChooser.setFileFilter(filter);
 
-        System.out.println(file.getAbsolutePath());
-
         try {
 
             this.mapDao.addMap(WorldLoader.genRawMapFILE(file));

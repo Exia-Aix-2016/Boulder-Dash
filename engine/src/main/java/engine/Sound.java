@@ -1,8 +1,7 @@
 package engine;
 
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.io.InputStream;
 
 /**
@@ -11,9 +10,15 @@ import java.io.InputStream;
  * */
 public class Sound extends Thread{
     private String filename;
+    private boolean loop;
 
     Sound(String filename){
+        this(filename, false);
+    }
+
+    Sound(String filename, boolean loop){
         this.filename = filename;
+        this.loop = loop;
     }
 
     /**
@@ -23,8 +28,13 @@ public class Sound extends Thread{
     public void run() {
         try {
             InputStream in = getClass().getResourceAsStream(this.filename + ".wav");
-            AudioStream audioStream = new AudioStream(in);
-            AudioPlayer.player.start(audioStream);
+            Clip clip = AudioSystem.getClip();
+
+            clip.open(AudioSystem.getAudioInputStream(in));
+            if (this.loop){
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+            }
+            clip.start();
         }catch (Exception e){
             System.err.println(e);
         }

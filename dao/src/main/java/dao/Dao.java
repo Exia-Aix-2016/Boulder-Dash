@@ -37,7 +37,7 @@ public class Dao {
         try {
             connection = DriverManager.getConnection(url, user, passwd);
         } catch (SQLException e) {
-            System.out.println("PLEASE VERIFY THE PARAMETERS CONNECTION !");
+            System.err.println("PLEASE VERIFY THE PARAMETERS CONNECTION !");
             e.printStackTrace();
         }
     }

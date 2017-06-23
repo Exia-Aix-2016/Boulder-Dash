@@ -57,7 +57,7 @@ public class Engine extends JPanel implements IEngine{
 
         this.game = game;
 
-        new Sound("menu").start();
+        new Sound("ambiance", true).start();
     }
 
     /**

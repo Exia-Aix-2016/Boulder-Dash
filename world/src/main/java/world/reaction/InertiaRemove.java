@@ -27,7 +27,6 @@ public class InertiaRemove extends Remove {
      */
     @Override
     protected boolean execute(int ticks) {
-        System.out.println(this.from.getStateManager().getCurrentState().getTicks());
         if (this.from.getStateManager().getCurrentState().getTicks() < 10){
             return super.execute(ticks);
         }
