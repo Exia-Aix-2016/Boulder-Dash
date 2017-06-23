@@ -6,6 +6,7 @@ import game.IFinishWorld;
 import world.IComponent;
 import world.IEntity;
 import world.IWorld;
+import Hud.Timer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +26,7 @@ public class Engine extends JPanel implements IEngine{
     private Thread tickGeneratorThread;
     private Hud hud;
     private IFinishWorld game;
+    private Timer timer;
 
     public Engine(IFinishWorld game){
         this.setLayout(null);
@@ -53,10 +55,14 @@ public class Engine extends JPanel implements IEngine{
 
         hud.setSize((int)this.getSize().getWidth(), 30);
         hud.setBackground(Color.YELLOW);
+
+        this.timer = new Timer(this, this.hud, this.world.getTimeRemaining());
+        this.tickGenerator.addTickListener(this.timer);
+
         hud.addInfo(new Info("Score"));
         hud.addInfo(new Info("Diamond remaining", this.world.getDiamonds_left()));
-        hud.addInfo(new Info("Time",this.world.getTimeRemaining()));
-    this.playSound("Start");
+
+        this.playSound("Start");
 
        this.tickGeneratorThread = new Thread(tickGenerator);
        this.tickGeneratorThread.start();
