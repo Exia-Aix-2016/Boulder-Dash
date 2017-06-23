@@ -33,7 +33,9 @@ public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
     GameBoot(){
 
         this.setTitle("BoulderDash");
-        this.setSize(new Dimension(800, 800));
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setUndecorated(true);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         try{
