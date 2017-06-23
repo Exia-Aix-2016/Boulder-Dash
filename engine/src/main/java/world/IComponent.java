@@ -5,16 +5,21 @@ import engine.IEngine;
 import java.awt.*;
 
 /**
- * TODO
- * @version 1.0
+ * interface IComponent
+ * regroup the methods used by a component of the engine
  * */
 public interface IComponent {
     /**
-     * TODO
+     * setEngine
+     * configure the engine of tne component
+     * @param IEngine
      * */
     void setEngine(IEngine engine);
     /**
-     * TODO
+     * getBounds
+     * return the bounds of the component
+     * @see Rectangle
+     * @return Rectangle
      * */
     Rectangle getBounds();
 }

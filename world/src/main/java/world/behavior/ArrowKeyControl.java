@@ -22,7 +22,7 @@ public class ArrowKeyControl extends Behavior implements KeyListener{
 
     /**
      * ArrowKeyControl
-     * the constructor of the class. Here to move an objet, thanks to an engine
+     * the constructor of the class. Here to move an object, thanks to an engine
      * @see IMovement
      * @see IEngine
      * */
@@ -33,7 +33,8 @@ public class ArrowKeyControl extends Behavior implements KeyListener{
         this.engine.addKeyListener(this);
     }
     /**
-     * TODO
+     * execute
+     * called by an element and use the code of the last key pressed to use the specific method to move the element
      * */
     @Override
     public void execute() {
@@ -56,21 +57,27 @@ public class ArrowKeyControl extends Behavior implements KeyListener{
     }
 
     /**
-     * TODO
+     * keyTyped
+     * used when a key is pressed
+     * @param KeyEvent
      * */
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
     /**
-     * TODO
+     * keyPressed
+     * get the key code of the keyEvent past in the method
+     * @param KeyEvent
      * */
     @Override
     public void keyPressed(KeyEvent e) {
         this.lastKey = e.getKeyCode();
     }
     /**
-     * TODO
+     * keyReleased
+     * invoked when the key is released, and set it key code to -1, which is attached to nothing
+     * @param KeyEvent
      * */
     @Override
     public void keyReleased(KeyEvent e) {
