@@ -3,7 +3,8 @@ package game;
 import engine.Engine;
 import world.World;
 /**
- * TODO
+ * interface ILaunch
+ * the interface which contain the method launch, used to start a new world
  * */
 public interface ILaunch {
     /**
