@@ -36,4 +36,6 @@ public interface IEngine {
     boolean isOut(Rectangle projection);
 
     boolean levelCompleted();
+
+    void playSound(String filename);
 }

@@ -34,7 +34,7 @@ public class Monster extends Entity {
     @Override
     public void destroy() {
         this.engine.getInfo("Score").get().add(100);
-
+        this.engine.playSound("Explosion");
         super.destroy();
     }
 }
