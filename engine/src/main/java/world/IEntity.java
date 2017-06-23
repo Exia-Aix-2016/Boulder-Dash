@@ -2,7 +2,11 @@ package world;
 
 import engine.TickListener;
 /**
- * TODO
+ * Interface Entity
+ * Represente the entity element
+ * @see TickListener
+ * @see IComponent
+ * @see Runnable
  * @version 1.0
  * */
 public interface IEntity extends TickListener, IComponent, Runnable{
