@@ -6,13 +6,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Abstract class Reaction
+ * The type Reaction define the mechanics when an object hit an other.
  *
- * TODO
- *
- * @see IAction
- * */
-
+ * @param <From> the type the object that hit;
+ * @param <To>   the type the object that be hit;
+ */
 public abstract class Reaction <From extends IAction, To extends IAction> {
 
     protected To to;
@@ -21,8 +19,12 @@ public abstract class Reaction <From extends IAction, To extends IAction> {
     protected Collection<Sides> sides = new ArrayList<>();
 
     /**
-     * TODO
-     * */
+     * Instantiates a new Reaction.
+     *
+     * @param to        the to
+     * @param fromClass the from class
+     * @param sides     the sides that can be hit
+     */
     Reaction(To to, Class<? extends From> fromClass, Sides[] sides){
         this.to = to;
         this.fromClass = fromClass;
@@ -30,15 +32,26 @@ public abstract class Reaction <From extends IAction, To extends IAction> {
             this.sides.add(side);
         }
     }
+
     /**
-     * TODO
-     * */
+     * Is reaction test if and object will react.
+     *
+     * @param from the from
+     * @param side the side
+     * @return the boolean
+     */
     public boolean isReaction(Object from, Sides side){
         return (fromClass.isInstance(from) && this.sides.contains(side));
     }
+
     /**
-     * TODO
-     * */
+     * Perform execute the reaction.
+     *
+     * @param from  the from
+     * @param side  the side
+     * @param ticks the ticks
+     * @return the boolean
+     */
     public boolean perform(Object from, Sides side, int ticks){
         if (isReaction(from, side)){
             this.from = (From) from;
@@ -46,8 +59,12 @@ public abstract class Reaction <From extends IAction, To extends IAction> {
         }
         return false;
     }
+
     /**
-     * TODO
-     * */
+     * Execute is the reaction mechanism.
+     *
+     * @param ticks the ticks
+     * @return the boolean
+     */
     protected abstract boolean execute(int ticks);
 }
