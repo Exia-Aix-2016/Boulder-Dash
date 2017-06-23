@@ -4,7 +4,7 @@ import world.elements.IAction;
 import world.elements.entity.IMovement;
 
 /**
- * Created by hougo on 22/06/2017.
+ * TODO
  */
 public class InertiaRemove extends Remove {
     public InertiaRemove(IAction to, Class<? extends IMovement> typeClass, Sides[] sides) {

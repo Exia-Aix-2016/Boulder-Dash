@@ -1,5 +1,10 @@
 package world.elements.entity;
 
+
+/**
+ * its a entity State
+ * @see StateType
+ * */
 public class State {
     private StateType stateType;
     private int tick = 0;

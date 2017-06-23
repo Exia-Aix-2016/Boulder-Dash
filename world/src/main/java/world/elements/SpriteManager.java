@@ -8,6 +8,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Allow to manage the state entity each entity has a StateManager
+ * @see StateType
+ * @see world.elements.entity.State
+ * */
 public class SpriteManager {
 
 
@@ -38,10 +43,17 @@ public class SpriteManager {
     }
 
 
+    /**
+     * @return the image of entity's state
+     * */
     public Image getImage(){
         return this.rest.getImage();
     }
 
+    /**
+     * @return the image with an StateType
+     * @see StateType
+     * */
     public Image getImage(StateType state){
         switch (state){
 
@@ -59,6 +71,9 @@ public class SpriteManager {
         return null;
     }
 
+    /**
+     * Each state has a Sprite for each entity
+     * */
     private class StateSprite {
 
         private ArrayList<Image> images = new ArrayList<>();
@@ -76,6 +91,10 @@ public class SpriteManager {
             this.iterator = this.images.iterator();
         }
 
+        /**
+         * @return Image
+         * @see Image
+         * */
         Image getImage(){
 
             if (!this.iterator.hasNext()){

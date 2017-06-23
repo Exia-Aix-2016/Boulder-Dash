@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
+/**
+ * Entity is a element in mouvement on the map
+ * @see Elements
+ * */
 public abstract class Entity extends Elements implements IEntity, IMovement {
 
     protected Thread thread = null;

@@ -9,9 +9,9 @@ public class EndGame extends Reaction<IMovement, IAction> {
     /**
      * EndGame
      *construction of the class.
-     * @param iAction
-     * @param fromClass
-     * @param sides
+     * @param iAction TODO
+     * @param fromClass TODO
+     * @param sides TODO
      */
     public EndGame(IAction iAction, Class<? extends IMovement> fromClass, Sides[] sides) {
         super(iAction, fromClass, sides);

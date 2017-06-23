@@ -59,7 +59,7 @@ public class ArrowKeyControl extends Behavior implements KeyListener{
     /**
      * keyTyped
      * used when a key is pressed
-     * @param e
+     * @param e represente the event
      * */
     @Override
     public void keyTyped(KeyEvent e) {
@@ -68,7 +68,7 @@ public class ArrowKeyControl extends Behavior implements KeyListener{
     /**
      * keyPressed
      * get the key code of the keyEvent past in the method
-     * @param e
+     * @param e represente the event
      * */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -77,7 +77,7 @@ public class ArrowKeyControl extends Behavior implements KeyListener{
     /**
      * keyReleased
      * invoked when the key is released, and set it key code to -1, which is attached to nothing
-     * @param e
+     * @param e represente the event
      * */
     @Override
     public void keyReleased(KeyEvent e) {
