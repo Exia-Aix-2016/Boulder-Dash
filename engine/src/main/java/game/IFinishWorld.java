@@ -1,7 +1,7 @@
 package game;
 
 /**
- * Created by hougo on 23/06/2017.
+ * Represente the methods which call when the game is finish.
  */
 public interface IFinishWorld {
     void finished(boolean win);

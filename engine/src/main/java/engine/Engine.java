@@ -15,19 +15,39 @@ import java.util.Optional;
 
 
 /**
- * TODO
+ * The Engine allow to manage the world, entities, sound, display, HUD, etc...
  * @version 1.0
  * */
 public class Engine extends JPanel implements IEngine{
 
+    /**
+     * The game's world
+     * */
     private IWorld world;
 
+    /**
+     * TickGenerator
+     * */
     private TickGenerator tickGenerator;
+    /**
+     * tread of the tickGenerator
+     * */
     private Thread tickGeneratorThread;
+    /**
+     * The HUD which display the informations
+     * */
     private Hud hud;
+
+    /**
+     * The interface when the game is finish
+     * */
     private IFinishWorld game;
     private Timer timer;
 
+    /**
+     * Engine contructor
+     * @param game Interface when game is finish
+     * */
     public Engine(IFinishWorld game){
         this.setLayout(null);
         this.setFocusable(true);
@@ -39,7 +59,9 @@ public class Engine extends JPanel implements IEngine{
     }
 
     /**
-     * TODO
+     * This method allow to load a world, create Hud and it information
+     * and start the tick generator
+     * @param world the world you want load
      * */
     public void loadWorld(IWorld world){
         this.world = world;
@@ -50,9 +72,7 @@ public class Engine extends JPanel implements IEngine{
         this.repaint();
 
         hud = new Hud(new GridLayout(1, 3));
-
         this.setComponentZOrder(hud, 0);
-
         hud.setSize((int)this.getSize().getWidth(), 30);
         hud.setBackground(Color.YELLOW);
 
@@ -61,13 +81,18 @@ public class Engine extends JPanel implements IEngine{
 
         hud.addInfo(new Info("Score"));
         hud.addInfo(new Info("Diamond remaining", this.world.getDiamonds_left()));
+        hud.addInfo(new Info("Time",this.world.getTimeRemaining()));
+
 
         this.playSound("Start");
 
-       this.tickGeneratorThread = new Thread(tickGenerator);
-       this.tickGeneratorThread.start();
+        this.tickGeneratorThread = new Thread(tickGenerator);
+        this.tickGeneratorThread.start();
     }
 
+    /**
+     * Allow to unload the world
+     * */
     private void unloadWorld(){
         this.world = null;
         this.hud = null;
@@ -79,12 +104,17 @@ public class Engine extends JPanel implements IEngine{
         this.repaint();
     }
 
+    /**
+     * Allow to get the information to the change them
+     *@return Optional(info) if the information it is present return Optional(Info) else Optional.empty()
+     * @see Info
+     * @see Optional
+     * */
     public Optional<Info> getInfo(final String name){
         return this.hud.getInfo(name);
     }
-    /**
-     * TODO
-     * */
+
+    @Override
     public Context getContext(Rectangle rectangle){
         return new Context(this.world.getComponents(), rectangle);
     }
@@ -126,7 +156,7 @@ public class Engine extends JPanel implements IEngine{
         this.playSound("Win");
         this.unloadWorld();
     }
-    // TODO
+
     @Override
     public boolean isOut(Rectangle projection) {
         return (
@@ -152,7 +182,8 @@ public class Engine extends JPanel implements IEngine{
     }
 
     /**
-     * TODO
+     * Allow to loadComponents in engine
+     * the entities recover the engine reference
      * */
     private void loadComponents(){
         Collection<IComponent> components = world.getComponents();
@@ -163,7 +194,9 @@ public class Engine extends JPanel implements IEngine{
         }
     }
     /**
-     * TODO
+     * Allow to configure entities
+     * - add in tickGenerator the entities(TickListerners)
+     * - load the entitie's behaviors
      * */
     private void configureEntity(){
         Collection<IEntity> entities = world.getEntities();

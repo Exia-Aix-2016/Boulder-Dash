@@ -7,7 +7,7 @@ import engine.TickListener;
  * */
 public interface IEntity extends TickListener, IComponent, Runnable{
     /**
-     * TODO
+     * Allow to load entity's behavios
      * */
     void loadBehaviors();
 }
