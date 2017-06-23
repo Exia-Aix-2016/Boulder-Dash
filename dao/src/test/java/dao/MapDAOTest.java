@@ -1,4 +1,4 @@
-package daotest;
+package dao;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

@@ -1,6 +1,6 @@
 package worldloader;
 
-import daotest.*;
+import dao.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

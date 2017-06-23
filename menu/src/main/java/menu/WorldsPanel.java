@@ -1,6 +1,6 @@
 package menu;
 
-import daotest.IMap;
+import dao.IMap;
 
 import java.util.ArrayList;
 

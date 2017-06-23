@@ -1,4 +1,4 @@
-package daotest;
+package dao;
 
 
 import java.sql.*;

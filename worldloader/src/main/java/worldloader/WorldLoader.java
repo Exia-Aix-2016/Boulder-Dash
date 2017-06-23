@@ -1,9 +1,9 @@
 package worldloader;
 
-import daotest.IMap;
-import daotest.ObjectType;
-import daotest.RawElement;
-import daotest.RawMap;
+import dao.IMap;
+import dao.ObjectType;
+import dao.RawElement;
+import dao.RawMap;
 import world.ICreateWorld;
 import world.Position;
 import world.World;
@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 /**
  * WorldLoader will can use IMap (DAO) to load a RawMap (which a sql representation of a world)
- * @see daotest
+ * @see dao
  *
  */
 public abstract class WorldLoader {
