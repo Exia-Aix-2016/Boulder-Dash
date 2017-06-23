@@ -25,7 +25,7 @@ public class MapDAOTest {
         if(mapDAO.getConnection() == null){
          fail("Fail : connection");
         }
-    }//FINISH
+    }
 
     /**
      * Test remove ObjectType
@@ -33,7 +33,7 @@ public class MapDAOTest {
     private void removeObjectTypeTest(ObjectType objectType){
         System.out.println("MapDAOTest : removeObjectTypeTest");
         mapDAO.removeObjectType(objectType);
-    }//FINISH
+    }
 
     /**
      * Test insert ObjectType
@@ -41,7 +41,7 @@ public class MapDAOTest {
     private void insertObjectTypeTest(ObjectType objectType){
         System.out.println("MapDAOTest : InsertObjectTypeTest");
         mapDAO.addObjectType(objectType);
-    }//FINISH
+    }
     /**
      * Test create MAp
      * */
@@ -52,7 +52,7 @@ public class MapDAOTest {
         map.addElement(new RawElement(ObjectType.WALL, 5, 5));
         map.addElement(new RawElement(ObjectType.DIRT, 1, 1));
         mapDAO.addMap(map);
-    }//FINISH
+    }
 
     /**
      * Test GetMap
@@ -62,7 +62,7 @@ public class MapDAOTest {
         if(!mapDAO.getMap("test").isPresent()){
             fail("Fail : getMap()");
         }
-    }//FINISH
+    }
 
     /**
      * Test Remove Map
@@ -70,7 +70,7 @@ public class MapDAOTest {
     private void removeMapTest(){
         System.out.println("MapDAOTest : remove Map");
         mapDAO.removeMap("test");
-    }//FINISH
+    }
 
     /**
      * Test get listMap
@@ -80,7 +80,7 @@ public class MapDAOTest {
         for(String name : mapDAO.getMapListNames()){
             System.out.println(name);
         }
-    }//FINISH
+    }
 
     /**
      * Order the test map
@@ -101,7 +101,7 @@ public class MapDAOTest {
     public void testInteractObjectType(){
         this.insertObjectTypeTest(ObjectType.TEST);
         this.removeObjectTypeTest(ObjectType.TEST);
-    }//FINISH
+    }
 
 
     /**
@@ -116,5 +116,5 @@ public class MapDAOTest {
             e.printStackTrace();
             fail("Erreur close connection");
         }
-    }//FINISH
+    }
 }

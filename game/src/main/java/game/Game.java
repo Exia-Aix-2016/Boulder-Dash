@@ -1,6 +1,6 @@
 package game;
 /**
- * TODO
+ * Its a main class
  * */
 public class Game {
 

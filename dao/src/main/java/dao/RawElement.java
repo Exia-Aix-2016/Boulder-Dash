@@ -34,7 +34,7 @@ public class RawElement {
         this.objectType = objectType;
         this.x = x;
         this.y = y;
-    }//FINISH
+    }
 
     /**
      * @return y position
@@ -54,5 +54,5 @@ public class RawElement {
      * */
     public ObjectType getObjectType() {
         return objectType;
-    }//FINISH
+    }
 }

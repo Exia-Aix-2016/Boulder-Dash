@@ -28,7 +28,7 @@ public class Parameters<T> {
     public Parameters(final T obj, final TypeParameters typeParameters){
         this.obj = obj;
         this.typeParameters = typeParameters;
-    }//FINISH
+    }
 
     /**
      * Set parameter object
@@ -37,7 +37,7 @@ public class Parameters<T> {
      * */
     public void setObj(T obj) {
         this.obj = obj;
-    }//FINISH
+    }
 
     /**
      * Set Type of this Parameter
@@ -46,7 +46,7 @@ public class Parameters<T> {
      * */
     public void setTypeParameters(TypeParameters typeParameters) {
         this.typeParameters = typeParameters;
-    }//FINISH
+    }
 
     /**
      * @return Object of this parameter
@@ -54,7 +54,7 @@ public class Parameters<T> {
      * */
     public T getParameter() {
         return obj;
-    }//FINISH
+    }
 
     /**
      * @return Type of this Parameter
@@ -62,5 +62,5 @@ public class Parameters<T> {
      * */
     public TypeParameters getTypeParameters() {
         return typeParameters;
-    }//FINISH
+    }
 }

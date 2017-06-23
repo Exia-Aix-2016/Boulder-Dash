@@ -32,7 +32,7 @@ public class DAOTest {
         if(dao == null){
             fail("Fail : instanciate dao");
         }
-    }//FINISH
+    }
 
     /**
      * Test Connection
@@ -44,5 +44,5 @@ public class DAOTest {
         if(connection == null){
             fail("Fail : getConnection");
         }
-    }//FINISH
+    }
 }

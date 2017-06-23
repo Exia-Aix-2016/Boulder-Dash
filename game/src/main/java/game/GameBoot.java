@@ -20,7 +20,7 @@ public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
     private menu.Menu menu;
     private Engine engine;
     /**
-     * TODO
+     * game icon
      * */
     private Image icone;
 
@@ -28,7 +28,7 @@ public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
 
     private JPanel panelKeyEvent;
     /**
-     * TODO
+     * Allow to boot the game
      * */
     GameBoot(){
 
@@ -75,14 +75,14 @@ public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
             });
     }
     /**
-     * TODO
+     * set visible the window et set size
      * */
     void boot(){
         this.setVisible(true);
         engine.setSize(this.getSize());
     }
     /**
-     * TODO
+     * lauch a party
      * */
     @Override
     public void launch(String worldName) {
@@ -101,6 +101,9 @@ public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
         }
     }
 
+    /**
+     * Call when the game is finish
+     * */
     @Override
     public void finished(boolean win) {
         if (win){
