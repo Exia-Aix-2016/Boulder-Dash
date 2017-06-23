@@ -12,23 +12,34 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 /**
- * TODO
+ * class GameBoot
+ * the window of the program, composed of many panels
+ * @see JFrame
+ * @see JPanel
+ * @see ILaunch
+ * @see IFinishWorld
  * */
 public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
 
+    /**
+     * mapDao
+     * the map which be loaded, from the database
+     * @see IMap
+     * */
     private IMap  mapDao = new MapDAO();
     private menu.Menu menu;
     private Engine engine;
-    /**
-     * game icon
-     * */
     private Image icone;
 
     KeyboardFocusManager keyboardFocusManager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 
     private JPanel panelKeyEvent;
+
     /**
-     * Allow to boot the game
+     * GameBoot
+     * the constructor of the class. Here to initialize the window: set title, size, specifications, icon, engine and key events for the game
+     * @see Engine
+     * @see Menu
      * */
     GameBoot(){
 
@@ -75,14 +86,20 @@ public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
             });
     }
     /**
-     * set visible the window et set size
+     * boot
+     * show the window and resize it, thank to the engine
+     * @see Engine
      * */
     void boot(){
         this.setVisible(true);
         engine.setSize(this.getSize());
     }
     /**
-     * lauch a party
+     * launch
+     * recover the information of the gameboot's map to create a new "world", a level of the game. Then, set the engine for it, remove the menu and instantiate the key manager
+     * @see Engine
+     * @see World
+     * @param String
      * */
     @Override
     public void launch(String worldName) {

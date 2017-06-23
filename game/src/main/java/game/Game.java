@@ -1,6 +1,8 @@
 package game;
 /**
- * Its a main class
+ * class Game
+ * the main class. Create and instantiate a new GameBoot
+ * @see GameBoot
  * */
 public class Game {
 
