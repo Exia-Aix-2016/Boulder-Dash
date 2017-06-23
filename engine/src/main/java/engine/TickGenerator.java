@@ -21,6 +21,10 @@ public class TickGenerator implements Runnable{
         tickListeners.remove(tickListener);
     }
 
+    public void removeAllTickListeners(){
+        this.tickListeners.clear();
+    }
+
     public int getMissTick() {
         return missTick;
     }
@@ -36,13 +40,13 @@ public class TickGenerator implements Runnable{
      * */
     @Override
     public void run() {
-        while (true){
-            this.fireTick();
-            try {
+        try {
+            while (!Thread.currentThread().isInterrupted()) {
+                this.fireTick();
                 Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }

@@ -2,6 +2,7 @@ package engine;
 
 import Hud.Hud;
 import Hud.Info;
+import game.IFinishWorld;
 import world.IComponent;
 import world.IEntity;
 import world.IWorld;
@@ -23,26 +24,22 @@ public class Engine extends JPanel implements IEngine{
     private TickGenerator tickGenerator;
     private Thread tickGeneratorThread;
     private Hud hud;
+    private IFinishWorld game;
 
-
-
-    private Image backgroundDirt;
-    private Graphics g;
-
-    public Engine(){
+    public Engine(IFinishWorld game){
         this.setLayout(null);
         this.setFocusable(true);
         this.requestFocusInWindow();
 
         this.tickGenerator = new TickGenerator();
 
+        this.game = game;
     }
 
     /**
      * TODO
      * */
     public void loadWorld(IWorld world){
-
         this.world = world;
         this.setBackground(Color.black);
         this.loadComponents();
@@ -63,6 +60,17 @@ public class Engine extends JPanel implements IEngine{
 
        this.tickGeneratorThread = new Thread(tickGenerator);
        this.tickGeneratorThread.start();
+    }
+
+    private void unloadWorld(){
+        this.world = null;
+        this.hud = null;
+        this.tickGeneratorThread.interrupt();
+        this.tickGenerator.removeAllTickListeners();
+        this.tickGeneratorThread = null;
+        this.removeAll();
+        this.revalidate();
+        this.repaint();
     }
 
     public Optional<Info> getInfo(final String name){
