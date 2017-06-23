@@ -5,14 +5,18 @@ import sun.audio.AudioStream;
 
 import java.io.InputStream;
 
-public class Sound {
+public class Sound extends Thread{
+    private String filename;
 
-    public  void playSound(final String filename) {
+    Sound(String filename){
+        this.filename = filename;
+    }
 
+    @Override
+    public void run() {
         try {
-            InputStream in = getClass().getResourceAsStream(filename + ".wav");
+            InputStream in = getClass().getResourceAsStream(this.filename + ".wav");
             AudioStream audioStream = new AudioStream(in);
-
             AudioPlayer.player.start(audioStream);
         }catch (Exception e){
 

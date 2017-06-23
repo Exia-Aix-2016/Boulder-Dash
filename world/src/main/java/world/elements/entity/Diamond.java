@@ -17,8 +17,6 @@ public class Diamond extends Entity {
         ), 20);
     }
 
-    Sound sound = new Sound();
-
     @Override
     public void loadBehaviors() {
         this.behaviors.add(new Gravity(this));
@@ -35,7 +33,7 @@ public class Diamond extends Entity {
     public void destroy() {
         this.engine.getInfo("Score").get().add(50);
         this.engine.getInfo("Diamond remaining").get().decrement();
-        sound.playSound("Pick");
+        this.engine.playSound("Pick");
         super.destroy();
     }
 }
