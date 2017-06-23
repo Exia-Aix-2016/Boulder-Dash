@@ -12,8 +12,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="dao" />
-    <orderEntry type="module" module-name="worldloader" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.6" level="project" />
+    <orderEntry type="module" module-name="worldloader" />
     <orderEntry type="module" module-name="world" />
     <orderEntry type="module" module-name="engine" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.11" level="project" />
