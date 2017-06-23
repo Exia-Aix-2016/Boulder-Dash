@@ -5,17 +5,21 @@ import engine.IEngine;
 import java.awt.*;
 
 /**
- * Its a interface Component
- * allow to give a brige engine between entities
- * @version 1.0
+ * interface IComponent
+ * regroup the methods used by a component of the engine
  * */
 public interface IComponent {
     /**
-     * Allow to add engine in Component
+     * setEngine
+     * configure the engine of tne component
+     * @param IEngine
      * */
     void setEngine(IEngine engine);
     /**
-     * Get the bounds Component
+     * getBounds
+     * return the bounds of the component
+     * @see Rectangle
+     * @return Rectangle
      * */
     Rectangle getBounds();
 }

@@ -11,7 +11,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 /**
- * TODO
+ * abstract class Elements
+ * The father of every objects printed in the window
+ * @see JComponent
+ * @see IComponent
+ * @see IAction
  * */
 public abstract class Elements extends JComponent implements IComponent, IAction {
 
@@ -24,7 +28,8 @@ public abstract class Elements extends JComponent implements IComponent, IAction
 
     protected Collection<Reaction> reactions = new ArrayList<>();
     /**
-     * TODO
+     * Elements
+     * the constructor of the class. Used to create a new element.
      * */
     public Elements(Position position, final Dimension dimension, SpriteManager spriteManager){
         this.position = position;
@@ -39,6 +44,11 @@ public abstract class Elements extends JComponent implements IComponent, IAction
         this.setImage(this.spriteManager.getImage());
     }
 
+    /**
+     * setImage
+     * set the image of the element, like the image passed
+     * @param Image
+     * */
     public void setImage(Image image) {
         this.image = image;
         this.revalidate();
@@ -46,13 +56,18 @@ public abstract class Elements extends JComponent implements IComponent, IAction
     }
 
     /**
-     * TODO
+     * getPosition
+     * return the position of the element
+     * @see Position
+     * @return Position
      * */
     public Position getPosition() {
         return position;
     }
     /**
-     * TODO
+     * setPosition
+     * configure a new position and set the news bounds of the element
+     * @param Position
      * */
     public void setPosition(Position position) {
         this.position = position;
@@ -60,7 +75,10 @@ public abstract class Elements extends JComponent implements IComponent, IAction
     }
 
     /**
-     * TODO
+     * updateBounds
+     * configure the new bounds of the element
+     * @see Rectangle
+     * @see Position
      * */
     private void updateBounds(){
         Rectangle bounds = new Rectangle(this.position.getX(), this.position.getY(), this.getSize().width, this.getSize().height);

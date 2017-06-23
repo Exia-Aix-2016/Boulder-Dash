@@ -3,9 +3,6 @@ package world.reaction;
 import world.elements.entity.IMovement;
 import world.elements.entity.StateType;
 
-/**
- * Created by hougo on 22/06/2017.
- */
 public class Heap extends Reaction<IMovement, IMovement>{
     /**
      * TODO

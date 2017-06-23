@@ -1,7 +1,7 @@
 package world;
 /**
- * TODO
- * @version 1.0
+ * interface IControllabe
+ *
  * */
 public interface IControllable {
     /**

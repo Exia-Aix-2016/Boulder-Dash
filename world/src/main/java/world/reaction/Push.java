@@ -2,9 +2,6 @@ package world.reaction;
 
 import world.elements.entity.IMovement;
 
-/**
- * Created by hougo on 22/06/2017.
- */
 public class Push extends Reaction<IMovement, IMovement> {
 
     private int delay;
