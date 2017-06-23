@@ -5,23 +5,23 @@ package world;
  * */
 public interface IControllable {
     /**
-     * TODO
+     * Allow Make to go left
      * */
     void goLeft();
     /**
-     * TODO
+     * Allow Make to go rignt
      * */
     void goRight();
     /**
-     * TODO
+     * Allow Make to go up
      * */
     void goUp();
     /**
-     * TODO
+     * Allow Make to go down
      * */
     void goDown();
     /**
-     * TODO
+     * Allow Make to go rest
      * */
     void goRest();
 }
