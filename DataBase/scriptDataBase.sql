@@ -19,9 +19,13 @@ create table boulderdash.Map
 	MapName varchar(255) not null
 		primary key,
 	Width int null,
-	Heigth int null
+	Heigth int null,
+	Diamond int null,
+	RemainingTime int null
 )
 ;
+
+
 #------------------------------------------------------------
 #                  CREATE boulderdash.ObjectMap
 #                             Table
@@ -71,6 +75,7 @@ INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('DIRT');
 INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('MONSTER');
 INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('ROCK');
 INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('WALL');
+INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('EXIT');
 #------------------------------------------------------------
 #                          Stock routines
 #------------------------------------------------------------
@@ -79,10 +84,10 @@ INSERT INTO boulderdash.ObjectType (TypeObject) VALUES ('WALL');
 #addMap
 #------------------------------------------------------------
 DELIMITER |
-create procedure boulderdash.addMap (IN nameMap varchar(255), IN width int, IN heigh int)
+create procedure boulderdash.addMap (IN nameMap varchar(255), IN width int, IN heigh int, IN nbrDiamond INT, IN timeremaining INT)
 BEGIN
 	IF NOT EXISTS(SELECT * FROM boulderdash.Map WHERE MapName = nameMap) THEN
-  INSERT INTO boulderdash.Map (MapName, Width, Heigth) VALUES (nameMap, width, heigh);
+  INSERT INTO boulderdash.Map (MapName, Width, Heigth, Diamond, RemainingTime) VALUES (nameMap, width, heigh, nbrDiamond, timeremaining);
 		END IF ;
 	END |
 DELIMITER ;
@@ -90,12 +95,12 @@ DELIMITER ;
 #addMapElement
 #------------------------------------------------------------
 DELIMITER |
-create procedure boulderdash.addMapElement (IN nameMAP varchar(255), IN nameElement varchar(255), IN X int, IN Y int)
-BEGIN
-		IF NOT EXISTS(SELECT * FROM boulderdash.ObjectMap WHERE MapName = nameMAP AND TypeObject = nameElement) THEN
+CREATE PROCEDURE boulderdash.addMapElement(IN nameMAP VARCHAR(255), IN nameElement VARCHAR(255), IN X INT, IN Y INT)
+  BEGIN
+		IF NOT EXISTS(SELECT * FROM boulderdash.ObjectMap WHERE MapName = nameMAP AND TypeObject = nameElement AND CoordX = X AND CoordY = Y) THEN
     INSERT INTO boulderdash.ObjectMap (CoordX, CoordY, MapName, TypeObject) VALUES (X, Y, nameMAP, nameElement);
 			END IF ;
-	END |
+	END;
 DELIMITER ;
 #------------------------------------------------------------
 #addObjectType
@@ -103,7 +108,7 @@ DELIMITER ;
 DELIMITER |
 create procedure boulderdash.addObjectType (IN OType varchar(255))
 BEGIN
-	IF EXISTS(SELECT * FROM boulderdash.ObjectType WHERE TypeObject = OType) THEN
+	IF NOT EXISTS(SELECT * FROM boulderdash.ObjectType WHERE TypeObject = OType) THEN
   INSERT INTO boulderdash.ObjectType (TypeObject) VALUE (OType);
 		END IF ;
 	END |
@@ -142,3 +147,51 @@ BEGIN
 		END IF ;
 	END |
 DELIMITER ;
+#------------------------------------------------------------
+#getSizeMap
+#------------------------------------------------------------
+DELIMITER |
+CREATE PROCEDURE boulderdash.getSizeMap(IN nameMap VARCHAR(255), OUT outWidth INTEGER, OUT outHeight INTEGER)
+	BEGIN
+			SELECT Width INTO outWidth FROM boulderdash.Map WHERE MapName = nameMap;
+			SELECT Heigth INTO outHeight FROM boulderdash.Map WHERE MapName = nameMap;
+	END |
+DELIMITER ;
+#------------------------------------------------------------
+#getMap
+#------------------------------------------------------------
+DELIMITER |
+
+CREATE PROCEDURE boulderdash.getMap(IN NameMap VARCHAR(255))
+  BEGIN
+    DECLARE rowcount int;
+		IF EXISTS(SELECT * FROM Map WHERE MapName = NameMap) THEN
+    	SELECT * FROM Map WHERE MapName = NameMap;
+			END IF ;
+  END;
+DELIMITER ;
+#------------------------------------------------------------
+#getMapObjects
+#------------------------------------------------------------
+DELIMITER |
+CREATE PROCEDURE boulderdash.getMapObjects(IN NameMap VARCHAR(255))
+  BEGIN
+    DECLARE rowcount int;
+		IF EXISTS(SELECT * FROM Map WHERE MapName = NameMap) THEN
+    SELECT * FROM boulderdash.ObjectMap WHERE MapName = NameMap;
+			END IF ;
+  END;
+DELIMITER ;
+
+#------------------------------------------------------------
+#getMapObjects
+#------------------------------------------------------------
+DELIMITER |
+CREATE PROCEDURE boulderdash.getMapNames()
+  BEGIN
+    DECLARE rowcount int;
+
+    SELECT MapName FROM boulderdash.Map;
+  END;
+DELIMITER ;
+
