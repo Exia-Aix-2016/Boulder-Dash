@@ -145,7 +145,11 @@ public class Engine extends JPanel implements IEngine{
 
     @Override
     public boolean levelCompleted() {
-        return true;
+        Optional<Info> d = this.getInfo("Diamond Remaining");
+        if (d.isPresent()){
+            return (d.get().get() == 0);
+        }
+        return false;
     }
 
     @Override
