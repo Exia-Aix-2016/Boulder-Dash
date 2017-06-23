@@ -124,6 +124,7 @@ public class Engine extends JPanel implements IEngine{
         this.remove((JComponent) element);
         this.revalidate();
         this.repaint();
+        this.tickGenerator.removeTickListener((TickListener) element);
         this.world.removeEntity(element);
     }
 

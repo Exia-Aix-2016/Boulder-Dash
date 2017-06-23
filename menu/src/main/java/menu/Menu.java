@@ -6,6 +6,7 @@ import worldloader.WorldLoader;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.io.File;
@@ -81,9 +82,11 @@ public class Menu extends JPanel implements IMenuAction {
         File defaut = vueSysteme.getDefaultDirectory();
 
         JFileChooser fileChooser = new JFileChooser(defaut);
-        fileChooser.showOpenDialog(null);
+        fileChooser.showDialog(this, "Test");
 
         File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+        fileChooser.setFileFilter(filter);
 
         System.out.println(file.getAbsolutePath());
 
