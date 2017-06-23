@@ -94,13 +94,7 @@ public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
         this.setVisible(true);
         engine.setSize(this.getSize());
     }
-    /**
-     * launch
-     * recover the information of the gameboot's map to create a new "world", a level of the game. Then, set the engine for it, remove the menu and instantiate the key manager
-     * @see Engine
-     * @see World
-     * @param String
-     * */
+
     @Override
     public void launch(String worldName) {
         System.out.println("Launching world: " + worldName);
@@ -118,9 +112,7 @@ public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
         }
     }
 
-    /**
-     * Call when the game is finish
-     * */
+
     @Override
     public void finished(boolean win) {
         if (win){
