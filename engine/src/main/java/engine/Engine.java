@@ -81,8 +81,6 @@ public class Engine extends JPanel implements IEngine{
 
         hud.addInfo(new Info("Score"));
         hud.addInfo(new Info("Diamond remaining", this.world.getDiamonds_left()));
-        hud.addInfo(new Info("Time",this.world.getTimeRemaining()));
-
 
         this.playSound("Start");
 
