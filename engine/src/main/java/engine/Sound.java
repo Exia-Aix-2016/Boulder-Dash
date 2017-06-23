@@ -2,6 +2,7 @@ package engine;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import java.io.BufferedInputStream;
 import java.io.InputStream;
 
 /**
@@ -27,7 +28,7 @@ public class Sound extends Thread{
     @Override
     public void run() {
         try {
-            InputStream in = getClass().getResourceAsStream(this.filename + ".wav");
+            InputStream in = new BufferedInputStream(this.getClass().getResourceAsStream(this.filename + ".wav"));
             Clip clip = AudioSystem.getClip();
 
             clip.open(AudioSystem.getAudioInputStream(in));
