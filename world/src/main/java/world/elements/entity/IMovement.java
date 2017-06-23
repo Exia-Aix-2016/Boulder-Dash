@@ -2,8 +2,6 @@ package world.elements.entity;
 
 import world.elements.IAction;
 
-import java.awt.*;
-
 
 public interface IMovement extends IAction {
     /**
@@ -34,7 +32,9 @@ public interface IMovement extends IAction {
      * */
     StateManager getStateManager();
     /**
-     * TODO
+     * isEmpty
+     * check if the specified coordinates are fulled
+     * @return boolean
      * */
     boolean isEmpty(int xCase, int yCase);
     /**
@@ -42,7 +42,8 @@ public interface IMovement extends IAction {
      * */
     void ignoreBehavior();
     /**
-     * TODO
+     * hasFinished
+     * check is the element had finished it current movement
      * */
     boolean hasFinish();
 }
