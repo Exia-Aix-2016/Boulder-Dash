@@ -3,7 +3,6 @@ package game;
 import dao.IMap;
 import dao.MapDAO;
 import engine.Engine;
-import menu.FinalScreen;
 import world.World;
 import worldloader.WorldLoader;
 
@@ -15,13 +14,11 @@ import java.awt.event.KeyListener;
 /**
  * TODO
  * */
-public class GameBoot extends JFrame implements ILaunch{
+public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
 
     private IMap  mapDao = new MapDAO();
     private menu.Menu menu;
     private Engine engine;
-
-    private FinalScreen finalScreen;
     /**
      * TODO
      * */
@@ -51,12 +48,9 @@ public class GameBoot extends JFrame implements ILaunch{
         menu = new menu.Menu(mapDao, this);
 
 
-        engine = new Engine();
+        engine = new Engine(this);
 
         this.add(menu);
-
-
-
 
         this.panelKeyEvent = this.menu;
 
@@ -103,5 +97,19 @@ public class GameBoot extends JFrame implements ILaunch{
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void finished(boolean win) {
+        if (win){
+            this.menu.displayWin();
+        } else {
+            this.menu.displayLose();
+        }
+        this.remove(this.engine);
+        this.add(this.menu);
+        this.revalidate();
+        this.repaint();
+        System.out.println("switch to menu");
     }
 }

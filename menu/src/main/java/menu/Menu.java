@@ -2,8 +2,6 @@ package menu;
 
 import dao.IMap;
 import game.ILaunch;
-import javafx.stage.FileChooser;
-import world.World;
 import worldloader.WorldLoader;
 
 import javax.imageio.ImageIO;
@@ -17,15 +15,17 @@ public class Menu extends JPanel implements IMenuAction {
 
     private JPanel rootPanel;
     private JPanel worldsPanel;
+    private JPanel win;
+    private JPanel lose;
 
     private Image backgroundImage;
     private IMap mapDao;
-    private ILaunch worldLaucher;
+    private ILaunch worldLauncher;
 
     public Menu(IMap mapDao, ILaunch worldLauncher) {
 
         this.mapDao = mapDao;
-        this.worldLaucher = worldLauncher;
+        this.worldLauncher = worldLauncher;
 
         this.setLayout(new GridBagLayout());
 
@@ -36,7 +36,8 @@ public class Menu extends JPanel implements IMenuAction {
         }
 
         this.rootPanel = new RootPanel(this);
-
+        this.win = new FinalScreen("Win", this, false);
+        this.lose = new FinalScreen("Lose", this, false);
 
         this.setPanel(this.rootPanel);
     }
@@ -70,7 +71,7 @@ public class Menu extends JPanel implements IMenuAction {
 
     @Override
     public void playWorld(String worldName) {
-        this.worldLaucher.launch(worldName);
+        this.worldLauncher.launch(worldName);
     }
 
     @Override
@@ -94,5 +95,15 @@ public class Menu extends JPanel implements IMenuAction {
         }
 
 
+    }
+
+    @Override
+    public void displayWin() {
+        this.setPanel(this.win);
+    }
+
+    @Override
+    public void displayLose() {
+        this.setPanel(this.lose);
     }
 }
