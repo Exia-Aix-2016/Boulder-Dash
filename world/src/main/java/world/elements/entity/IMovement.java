@@ -2,8 +2,6 @@ package world.elements.entity;
 
 import world.elements.IAction;
 
-import java.awt.*;
-
 
 public interface IMovement extends IAction {
     /**
@@ -45,7 +43,7 @@ public interface IMovement extends IAction {
     void ignoreBehavior();
     /**
      * hasFinished
-     * check is the element had finished it current movement 
+     * check is the element had finished it current movement
      * */
     boolean hasFinish();
 }
