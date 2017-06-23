@@ -82,10 +82,10 @@ public class Menu extends JPanel implements IMenuAction {
         File defaut = vueSysteme.getDefaultDirectory();
 
         JFileChooser fileChooser = new JFileChooser(defaut);
-        fileChooser.showDialog(this, "Test");
+        fileChooser.showDialog(this, "Load");
 
         File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "Map Loader");
         fileChooser.setFileFilter(filter);
 
         System.out.println(file.getAbsolutePath());
