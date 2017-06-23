@@ -40,7 +40,10 @@ public abstract class WorldLoader {
 
             Dimension dimension = new Dimension(rawMap.getWidth(), rawMap.getHeight());
 
-            int elementSize = screenSize.width / dimension.width;
+            int ratioW = screenSize.width / dimension.width;
+            int ratioH = screenSize.height / dimension.height;
+
+            int elementSize = ratioW < ratioH ? ratioW : ratioH;
 
             Dimension elementDimension = new Dimension(elementSize, elementSize);
 

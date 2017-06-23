@@ -3,7 +3,7 @@ package world;
 import java.awt.*;
 import java.util.Collection;
 /**
- * TODO
+ * Its a interface allow to give a brige engine between World
  * @version 1.0
  * */
 public interface IWorld {
@@ -23,12 +23,24 @@ public interface IWorld {
      * TODO
      * */
     Dimension getDimension();
+    /**
+     * TODO
+     * */
     int getTimeRemaining();
+    /**
+     * TODO
+     * */
     int getDiamonds_left();
-
+    /**
+     * TODO
+     * */
     void removeEntity(IComponent element);
-
+    /**
+     * TODO
+     * */
     void removeBlock(IComponent element);
-
+    /**
+     * TODO
+     * */
     void removeCharacter(IComponent element);
 }

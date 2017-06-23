@@ -4,26 +4,41 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * TODO
+ * The tickGenerator allow Give a rhythm to the entities(TickListener)
+ * @see TickListener
+ * @see Runnable
  * @version 1.0
  * */
 public class TickGenerator implements Runnable{
 
-    private int missTick = 0;
-
     private Collection<TickListener> tickListeners = new ArrayList<>();
 
+    /**
+     * Allow to add a TickListener
+     * @param tickListener add the tickListener give in parameter
+     * */
     public void addTickListener(TickListener tickListener){
         tickListeners.add(tickListener);
     }
 
+    /**
+     * Allow to remove a TickListener
+     * @param tickListener Remove the tickListener give in parameters
+     * */
     public void removeTickListener(TickListener tickListener){
         tickListeners.remove(tickListener);
     }
 
-    public int getMissTick() {
-        return missTick;
+    /**
+     * Remove all TickListeners
+     * */
+    public void removeAllTickListeners(){
+        this.tickListeners.clear();
     }
+
+    /**
+     * Call the tick() method for all TickListener
+     * */
     private void fireTick(){
         for(TickListener listener : tickListeners) {
             listener.tick();
@@ -32,17 +47,18 @@ public class TickGenerator implements Runnable{
     }
 
     /**
+     * The TickGenerator call the tick() method in TickListeners every 100 milliseconds
      * @see Runnable
      * */
     @Override
     public void run() {
-        while (true){
-            this.fireTick();
-            try {
+        try {
+            while (!Thread.currentThread().isInterrupted()) {
+                this.fireTick();
                 Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }

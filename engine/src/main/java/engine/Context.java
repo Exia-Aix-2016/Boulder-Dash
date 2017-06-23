@@ -14,14 +14,22 @@ import java.util.Optional;
  */
 public class Context {
 
+    /**
+     * Represente the virtual rectangle which placed forward the entities which need the context
+     * @see Rectangle
+     * */
     private Rectangle rectangle;
+    /**
+     * Its a list of all Components in game's map
+     * @see IComponent
+     * */
     private Collection<IComponent> worldComponents;
 
-
     /**
-     * Contructor Context
-     * @param worldComponents Collection(JComponent)
-     * @param rectangle the cursor element to search in worldComponents
+     * Allow to get the context when a entity request
+     * @return The context which requested by an entity
+     * @param rectangle Represente a virtual rectangle forward entities
+     * @see Context
      * */
     Context(Collection<IComponent> worldComponents, Rectangle rectangle){
         this.rectangle = rectangle;
@@ -33,7 +41,6 @@ public class Context {
      * @return Optional(JComponent) if the context found the block return JComponent else Optional.empty()
      * @see JComponent
      * @see Optional
-     * @see Runnable
      * */
     public Optional<IComponent> get(){
 
@@ -42,7 +49,6 @@ public class Context {
                 return  Optional.of(component);
             }
         }
-
         return Optional.empty();
     }
 }
