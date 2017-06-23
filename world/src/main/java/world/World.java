@@ -50,9 +50,8 @@ public class World implements ICreateWorld, IWorld {
     public String getName() {
         return name;
     }
-    /**
-     * @return the remaining time
-     * */
+
+    @Override
     public int getTimeRemaining() {
         return timeRemaining;
     }
@@ -109,9 +108,8 @@ public class World implements ICreateWorld, IWorld {
     public Date getStartTime() {
         return startTime;
     }
-    /**
-     * @return the number of diamonds
-     * */
+
+    @Override
     public int getDiamonds_left() {
         return this.diamonds_left;
     }

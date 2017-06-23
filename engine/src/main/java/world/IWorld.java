@@ -8,39 +8,52 @@ import java.util.Collection;
  * */
 public interface IWorld {
     /**
-     * TODO
+     * @return a controllable
+     * no implement
+     * @see IControllable
      * */
     IControllable getControllable();
     /**
-     * TODO
+     * @return a collection of all Components in the map (entities + blocks)
+     * @see IComponent
+     * @see Collection
      * */
     Collection<IComponent> getComponents();
     /**
-     * TODO
+     * @return a collection of all entities in the map
+     * @see IEntity
+     * @see Collection
      * */
     Collection<IEntity> getEntities();
     /**
-     * TODO
+     * @return the map Dimension
+     * @see Dimension
      * */
     Dimension getDimension();
     /**
-     * TODO
+     * @return the remaining time
      * */
     int getTimeRemaining();
     /**
-     * TODO
+     * @return the number of diamonds
      * */
     int getDiamonds_left();
     /**
-     * TODO
+     * Allow to remove an entity
+     * @param element represente the element to remove
+     * @see IComponent
      * */
     void removeEntity(IComponent element);
     /**
-     * TODO
+     * Allow to remove the block
+     * @param element represente the element to remove.
+     * @see IComponent
      * */
     void removeBlock(IComponent element);
     /**
-     * TODO
+     * Allow to Remove a character
+     * @param element represente the element to remove
+     * @see IComponent
      * */
     void removeCharacter(IComponent element);
 }
