@@ -1,7 +1,6 @@
 package world.elements.block;
 
 import world.Position;
-import world.Permeability;
 import world.elements.SpriteManager;
 
 import java.awt.*;
