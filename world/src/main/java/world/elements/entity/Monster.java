@@ -3,6 +3,7 @@ package world.elements.entity;
 import world.Position;
 import world.behavior.MonsterMove;
 import world.elements.SpriteManager;
+import world.reaction.Kill;
 import world.reaction.Remove;
 import world.reaction.Sides;
 
@@ -19,6 +20,7 @@ public class Monster extends Entity {
                 new String[]{"Monster1_walking1.png", "Monster1_walking2.png"}
         ), 30);
         this.reactions.add(new Remove(this, Rock.class, new Sides[]{Sides.LEFT, Sides.RIGHT, Sides.TOP, Sides.BOTTOM}));
+        this.reactions.add(new Kill(this, Character.class, new Sides[]{Sides.LEFT, Sides.RIGHT, Sides.TOP, Sides.BOTTOM}));
     }
 
     @Override

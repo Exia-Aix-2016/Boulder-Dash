@@ -123,31 +123,19 @@ public class Engine extends JPanel implements IEngine{
     // TODO
     @Override
     public boolean isOut(Rectangle projection) {
-
-        if ( 0 > projection.x){
-            return true;
-        }
-
-        if (0 > projection.y){
-            return true;
-        }
-
-        if (this.getSize().width < projection.x + projection.width){
-            return true;
-        }
-
-        if (this.getSize().height < projection.y + projection.height){
-            return true;
-        }
-
-        return false;
+        return (
+            0 > projection.x ||
+            0 > projection.y ||
+            this.getSize().width < projection.x + projection.width ||
+            this.getSize().height < projection.y + projection.height
+        );
     }
 
     @Override
     public boolean levelCompleted() {
         Optional<Info> d = this.getInfo("Diamond Remaining");
         if (d.isPresent()){
-            return (d.get().get() == 0);
+            return (d.get().get() <= 0);
         }
         return false;
     }

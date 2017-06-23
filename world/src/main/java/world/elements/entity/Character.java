@@ -19,6 +19,9 @@ public class Character extends Entity{
                 new String[]{"Character_left1.png", "Character_left2.png"},
                 new String[]{"Character_right1.png", "Character_right2.png"}
         ),10);
+
+        this.reactions.add(new Remove(this, Monster.class, new Sides[]{Sides.LEFT, Sides.RIGHT, Sides.TOP, Sides.BOTTOM}));
+        this.reactions.add(new InertiaRemove(this, Rock.class, new Sides[]{Sides.TOP}));
     }
 
 
@@ -31,8 +34,6 @@ public class Character extends Entity{
     @Override
     public void loadBehaviors() {
         this.behaviors.add(new ArrowKeyControl(this, this.engine));
-        this.reactions.add(new Remove(this, Monster.class, new Sides[]{Sides.LEFT}));
-        this.reactions.add(new InertiaRemove(this, Rock.class, new Sides[]{Sides.TOP}));
     }
 
     @Override
