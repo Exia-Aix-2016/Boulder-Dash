@@ -1,6 +1,7 @@
 package world.elements.entity;
 
 import world.Position;
+import world.behavior.IAHostile;
 import world.behavior.MonsterMove;
 import world.elements.SpriteManager;
 import world.reaction.Kill;
@@ -30,6 +31,7 @@ public class Monster extends Entity {
     @Override
     public void loadBehaviors() {
         this.behaviors.add(new MonsterMove(this));
+        this.behaviors.add(new IAHostile(this));
 
     }
     @Override
