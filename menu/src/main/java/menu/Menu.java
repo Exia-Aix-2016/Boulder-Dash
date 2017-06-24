@@ -30,6 +30,7 @@ public class Menu extends JPanel implements IMenuAction {
 
         this.setLayout(new GridBagLayout());
 
+
         try {
             this.backgroundImage = ImageIO.read(this.getClass().getResource("background.jpg"));
         } catch (IOException e) {
@@ -41,6 +42,7 @@ public class Menu extends JPanel implements IMenuAction {
         this.lose = new FinalScreen("Lose", this, false);
 
         this.setPanel(this.rootPanel);
+
     }
 
     private void setPanel(JPanel panel) {
@@ -83,19 +85,19 @@ public class Menu extends JPanel implements IMenuAction {
 
         JFileChooser fileChooser = new JFileChooser(defaut);
         fileChooser.showDialog(this, "Load");
+        if(fileChooser.getSelectedFile() != null){
+            File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
 
-        File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "Map Loader");
-        fileChooser.setFileFilter(filter);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "Map Loader");
+            fileChooser.setFileFilter(filter);
 
-        try {
+            try {
 
-            this.mapDao.addMap(WorldLoader.genRawMapFILE(file));
-        } catch (Exception e) {
-            e.printStackTrace();
+                this.mapDao.addMap(WorldLoader.genRawMapFILE(file));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
-
     }
 
     @Override
