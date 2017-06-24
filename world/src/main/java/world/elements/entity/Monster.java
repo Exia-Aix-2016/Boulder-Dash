@@ -31,8 +31,6 @@ public class Monster extends Entity {
     @Override
     public void loadBehaviors() {
         this.behaviors.add(new MonsterMove(this));
-        this.behaviors.add(new IAHostile(this));
-
     }
     @Override
     public void run() {
