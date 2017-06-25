@@ -14,7 +14,7 @@ import java.awt.*;
  *Rock entity
  * @see Entity
  * */
-public class Monster extends Entity {
+public class Monster extends Entity   {
 
     public Monster(Position position, Dimension dimension){
         super(position, dimension, new SpriteManager(
@@ -30,7 +30,8 @@ public class Monster extends Entity {
 
     @Override
     public void loadBehaviors() {
-        this.behaviors.add(new MonsterMove(this));
+        this.behaviors.add(new IAHostile(this));
+
     }
     @Override
     public void run() {

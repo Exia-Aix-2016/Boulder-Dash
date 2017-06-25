@@ -1,17 +1,15 @@
 package world.behavior;
 
-import engine.Context;
+
 import world.elements.IAction;
 import world.elements.entity.Character;
 import world.elements.entity.Entity;
 import world.elements.entity.IMovement;
 import world.elements.entity.StateType;
 
-import java.util.Optional;
 
-/**
- * Created by Mandel on 24/06/2017.
- */
+
+
 public class IAHostile extends Behavior {
 
     private static Entity entity;
