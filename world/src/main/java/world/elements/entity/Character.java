@@ -34,6 +34,8 @@ public class Character extends Entity{
     public void run() {
         super.run();
 
+
+
     }
 
     @Override

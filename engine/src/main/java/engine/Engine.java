@@ -56,6 +56,8 @@ public class Engine extends JPanel implements IEngine{
         this.tickGenerator = new TickGenerator();
 
         this.game = game;
+
+        new Sound("ambiance", true).start();
     }
 
     /**

@@ -36,7 +36,7 @@ public abstract class Entity extends Elements implements IEntity, IMovement {
          stateManager.pushState(StateType.WAITING);
     }
 
-    protected Optional<IAction> getContext(Rectangle rec){
+    public Optional<IAction> getContext(Rectangle rec){
         Context context = this.engine.getContext(rec);
 
         Optional<IComponent> component = context.get();

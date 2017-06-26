@@ -2,6 +2,8 @@ package world.elements.entity;
 
 import world.elements.IAction;
 
+import java.util.Optional;
+
 
 public interface IMovement extends IAction {
     /**
@@ -47,4 +49,5 @@ public interface IMovement extends IAction {
      * @return boolean
      * */
     boolean hasFinish();
+
 }

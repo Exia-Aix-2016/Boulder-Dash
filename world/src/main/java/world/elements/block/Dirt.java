@@ -20,7 +20,7 @@ public class Dirt extends Block{
         ));
 
         Sides[] sides = {Sides.LEFT, Sides.RIGHT, Sides.BOTTOM, Sides.TOP};
-        this.reactions.add(new Remove(this, Character.class, sides,5));
+        this.reactions.add(new Remove(this, Character.class, sides,1));
     }
 
     @Override

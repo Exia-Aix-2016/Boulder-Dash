@@ -53,7 +53,7 @@ public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
             icone = ImageIO.read(this.getClass().getResource("Character_waiting.png"));
 
         }catch (Exception e){
-            System.out.println("load fail");
+            System.err.println("load fail");
         }
 
         this.setIconImage(icone);
@@ -97,10 +97,8 @@ public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
 
     @Override
     public void launch(String worldName) {
-        System.out.println("Launching world: " + worldName);
         try {
             World world = WorldLoader.getMap(worldName, mapDao, this.getSize());
-            System.out.println(world);
             engine.loadWorld(world);
             this.remove(menu);
             this.add(engine);
@@ -124,6 +122,5 @@ public class GameBoot extends JFrame implements ILaunch, IFinishWorld{
         this.add(this.menu);
         this.revalidate();
         this.repaint();
-        System.out.println("switch to menu");
     }
 }
